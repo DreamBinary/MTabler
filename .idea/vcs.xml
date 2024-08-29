@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LLaVA-NeXT" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PaddleOCR" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PaddleOCR/ppstructure/AutoLog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sglang" vcs="Git" />
+  </component>
+</project>

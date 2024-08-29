@@ -1,0 +1,128 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.14",
+    "heartbeatAt": "2024-08-17T13:48:20.656732",
+    "startedAt": "2024-08-17T13:48:16.600356",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/root/MTabler/tmp.py",
+    "codePathLocal": "tmp.py",
+    "codePath": "tmp.py",
+    "git": {
+        "remote": "git@github.com:DreamBinary/MTabler.git",
+        "commit": "f9bed5971c2afe51c57f983583e5bb836d91e515"
+    },
+    "email": "1647715359@qq.com",
+    "root": "/root/MTabler",
+    "host": "fiv",
+    "username": "root",
+    "executable": "/root/anaconda3/envs/llava/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2894.476,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.476,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 351.0343017578125
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+            "memory_total": 6442450944
+        }
+    ],
+    "memory": {
+        "total": 11.683902740478516
+    }
+}

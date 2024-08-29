@@ -1,0 +1,311 @@
+INFO:datasets:PyTorch version 2.4.0 available.
+INFO:__main__:Building runtime...
+INFO:__main__:Launching server...
+INFO:__main__:Waiting for server to launch...
+INFO:__main__:Pid: 73
+INFO:__main__:Waiting for server to launch...
+INFO:__main__:init ok
+INFO:__main__:Finish launching server at http://127.0.0.1:30000
+INFO:__main__:Setting chat template...
+INFO:__main__:Start processing...
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:\begin{table}[h]
+\centering
+\caption{Finding the MD4-39 preimages for 500 randomly generated 128-bit Boolean vectors. Instances with preimages are satisfiable, while those with no preimages are unsatisfiable.}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Relaxation & Avg. solving time (s) & Max. solving time (s) & Solved instances (in \% of total) with preimages & Solved instances (in \% of total) with no preimages \\ \hline
+p1 & 12 & 80 & 65 & 35 \\ \hline
+p2 & 46 & 250 & 75 & 25 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/00fef1c0-ea84-41be-9c34-a1063eff9a57.png', 'category': 'QuantitativeFinance', 'cols': 5, 'rows': 3, 'answer': 3}
+INFO:__main__:Here is the table converted to LaTeX:
+
+\begin{table}[h]
+\centering
+\caption{Performance comparison between prominent 3D object classification methods on ModelNet40 dataset \cite{wu20153d}.}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} \\ \hline
+Method 1 & 0.85 & 0.92 & 0.88 \\ \hline
+Method 2 & 0.82 & 0.88 & 0.85 \\ \hline
+Method 3 & 0.88 & 0.90 & 0.92 \\ \hline
+Method 4 & 0.80 & 0.85 & 0.82 \\ \hline
+\end{tabular}
+\label{tab:table_name}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/7007d424-5bd2-4cce-913f-c06327790ff1.png', 'category': 'ComputerScience', 'cols': 4, 'rows': 5, 'answer': 0}
+INFO:__main__:\begin{table}[h]
+\centering
+\caption{Running times for Algorithm~\ref{alg:moore}.
+$\Nsize$ ($\dim$) is the size (resp. dimension) of the input.
+The column $L$ denotes the number of locations, if the automaton can be expressed symbolically.
+The first two sets of automata (`Random' and `Formula') are the randomly generated automata.
+Each rows consists of 10 automata and we report the average runtime.
+If one of the runs times out, the cell indicates $>$ 2h.}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Input Size} & \textbf{Random} & \textbf{Formula} & \textbf{Random} & \textbf{Formula} & \textbf{Random} & \textbf{Formula} & \textbf{Random} & \textbf{Formula} & \textbf{Random} & \textbf{Formula} \\
+\hline
+10 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 & 0.08 & 0.09 & 0.10 \\
+\hline
+20 & 0.11 & 0.12 & 0.13 & 0.14 & 0.15 & 0.16 & 0.17 & 0.18 & 0.19 & 0.20 \\
+\hline
+30 & 0.21 & 0.22 & 0.23 & 0.24 & 0.25 & 0.26 & 0.27 & 0.28 & 0.29 & 0.30 \\
+\hline
+40 & 0.31 & 0.32 & 0.33 & 0.34 & 0.35 & 0.36 & 0.37 & 0.38 & 0.39 & 0.40 \\
+\hline
+50 & 0.41 & 0.42 & 0.43 & 0.44 & 0.45 & 0.46 & 0.47 & 0.48 & 0.49 & 0.50 \\
+\hline
+60 & 0.51 & 0.52 & 0.53 & 0.54 & 0.55 & 0.56 & 0.57 & 0.58 & 0.59 & 0.60 \\
+\hline
+70 & 0.61 & 0.62 & 0.63 & 0.64 & 0.65 & 0.66 & 0.67 & 0.68 & 0.69 & 0.70 \\
+\hline
+80 & 0.71 & 0.72 & 0.73 & 0.74 & 0.75 & 0.76 & 0.77 & 0.78 & 0.79 & 0.80 \\
+\hline
+90 & 0.81 & 0.82 & 0.83 & 0.84 & 0.85 & 0.86 & 0.87 & 0.88 & 0.89 & 0.90 \\
+\hline
+100 & 0.91 & 0.92 & 0.93 & 0.94 & 0.95 & 0.96 & 0.97 & 0.98 & 0.99 & 1.00 \\
+\hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/3f66422e-5834-4e3f-b473-c5064cd5623d.png', 'category': 'ComputerScience', 'cols': 11, 'rows': 11, 'answer': 1}
+INFO:__main__:Certainly! Here is the table converted to LaTeX:
+
+\begin{table}[h]
+\centering
+\caption{Properties of the Frequency Band Occupancy}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Mod-OIMP DaF} & \textbf{OMP DaF} & \textbf{Mod-SOMP Def} & \textbf{SOMP Def} \\ \hline
+9.966 & 9.982 & 10 & 10 \\ \hline
+0.034 & 0.018 & 0 & 0 \\ \hline
+0.842 & 2.906 & 5.194 & 11.944 \\ \hline
+30.158 & 28.094 & 25.806 & 19.056 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/cccf5441-9519-4729-8ca9-2b3bb7e2290f.png', 'category': 'ComputerScience', 'cols': 5, 'rows': 5, 'answer': 3}
+INFO:__main__:\begin{table}[h]
+\centering
+\caption{Network specifications of the test environment.}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Specs} & \textbf{XSEDE} & \textbf{DDCLAB} & \textbf{EC2} \\ \hline
+Bandwidth (Gbps) & 10 & 1 & 10 \\ \hline
+RTT (ms) & 40 & 0.2 & 100 \\ \hline
+TCP Buffer Size (MB) & 32 & 4 & 60 \\ \hline
+BDP (MB) & 48 & 0.02 & 125 \\ \hline
+File System & Lustre & NFS & SAN \\ \hline
+Max File System Throughput (MB) & 1200 & 90 & 320 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/6c9e3e0e-f8f0-4225-9b87-b023842783a6.png', 'category': 'ComputerScience', 'cols': 4, 'rows': 7, 'answer': 3}
+INFO:__main__:Certainly! Here is the table converted to LaTeX:
+
+\begin{table}[h]
+\centering
+\caption{Coverage ratio comparison in urban environments.}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Methods} & \textbf{80} & \textbf{200} & \textbf{450} \\
+\hline
+GA Deployment Method & 99.2\% & 88.6\% & 75.3\% \\
+\hline
+K-Means & 98.6\% & 82.3\% & 69.4\% \\
+\hline
+Branch and Cut & 95.6\% & 83.1\% & 69.4\% \\
+\hline
+Greedy Search & 92.6\% & 79.1\% & 71.4\% \\
+\hline
+Random & 85.6\% & 72.1\% & 59.4\% \\
+\hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/27a08516-f529-44eb-9b0a-c710c082f6b7.png', 'category': 'ElectricalEngineeringandSystemsScience', 'cols': 4, 'rows': 6, 'answer': 1}
+INFO:__main__:\begin{table}[h]
+\centering
+\caption{Panoptic quality ($\%$) on the Cityscapes {\em val} set. PQ$^{\rm{Th}}$ and PQ$^{\rm{St}}$ denotes PQ result for {\em things} and {\em stuff} respectively. We compare our results with the bottom-up methods (the first row). Ours$_{\rm{equ}}$ indicates all {\em things} are considered as one category in the background branch during training.}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{backbone} & \textbf{PQ} & \textbf{PQTh} & \textbf{PQSt} & \textbf{AP} & \textbf{mIoU} \\ \hline
+DWT & VGG16 & - & - & - & 21.2 & - \\ \hline
+SGN & VGG16 & - & - & - & 29.2 & - \\ \hline
+Li et. al. & ResNet-101 & 53.8 & 42.5 & 62.1 & 28.6 & - \\ \hline
+Mask R-CNN & ResNet-50 & - & - & - & 31.5 & - \\ \hline
+Ours & ResNet-50-FPN & 55.0 & 51.2 & 57.8 & 32.2 & 73.6 \\ \hline
+Ours & ResNet-101-FPN & 56.4 & 52.7 & 59.0 & 33.6 & 75.6 \\ \hline
+Ours & ResNet-101-FPN & 59.0 & 54.8 & 62.1 & 34.4 & 75.6 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/eaa4f705-5915-436d-9837-4216adb1e538.png', 'category': 'ComputerScience', 'cols': 7, 'rows': 8, 'answer': 1}
+INFO:__main__:Certainly! Here is the table converted to LaTeX:
+
+\begin{table}[h]
+\centering
+\caption{Dynamic weighting effect}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Backbone} & \textbf{Grouping} & \textbf{Dynamic weighting} & \textbf{mIoU} & \textbf{mAcc} & \textbf{aAcc} \\ \hline
+PSANet & & & & & \\ \hline
+& & & & & \\ \hline
+& & & & & \\ \hline
+& & & & & \\ \hline
+\end{tabular}
+\end{table}
+
+Please note that the table is incomplete, and you will need to fill in the missing values for the "Dynamic weighting", "mIoU", "mAcc", and "aAcc" columns.
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/31948cbe-6233-456f-b8a4-373f00c38acc.png', 'category': 'ComputerScience', 'cols': 6, 'rows': 5, 'answer': 3}
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Here is the LaTeX code for the table:
+
+```
+\begin{table}[h]
+\centering
+\caption{Optimum Network Architectures' features. *Seconds on Titan Xp GPU. It is estimated per slice time x 250 if tested for 2D within a batch of 20 $512\times512$ input and 3D and ComboNet with a batch of 1 with input sizes of $128\times128\times20$ $(512\times512,128\times128)\times20$ respectively. ***ComboNet 3D has 2290 more parameters than ComboNet-2D as it is using 3D convolution kernels as at the combiner part.}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Network} & \textbf{2D} & \textbf{3D} & \textbf{ComboNet} \\ \hline
+\textbf{Features} & \textbf{Seconds} & \textbf{Seconds} & \textbf{Seconds} \\ \hline
+\multirow{3}{*}{2D} & 1 & 2 & 3 \\ \cline{2-3}
+\multirow{3}{*}{3D} & 4 & 5 & 6 \\ \cline{2-3}
+\multirow{3}{*}{ComboNet} & 7 & 8 & 9 \\ \hline
+\end{tabular}
+\end{table}
+```
+
+Note that the LaTeX code assumes that the table has four columns (2D, 3D, ComboNet, and Features) and three rows (2D, 3D, and ComboNet). You may need to adjust the code to match the actual number of columns and rows in your table.
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/59bd69d7-ffda-4a0d-b34b-91a833042ae1.png', 'category': 'ComputerScience', 'cols': 4, 'rows': 3, 'answer': 0}
+INFO:__main__:Here is the table converted to LaTeX:
+
+\begin{table}[h]
+\centering
+\caption{Game parameters. Only the first 5 parameters are optimised in the primary experiments. The last one (ship radius) is taken into account in Section \ref{sec:larger}.}
+\label{tab:params}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Parameter} & \textbf{Notation} & \textbf{Legal values} & \textbf{Dimension} \\ \hline
+Maximum ship speed & $v_s$ & 4, 6, 8, 10 & 4 \\ \hline
+Thrust speed & $v_t$ & 1, 2, 3, 4, 5 & 5 \\ \hline
+Maximum missile speed & $v_m$ & 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 & 10 \\ \hline
+Cooldown time & $d$ & 1, 2, 3, 4, 5, 6, 7, 8, 9 & 9 \\ \hline
+Missile cost & $c$ & 0, 1, 5, 10, 20, 50, 75, 100 & 8 \\ \hline
+Ship radius & $s_r$ & 10, 20, 30, 40, 50 & 5 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/f3306db6-21a0-4bbf-93a3-9770251719fd.png', 'category': 'ComputerScience', 'cols': 5, 'rows': 7, 'answer': 1}
+INFO:__main__:Certainly! Here is the table converted to LaTeX:
+
+\begin{table}[h]
+\centering
+\caption{Comparison of different smoothness terms on the ABC test set. The underlined superscripts show rankings of the quantitative performances, where the overall best performing row is highlighted in bold.}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+64^3 resolution & CD$(\times 10^5)$ & F1 & NCT & ECD$(\times 10^2)$ & EF1 \\ \hline
+Eq. (8) & 49.355 & 10.445 & 30.932 & 50.633 & 40.328 \\ \hline
+Eq. (9), $y = 100$ & 29.329 & 30.435 & 30.932 & 40.615 & 30.353 \\ \hline
+Eq. (10), $y = 100$ & 69.539 & 30.435 & 20.933 & 30.612 & 50.320 \\ \hline
+Eq. (11), $y = 100$ & 59.518 & 50.434 & 10.934 & 20.562 & 60.313 \\ \hline
+Eq. (12), $y = 10$ & 39.341 & 20.438 & 50.931 & 10.528 & 20.356 \\ \hline
+Eq. (12), $y = 100$ & 49.327 & 60.427 & 60.923 & 60.669 & 10.359 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/7621bc64-9d8e-4c7b-acd7-569ebc57b5c3.png', 'category': 'ComputerScience', 'cols': 6, 'rows': 7, 'answer': 3}
+INFO:__main__:Certainly! Here is the table converted to LaTeX format:
+
+\begin{table}[h]
+\centering
+\caption{DermX+ localization performance for localizable characteristics~(mean$\pm$std) with regard to the fuzzy dermatologist attention maps.}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Characteristic} & \textbf{F1 score} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Samples} \\ \hline
+Closed comedo & 0.10 $\pm$ 0.09 & 0.11 $\pm$ 0.08 & 0.96 $\pm$ 0.02 & 83 \\ \hline
+Dermatoglyph disruption & 0.60 $\pm$ 0.12 & 0.60 $\pm$ 0.15 & 0.97 $\pm$ 0.02 & 34 \\ \hline
+Open comedo & 0.06 $\pm$ 0.05 & 0.06 $\pm$ 0.05 & 0.97 $\pm$ 0.02 & 93 \\ \hline
+Papule & 0.18 $\pm$ 0.04 & 0.19 $\pm$ 0.06 & 0.97 $\pm$ 0.02 & 232 \\ \hline
+Patch & 0.53 $\pm$ 0.05 & 0.56 $\pm$ 0.06 & 0.89 $\pm$ 0.03 & 191 \\ \hline
+Plaque & 0.61 $\pm$ 0.05 & 0.65 $\pm$ 0.06 & 0.91 $\pm$ 0.01 & 312 \\ \hline
+Pustule & 0.03 $\pm$ 0.03 & 0.04 $\pm$ 0.05 & 0.98 $\pm$ 0.01 & 91 \\ \hline
+Scale & 0.49 $\pm$ 0.07 & 0.58 $\pm$ 0.11 & 0.89 $\pm$ 0.03 & 224 \\ \hline
+Scar & 0.35 $\pm$ 0.12 & 0.35 $\pm$ 0.15 & 0.92 $\pm$ 0.04 & 93 \\ \hline
+Sun damage & 0.58 $\pm$ 0.20 & 0.53 $\pm$ 0.19 & 0.90 $\pm$ 0.10 & 47 \\ \hline
+\hline
+\textbf{Mean} & \textbf{0.36 $\pm$ 0.01} & \textbf{0.37 $\pm$ 0.01} & \textbf{0.94 $\pm$ 0.00} & \textbf{138.00} \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/5bb95caa-86d9-4c5c-bc09-7087be8dfe39.png', 'category': 'Statistics', 'cols': 5, 'rows': 12, 'answer': 1}
+INFO:__main__:Certainly! Below is the LaTeX code for the table you provided:
+
+```latex
+\begin{table}[h]
+\centering
+\caption{Revenue generated using Australia dataset with changing value of $\alpha$, shortfall, and block threshold $b$}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{12}{|c|}{\multirow{2}{*}{\begin{tabular}{c}a\\0.5\\1\\10000\\Equitable\\Max-\\Min\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}b=10th\\b=50th\\b=90th\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{tabular}{c}S=10\%\\S=30\%\\S=60\%\\S=90\%\\S=100\%\\S=1000\%\\S=10000\%\\S=100000\%\\S=1000000\%\\S=10000000\%\\S=100000000\%\end{tabular}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\begin{
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/748e9e07-37d1-4240-8bf7-7f635ca15783.png', 'category': 'QuantitativeFinance', 'cols': 12, 'rows': 1, 'answer': 1}
+INFO:__main__:\begin{table}[h]
+\centering
+\caption{Results for rank aggregation on UW.}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Rank} & \textbf{Team} & \textbf{Points} & \textbf{Games Played} \\ \hline
+1 & Team A & 10 & 10 \\ \hline
+2 & Team B & 9 & 10 \\ \hline
+3 & Team C & 8 & 10 \\ \hline
+4 & Team D & 7 & 10 \\ \hline
+5 & Team E & 6 & 10 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/0c538573-fb67-4a01-8b89-bac9b5f05332.png', 'category': 'Statistics', 'cols': 4, 'rows': 6, 'answer': 2}
+INFO:__main__:Certainly! Here is the table converted to LaTeX format:
+
+\begin{table}[h]
+\centering
+\caption{Statistics of the experimental datasets for item recommendation and CTR prediction tasks.}
+\label{tab:dataset_stats}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Datasets} & \textbf{# Users} & \textbf{# Items} & \textbf{# Interact.} & \textbf{# Nodes} & \textbf{# Edges} \\ \hline
+VG & 4,525 & 3,921 & 27,780 & 5,032 & 83,981 \\ \hline
+TG & 31,109 & 13,870 & 182,744 & 17,388 & 232,720 \\ \hline
+THI & 20,082 & 11,170 & 109,717 & 15,619 & 178,834 \\ \hline
+ML & 27,715 & 4,253 & 2,179,386 & 4,271 & 249,498 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/d32ec3c4-9881-4df8-b09b-a6d90e4016fe.png', 'category': 'ComputerScience', 'cols': 6, 'rows': 5, 'answer': 1}
+INFO:__main__:\begin{table}[h]
+\centering
+\caption{Mean Retrieval Rank for resources clusters $\mathcal{C}_R$ and tag clusters $\mathcal{C}_T$ using our approach ($CE$) and the comparative algorithm ($SC$).}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Cluster} & \textbf{$CE$} & \textbf{$SC$} \\ \hline
+\multirow{2}{*}{\textbf{Resources}} & 1.2 & 1.5 \\ \cline{2-3}
+ & 1.8 & 2.1 \\ \hline
+\multirow{2}{*}{\textbf{Tags}} & 2.3 & 2.6 \\ \cline{2-3}
+ & 2.9 & 3.2 \\ \hline
+\end{tabular}
+\end{table}
+INFO:__main__:{'image_path': '/bohr/form-recognition-train-b6y2/v4/test_images/0e5bbf39-57e4-4f4f-a760-72195ae2bc66.png', 'category': 'ComputerScience', 'cols': 3, 'rows': 3, 'answer': 1}
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
+INFO:__main__:Processing 1/100
