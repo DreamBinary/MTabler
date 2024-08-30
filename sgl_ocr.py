@@ -1,13 +1,13 @@
 import multiprocessing
+import re
 
 pkgs_path = "/bohr/pkgs-7x29/v15/pkgs"
 # llava_lib_path = "/bohr/libb-bg5b/v3/llava"
 # tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
 model_path = "lmms-lab/llava-onevision-qwen2-7b-si"
 cache_path = "/bohr/cach-rxl3/v9/cache"
-table_model_dir = "../model/ch_ppstructure_openatom_SLANetv2_infer"
-table_char_dict_path = ""
-img_output_dir = ""
+table_model_dir = "/bohr/ocrr-zlwd/v1/ch_ppstructure_openatom_SLANetv2_infer"
+table_char_dict_path = "/bohr/ocrr-zlwd/v1/table_structure_dict.txt"
 # pkgs_path = "/personal/pkgs"
 # llava_lib_path = "/personal/llava"
 # model_path = "lmms-lab/llava-onevision-qwen2-0.5b-ov"
@@ -100,7 +100,8 @@ class TSR(TableStructurer):
         #         ["<html>", "<body>", "<table>"]
         #         + structure_str_list
         #         + ["</table>", "</body>", "</html>"]
-        # )
+        # )\
+        structure_str_list = ["<table>"] + structure_str_list + ["</table>"]
         return structure_str_list, bbox_list
 
 
@@ -167,17 +168,31 @@ class Runtime(sgl.srt.server.Runtime):
 
 @sgl.function
 def one_image(s, img_path, caption, q3, tsr):
+    q2 = """
+Based on the table, caption and html structure, which subject is most relevant to the table?
+A) Physics
+B) Mathematics
+C) Computer Science
+D) Quantitative Biology
+E) Quantitative Finance
+F) Statistics
+G) Electrical Engineering and Systems Science
+H) Economics
+"""
+    s += sgl.system("You are a helpful assistant. Please only provide the letter corresponding to the correct answer for multiple-choice questions, without any additional information.")
     s += sgl.user(
         sgl.image(img_path) +
         f'This is a table image. The caption of the table is "{caption}". The structure of the table in html format is as follows: {tsr}.')
     s += sgl.assistant("I have a general understanding of the information in this table.")
-    s += sgl.user(
-        "Based on the provided table, caption and html structure, select the most relevant subject to the table from (A. Physics, B. Mathematics, C. ComputerScience, D. QuantitativeBiology, E. QuantitativeFinance, F. Statistics, G. ElectricalEngineeringandSystemsScience, H. Economics). Answer with the option's letter from the given choices directly.")
+    s += sgl.user(q2)
     s += sgl.assistant(
-        sgl.gen("subject", choices=["A", "B", "C", "D", "E", "F", "G", "H"],
-                max_tokens=2, temperature=0.0, top_p=1))
+        sgl.gen("subject",
+                # choices=["A", "B", "C", "D", "E", "F", "G", "H"],
+                max_tokens=4, temperature=0.0, top_p=1))
     s += sgl.user(q3)
-    s += sgl.assistant(sgl.gen("option", choices=["A", "B", "C", "D"], max_tokens=2, temperature=0.0, top_p=1))
+    s += sgl.assistant(sgl.gen("option",
+                               # choices=["A", "B", "C", "D"],
+                               max_tokens=4, temperature=0.0, top_p=1))
 
 
 def count_rows_and_columns(html_tags):
@@ -214,6 +229,7 @@ class Worker:
 
     def run(self):
         ocr_process = multiprocessing.Process(target=self.ocr)
+        ocr_process.start()
 
         model_overide_args = {
             "attn_implementation": "eager",
@@ -244,7 +260,7 @@ class Worker:
             "benchmark": False,
             "use_tensorrt": False,
             "use_onnx": False,
-            "table_max_len": 512,
+            "table_max_len": 1024,
             "enable_mkldnn": True,
             "table_algorithm": "SLANet",
             "merge_no_span_structure": True,
@@ -269,7 +285,14 @@ class Worker:
             # output_path = os.path.join(img_output_dir, item["image_path"])
             # cv2.imwrite(output_path, img)
             rows, cols = count_rows_and_columns(structure_str_list)
-            q3 = f"""Based on the provided table, caption and LaTex, for the question: "{item["question"]}", select the most correct option from (A. {item["options"][0]}, B. {item["options"][1]}, C. {item["options"][2]}, D. {item["options"][3]}). Answer with the option\'s letter from the given choices directly."""
+            question = item["question"]
+            question = question[0].lower() + question[1:]
+            q3 = f"""Based on the table, caption and html structure, {question}
+A) {item["options"][0]}
+B) {item["options"][1]}
+C) {item["options"][2]}
+D) {item["options"][3]}
+"""
             self.ocr_data.put(((item["image_path"], rows, cols), (path, item["caption"], structure_str_list, q3)))
         self.ocr_data.put(None)
 
@@ -308,13 +331,24 @@ class Worker:
             self.clean_out(o, s)
 
     def clean_out(self, o, s):
+        print(s)
         img_path, rows, cols = o
+        category = ""
+        answer = -1
         try:
-            category = sub_list[l2i[s["subject"][0]]]
+            subject = s["subject"]
+            match = re.search(r'[A-Za-z]', subject)
+            if match:
+                category = match.group(0).upper()
+                category = sub_list[l2i[category]]
         except:
             category = ""
         try:
-            answer = l2i[s["option"][0]]
+            option = s["option"]
+            match = re.search(r'[A-Za-z]', option)
+            if match:
+                answer = match.group(0).upper()
+                answer = l2i[answer]
         except:
             answer = -1
         sub_item = {
@@ -324,6 +358,7 @@ class Worker:
             "rows": rows,
             "answer": answer,
         }
+        print(sub_item)
         self.submission.append(sub_item)
 
 

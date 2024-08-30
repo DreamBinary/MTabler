@@ -9,7 +9,6 @@ cache_path = "/bohr/cach-rxl3/v9/cache"
 # model_path = "lmms-lab/llava-onevision-qwen2-0.5b-ov"
 # cache_path = "/personal/cache"
 
-
 import os
 
 # os.system(f"pip install {pkgs_path}/* --ignore-installed")
@@ -125,7 +124,7 @@ def one_image(s, img_path, caption, q3):
         f'This is a table image. The caption of the table is "{caption}".')
     s += sgl.assistant("I have a general understanding of the information in this table.")
     s += sgl.user("Convert this table to LaTex.")
-    s += sgl.assistant(sgl.gen("LaTex", max_tokens=2048, temperature=0.0, top_p=1))
+    s += sgl.assistant(sgl.gen("LaTex", max_tokens=4096, temperature=0.0, top_p=1))
     s += sgl.user(
         "Based on the provided table, caption and LaTex, select the most relevant subject to the table from (A. Physics, B. Mathematics, C. ComputerScience, D. QuantitativeBiology, E. QuantitativeFinance, F. Statistics, G. ElectricalEngineeringandSystemsScience, H. Economics). Answer with the option's letter from the given choices directly.")
     s += sgl.assistant(
@@ -158,7 +157,8 @@ class Worker:
     def __init__(self):
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
             self.data = json.load(f)
-        self.batch_size = 8
+            self.data = list(self.data)[:10]
+        self.batch_size = 4
         self.submission = []
 
     def run(self):
@@ -190,9 +190,8 @@ class Worker:
             if len(batch_images) == self.batch_size:
                 self.batch(batch_images)
                 batch_images = []
-        if len(self.submission) < 5000:
-            with open('submission.json', 'w') as f:
-                json.dump(self.submission, f)
+        with open('submission.json', 'w') as f:
+            json.dump(self.submission, f)
 
     def batch(self, batch_images):
         states = one_image.run_batch(batch_images)
@@ -220,6 +219,7 @@ class Worker:
             "rows": rows,
             "answer": answer,
         }
+        print(sub_item)
         self.submission.append(sub_item)
 
 

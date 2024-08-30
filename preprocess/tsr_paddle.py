@@ -2,6 +2,8 @@
 # @FileName : tsr.py
 # @Time : 2024/8/28 21:57
 # @Author : fiv
+from collections import defaultdict
+
 import cv2
 import numpy as np
 from paddleocr.ppocr.data.imaug import transform
@@ -10,8 +12,6 @@ from paddleocr.ppstructure.table.predict_structure import TableStructurer
 
 class TSR(TableStructurer):
     def __init__(self, args):
-        # python table/predict_structure.py - -table_model_dir =../ inference / slanet_lcnetv2_infer / --table_char_dict_path =../ ppocr / utils / dict / table_structure_dict.txt - -image_dir = docs / table / table.jpg - -output =../ output / table_slanet_lcnetv2 - -use_gpu = False - -benchmark = True - -enable_mkldnn = True - -table_max_len = 512
-
         super().__init__(args)
 
     def __call__(self, img):
@@ -53,9 +53,11 @@ class TSR(TableStructurer):
 
 
 def tsr(image_file_list):
+    table_model_dir = "/bohr/ocrr-zlwd/v1/ch_ppstructure_openatom_SLANetv2_infer"
+    table_char_dict_path = "/bohr/ocrr-zlwd/v1/table_structure_dict.txt"
     args = type("Args", (), {
-        "table_model_dir": "../model/ch_ppstructure_openatom_SLANetv2_infer",
-        "table_char_dict_path": "./table_structure_dict.txt",
+        "table_model_dir": table_model_dir,
+        "table_char_dict_path": table_char_dict_path,
         "use_gpu": False,
         # "gpu_id": 0,
         # "gpu_mem": 500,
@@ -93,25 +95,50 @@ def count_rows_and_columns(html_tags):
     max_columns = 0
     current_columns = 0
     rowspan_columns = {}
+    index = 0
+    columns_cnt = defaultdict(int)
+    while index < len(html_tags):
+        tag = html_tags[index]
 
-    for tag in html_tags:
-        if tag.startswith('<tr>'):
+        if tag == '<tr>':
             rows += 1
             current_columns = 0
+
+            # Account for any ongoing rowspans from previous rows
             for col, span in rowspan_columns.items():
                 if span > 1:
                     current_columns += 1
                     rowspan_columns[col] -= 1
-            max_columns = max(max_columns, current_columns)
+
         elif tag.startswith('<td'):
-            current_columns += 1
-            if 'rowspan' in tag:
-                rowspan_value = int(tag.split('rowspan="')[1].split('"')[0])
-                rowspan_columns[current_columns] = rowspan_value
+            colspan = 1
+            rowspan = 1
+
+            # Check if 'colspan' and 'rowspan' are in the subsequent strings
+            if index + 1 < len(html_tags) and 'colspan="' in html_tags[index + 1]:
+                colspan = int(html_tags[index + 1].strip().split('colspan="')[1].split('"')[0])
+                index += 1  # Skip the colspan string
+            if index + 1 < len(html_tags) and 'rowspan="' in html_tags[index + 1]:
+                rowspan = int(html_tags[index + 1].strip().split('rowspan="')[1].split('"')[0])
+                index += 1  # Skip the rowspan string
+
+            # Increment columns count
+            current_columns += colspan
+
+            # Track rowspans for subsequent rows
+            if rowspan > 1:
+                for _ in range(colspan):
+                    rowspan_columns[current_columns - _] = rowspan
+
         elif tag == '</tr>':
+            print(f"Row {rows} has {current_columns} columns")
+            columns_cnt[current_columns] += 1
             max_columns = max(max_columns, current_columns)
 
-    return rows, max_columns
+        index += 1
+    columns = max(columns_cnt, key=columns_cnt.get)
+    return rows, columns
+
 
 if __name__ == '__main__':
     image_file_list = ["./tmp.png"]

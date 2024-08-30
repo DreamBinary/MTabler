@@ -47,5 +47,5 @@ if __name__ == "__main__":
     file_path = "./tmp.png"
     raw_image = Image.open(file_path).convert("RGB")
     bordered_image, rows, cols = tsr_process(raw_image)
-    bordered_image.save("tmp.png")
+    bordered_image.save("result.png")
     print(rows, cols)

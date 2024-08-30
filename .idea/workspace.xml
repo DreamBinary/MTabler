@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LLaVA-NeXT" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LLaVA-NeXT/llava/conversation.py" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT/llava/conversation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LLaVA-NeXT/llava/eval/model_vqa.py" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT/llava/eval/model_vqa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LLaVA-NeXT/llava/serve/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT/llava/serve/cli.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LLaVA-NeXT/playground/demo/video_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT/playground/demo/video_demo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LLaVA-NeXT/playground/sgl_llava_inference_multinode.py" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT/playground/sgl_llava_inference_multinode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LLaVA-NeXT/scripts/archived/merge_lora_weights.py" beforeDir="false" afterPath="$PROJECT_DIR$/LLaVA-NeXT/scripts/archived/merge_lora_weights.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocess/result.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/result.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocess/tmp.png" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tmp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocess/tsr.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tsr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocess/tsr_paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tsr_paddle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_latex.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_latex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_ocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_ocr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +36,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/sglang" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,17 +72,17 @@
     &quot;Python.ttt.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/preprocess&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;two.files.diff.last.used.file&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/log/log2.txt&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\preprocess" />
+      <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\PaddleOCR\ppstructure" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\PaddleOCR" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model" />
@@ -84,7 +94,7 @@
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ttt">
+  <component name="RunManager" selected="Python.tsr_paddle">
     <configuration name="tmp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MTabler" />
       <option name="ENV_FILES" value="" />
@@ -202,10 +212,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ttt" />
         <item itemvalue="Python.tsr_paddle" />
-        <item itemvalue="Python.tsr (1)" />
+        <item itemvalue="Python.ttt" />
         <item itemvalue="Python.tsr" />
+        <item itemvalue="Python.tsr (1)" />
         <item itemvalue="Python.tmp" />
       </list>
     </recent_temporary>
@@ -302,7 +312,9 @@
       <workItem from="1724834065842" duration="11879000" />
       <workItem from="1724849406597" duration="7258000" />
       <workItem from="1724931494128" duration="4498000" />
-      <workItem from="1724936070921" duration="1359000" />
+      <workItem from="1724936070921" duration="1548000" />
+      <workItem from="1724993734636" duration="6237000" />
+      <workItem from="1725011095972" duration="4364000" />
     </task>
     <servers />
   </component>
@@ -345,7 +357,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MTabler$download.coverage" NAME="download 覆盖结果" MODIFIED="1724151900016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$tsr.coverage" NAME="tsr 覆盖结果" MODIFIED="1723793609615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
+    <SUITE FILE_PATH="coverage/MTabler$tsr.coverage" NAME="tsr 覆盖结果" MODIFIED="1724997703085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
     <SUITE FILE_PATH="coverage/MTabler$main_llava.coverage" NAME="main_llava 覆盖结果" MODIFIED="1723183709619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$TableVQA_Bench.coverage" NAME="TableVQA-Bench 覆盖结果" MODIFIED="1723861323792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/MTabler$thresholding.coverage" NAME="thresholding 覆盖结果" MODIFIED="1723462510269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
@@ -355,9 +367,9 @@
     <SUITE FILE_PATH="coverage/MTabler$table_shape.coverage" NAME="table_shape 覆盖结果" MODIFIED="1723379673923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1724571523547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$ComTQA.coverage" NAME="ComTQA 覆盖结果" MODIFIED="1723862271942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
-    <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1724936502974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1725001139057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$convert.coverage" NAME="convert 覆盖结果" MODIFIED="1723803289561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/TableVQA-Bench" />
-    <SUITE FILE_PATH="coverage/MTabler$tsr_paddle.coverage" NAME="tsr_paddle 覆盖结果" MODIFIED="1724934436937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
+    <SUITE FILE_PATH="coverage/MTabler$tsr_paddle.coverage" NAME="tsr_paddle 覆盖结果" MODIFIED="1725011378756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
     <SUITE FILE_PATH="coverage/MTabler$gather.coverage" NAME="gather 覆盖结果" MODIFIED="1723984164107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/MTabler$train_mem.coverage" NAME="train_mem 覆盖结果" MODIFIED="1723879354218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
