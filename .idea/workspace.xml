@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="" />
+    <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/MTabler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MTabler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/llava_vllm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/baseline.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/main_llava.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/table_llava.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/main_llava_with_tsr.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/table_llava_tsr.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_local.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0818.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_tsr.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0818_2.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0824.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_latex.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0825.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_latex2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0825_2.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0826.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_0826_2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/sgl.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_0.5b.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_process.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl_process.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_thread.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl_thread.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_vllmhelp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl_vllm.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_vllmov.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commit/ov_vllm.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download.py" beforeDir="false" afterPath="$PROJECT_DIR$/download.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_latex.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/sgl_latex.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_latex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_paddle.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_paddle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_unitable.py" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_unitable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vllmhelp.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vllmhelp.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,42 +69,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.ComTQA.executor&quot;: &quot;Run&quot;,
-    &quot;Python.MMTab.executor&quot;: &quot;Run&quot;,
-    &quot;Python.TableVQA-Bench.executor&quot;: &quot;Run&quot;,
-    &quot;Python.conversation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.convert.executor&quot;: &quot;Run&quot;,
-    &quot;Python.download.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gather.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_llava.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sgl_ocr.executor&quot;: &quot;Run&quot;,
-    &quot;Python.table_shape.executor&quot;: &quot;Run&quot;,
-    &quot;Python.thresholding.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tmp.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_mem.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tsr (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.tsr.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tsr_paddle.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ttt.executor&quot;: &quot;Run&quot;,
-    &quot;Python.unitable.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/log/log2.txt&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.ComTQA.executor": "Run",
+    "Python.MMTab.executor": "Run",
+    "Python.TableVQA-Bench.executor": "Run",
+    "Python.conversation.executor": "Run",
+    "Python.convert.executor": "Run",
+    "Python.download.executor": "Run",
+    "Python.gather.executor": "Run",
+    "Python.main_llava.executor": "Run",
+    "Python.sgl_ocr.executor": "Run",
+    "Python.table_shape.executor": "Run",
+    "Python.thresholding.executor": "Run",
+    "Python.tmp.executor": "Run",
+    "Python.train_mem.executor": "Run",
+    "Python.tsr (1).executor": "Run",
+    "Python.tsr.executor": "Run",
+    "Python.tsr_paddle.executor": "Run",
+    "Python.ttt.executor": "Run",
+    "Python.unitable.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu/root/MTabler",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
+    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/commit/si_internvl_vllm.ipynb"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
+      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\commit" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\preprocess" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model\unitable\vocab" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\unitable" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\ocr" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\commit" />
@@ -80,8 +114,8 @@
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\unitable\experiments\unitable_weights" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.unitable">
-    <configuration name="sgl_paddle" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.tmp">
+    <configuration name="download" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MTabler" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -95,7 +129,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="\\wsl.localhost\Ubuntu\root\MTabler\sgl_paddle.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/download.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -104,7 +138,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tsr" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="tmp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MTabler" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,12 +147,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocess" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocess/tsr.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -198,11 +232,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tmp" />
+        <item itemvalue="Python.download" />
         <item itemvalue="Python.unitable" />
         <item itemvalue="Python.ttt" />
         <item itemvalue="Python.tsr_paddle" />
-        <item itemvalue="Python.sgl_paddle" />
-        <item itemvalue="Python.tsr" />
       </list>
     </recent_temporary>
   </component>
@@ -308,7 +342,11 @@
       <workItem from="1725087750926" duration="5337000" />
       <workItem from="1725093168689" duration="3064000" />
       <workItem from="1725097786837" duration="17013000" />
-      <workItem from="1725173662843" duration="750000" />
+      <workItem from="1725173662843" duration="836000" />
+      <workItem from="1725178708808" duration="149000" />
+      <workItem from="1725182933322" duration="601000" />
+      <workItem from="1725183833857" duration="283000" />
+      <workItem from="1725184208424" duration="8499000" />
     </task>
     <servers />
   </component>
@@ -342,34 +380,39 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sgl_unitable.py</url>
-          <line>73</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/preprocess/src/model/encoderdecoder.py</url>
           <line>63</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ttt.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
           <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/ov_si_0818_2.ipynb</url>
           <line>34</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/qwen_paddle.ipynb</url>
+          <line>28</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MTabler$download.coverage" NAME="download 覆盖结果" MODIFIED="1724151900016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$download.coverage" NAME="download 覆盖结果" MODIFIED="1725192431508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$tsr.coverage" NAME="tsr 覆盖结果" MODIFIED="1724997703085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$TableVQA_Bench.coverage" NAME="TableVQA-Bench 覆盖结果" MODIFIED="1723861323792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/MTabler$main_llava.coverage" NAME="main_llava 覆盖结果" MODIFIED="1723183709619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$TableVQA_Bench.coverage" NAME="TableVQA-Bench 覆盖结果" MODIFIED="1723861323792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/MTabler$thresholding.coverage" NAME="thresholding 覆盖结果" MODIFIED="1723462510269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
     <SUITE FILE_PATH="coverage/MTabler$MMTab.coverage" NAME="MMTab 覆盖结果" MODIFIED="1723983934699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/MTabler$conversation.coverage" NAME="conversation 覆盖结果" MODIFIED="1723211466701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/llava" />
     <SUITE FILE_PATH="coverage/MTabler$tsr__1_.coverage" NAME="tsr (1) 覆盖结果" MODIFIED="1724932856778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PaddleOCR/ppstructure" />
     <SUITE FILE_PATH="coverage/MTabler$table_shape.coverage" NAME="table_shape 覆盖结果" MODIFIED="1723379673923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1724571523547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1725194435307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$sgl_ocr.coverage" NAME="sgl_ocr 覆盖结果" MODIFIED="1725066143420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$ComTQA.coverage" NAME="ComTQA 覆盖结果" MODIFIED="1723862271942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
     <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1725110647771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

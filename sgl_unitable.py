@@ -1,3 +1,5 @@
+from tqdm import tqdm
+
 pkgs_path = "/bohr/pkgs-7x29/v18/pkgs"
 # llava_lib_path = "/bohr/libb-bg5b/v3/llava"
 # tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
@@ -28,15 +30,15 @@ os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 device = "cuda"
 
 import json
-import multiprocessing as mp
-import copy
+
+import torch.multiprocessing as multiprocessing
+
 from sglang.srt.server import launch_server
 from sglang.srt.server_args import ServerArgs
 from sglang.srt.utils import allocate_init_ports
 from sglang import RuntimeEndpoint
 
 import sglang as sgl
-import multiprocessing
 
 import re
 import warnings
@@ -62,6 +64,10 @@ from src.vocab import (
 )
 
 warnings.filterwarnings('ignore')
+import logging
+
+multiprocessing.log_to_stderr(logging.INFO)
+logger = multiprocessing.get_logger()
 
 l2i = defaultdict(lambda: -1)
 for i, letter in enumerate('ABCDEFGH'):
@@ -69,6 +75,14 @@ for i, letter in enumerate('ABCDEFGH'):
 sub_list = ('Physics', 'Mathematics', 'ComputerScience', 'QuantitativeBiology', 'QuantitativeFinance',
             'Statistics', 'ElectricalEngineeringandSystemsScience', 'Economics', '')
 torch.cuda.empty_cache()
+
+if os.environ.get('DATA_PATH_B'):
+    base_dir = os.environ.get('DATA_PATH_B')
+else:
+    base_dir = '/bohr/form-recognition-train-b6y2/v4'
+with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
+    data = list(json.load(f))
+    data = data[:10]
 
 
 class Runtime(sgl.srt.server.Runtime):
@@ -96,8 +110,8 @@ class Runtime(sgl.srt.server.Runtime):
 
         self.pid = None
         # logger.info("Launching server...")
-        pipe_reader, pipe_writer = mp.Pipe(duplex=False)
-        proc = mp.Process(
+        pipe_reader, pipe_writer = multiprocessing.Pipe(duplex=False)
+        proc = multiprocessing.Process(
             target=launch_server,
             args=(self.server_args, model_overide_args, pipe_writer),
         )
@@ -150,26 +164,6 @@ patch_size = 16
 nhead = 12
 dropout = 0.2
 
-backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
-encoder = Encoder(
-    d_model=d_model,
-    nhead=nhead,
-    dropout=dropout,
-    activation="gelu",
-    norm_first=True,
-    nlayer=12,
-    ff_ratio=4,
-)
-decoder = Decoder(
-    d_model=d_model,
-    nhead=nhead,
-    dropout=dropout,
-    activation="gelu",
-    norm_first=True,
-    nlayer=4,
-    ff_ratio=4,
-)
-
 
 def autoregressive_decode(
         model: EncoderDecoder,
@@ -212,13 +206,16 @@ def load_vocab_and_model(
         vocab_path: Union[str, Path],
         max_seq_len: int,
         model_weights: Union[str, Path],
+        backbone: nn.Module,
+        encoder: nn.Module,
+        decoder: nn.Module,
 ) -> Tuple[tk.Tokenizer, EncoderDecoder]:
     vocab_path = str(vocab_path)
     vocab = tk.Tokenizer.from_file(vocab_path)
     model = EncoderDecoder(
-        backbone=copy.deepcopy(backbone),
-        encoder=copy.deepcopy(encoder),
-        decoder=copy.deepcopy(decoder),
+        backbone=backbone,
+        encoder=encoder,
+        decoder=decoder,
         vocab_size=vocab.get_vocab_size(),
         d_model=d_model,
         padding_idx=vocab.token_to_id("<pad>"),
@@ -307,24 +304,13 @@ def count_rows_and_columns(html_tags):
     return rows, columns
 
 
-if os.environ.get('DATA_PATH_B'):
-    base_dir = os.environ.get('DATA_PATH_B')
-else:
-    base_dir = '/bohr/form-recognition-train-b6y2/v4'
-with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
-    data = list(json.load(f))
-    data = data[:10]
-
-
 class Unitable:
     def __init__(self):
         manager = multiprocessing.Manager()
         self.html = manager.list()
         self.bbox = manager.list()
         self.cell_input = multiprocessing.Queue()
-
         self.shape = manager.list()
-
         self.result = multiprocessing.Queue()
 
     def run(self):
@@ -344,9 +330,8 @@ class Unitable:
     def size(self):
         return self.result.qsize()
 
-    def has_result(self):
-        return not self.result.empty()
-    # def __call__(self, image):
+        # def __call__(self, image):
+
     #     html = self.img_tsr(image)
     #     bbox = self.img_bbox(image)
     #     cell = self.img_tcr(image, bbox)
@@ -360,8 +345,23 @@ class Unitable:
     #     return image, code, rows, cols
     # return self.img_tsr(image)
 
-    def img_tsr(self, vocab_html, model_html):
-        for item in data:
+    def img_tsr(self):
+        backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
+        encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+                          norm_first=True, nlayer=12, ff_ratio=4)
+        decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+                          norm_first=True, nlayer=4, ff_ratio=4)
+        vocab_html, model_html = load_vocab_and_model(
+            vocab_path=VOCAB_HTML,
+            max_seq_len=784,
+            model_weights=MODEL_DIR / MODEL_FILE_NAME[0],
+            backbone=backbone,
+            encoder=encoder,
+            decoder=decoder
+        )
+
+        for item in tqdm(data, desc="HTML"):
+        # for item in data:
             image = Image.open(os.path.join(base_dir, "test_images", item["image_path"])).convert("RGB")
             # Image transformation
             image_tensor = image_to_tensor(image, size=(448, 448))
@@ -390,15 +390,26 @@ class Unitable:
                 self.html.append(pred_html)
         if not self.html and not self.bbox:
             self.cell_input.put(None)
+        logger.info("HTML processed")
 
     def img_bbox(self):
+        backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
+        encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+                          norm_first=True, nlayer=12, ff_ratio=4)
+        decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+                          norm_first=True, nlayer=4, ff_ratio=4)
         vocab_bbox, model_bbox = load_vocab_and_model(
             vocab_path=VOCAB_BBOX,
             max_seq_len=1024,
             model_weights=MODEL_DIR / MODEL_FILE_NAME[1],
+            backbone=backbone,
+            encoder=encoder,
+            decoder=decoder
         )
-        for item in data:
+        for item in tqdm(data, desc="BBOX"):
+        # for item in data:
             image = Image.open(os.path.join(base_dir, "test_images", item["image_path"])).convert("RGB")
+
             # Image transformation
             image_tensor = image_to_tensor(image, size=(448, 448))
             image_size = image.size
@@ -424,12 +435,21 @@ class Unitable:
                 self.bbox.append(pred_bbox)
         if not self.html and not self.bbox:
             self.cell_input.put(None)
+        logger.info("BBOX processed")
 
     def img_tcr(self):
+        backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
+        encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+                          norm_first=True, nlayer=12, ff_ratio=4)
+        decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+                          norm_first=True, nlayer=4, ff_ratio=4)
         vocab_cell, model_cell = load_vocab_and_model(
             vocab_path=VOCAB_CELL,
             max_seq_len=200,
             model_weights=MODEL_DIR / MODEL_FILE_NAME[2],
+            backbone=backbone,
+            encoder=encoder,
+            decoder=decoder
         )
         idx = 0
         while True:
@@ -438,7 +458,6 @@ class Unitable:
                 break
             html, bbox = item
             image = Image.open(os.path.join(base_dir, "test_images", data[idx]["image_path"])).convert("RGB")
-
 
             # Cell image cropping and transformation
             image_tensor = [image_to_tensor(image.crop(b), size=(112, 448)) for b in bbox]
@@ -465,16 +484,14 @@ class Unitable:
             code = "".join(code)
 
             self.result.put((idx, self.shape.pop(0), code))
-            logger.info(f"Image {idx} processed", flush=True)
-            logger.info(f"HTML: {html}", flush=True)
-            logger.info(f"BBOX: {bbox}", flush=True)
-            logger.info(f"CODE: {code}", flush=True)
-            print("HTML:", html, flush=True)
-            print("BBOX:", bbox, flush=True)
-            print("CODE:", code, flush=True)
 
+            logger.info(f"Image {idx} processed")
+            logger.info(f"HTML: {html}")
+            logger.info(f"BBOX: {bbox}")
+            logger.info(f"CODE: {code}")
             idx += 1
         self.result.put(None)
+        logger.info("TCR processed")
 
     # def draw_bbox(self, image, bbox):
     #     draw = ImageDraw.Draw(image)
@@ -499,7 +516,7 @@ H) Economics
         "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions.")
     s += sgl.user(
         sgl.image(img_path) +
-        f'This is a table image. The caption of the table is "{caption}". The OCR recognition result of the table in HTML format is {tsr}, which can be used as a reference but no the standard answer')
+        f'This is a table image. The caption of the table is "{caption}". The OCR recognition result of the table in HTML format is {tsr}, which can be used as a reference but no standard answer')
     s += sgl.assistant("I have a general understanding of the information in this table.")
     s += sgl.user(q2)
     s += sgl.assistant(
@@ -512,6 +529,9 @@ H) Economics
                                max_tokens=2, temperature=0.0, top_p=1))
 
 
+from sglang.lang.chat_template import get_chat_template
+
+
 class Worker:
     def __init__(self):
         self.batch_size = 8
@@ -522,22 +542,22 @@ class Worker:
         ocr = multiprocessing.Process(target=self.ocr)
         ocr.start()
 
-        # model_overide_args = {
-        #     "attn_implementation": "eager",
-        #     "multimodal": True,
-        #     "overwrite_config": {
-        #         "image_aspect_ratio": "anyres_max_9"
-        #     }
-        # }
-        # runtime = Runtime(
-        #     model_path=model_path,
-        #     model_overide_args=model_overide_args,
-        # )
-        # runtime.endpoint.chat_template = get_chat_template("qwen")
-        # sgl.set_default_backend(runtime)
-        # self.process()
-        # runtime.shutdown()
-        ocr.join()
+        model_overide_args = {
+            "attn_implementation": "eager",
+            "multimodal": True,
+            "overwrite_config": {
+                "image_aspect_ratio": "anyres_max_9"
+            }
+        }
+        runtime = Runtime(
+            model_path=model_path,
+            model_overide_args=model_overide_args,
+        )
+        runtime.endpoint.chat_template = get_chat_template("qwen")
+        sgl.set_default_backend(runtime)
+        self.process()
+        runtime.shutdown()
+        # ocr.join()
 
     def ocr(self):
         unitable = Unitable()
@@ -618,8 +638,7 @@ D) {item["options"][3]}
             "rows": rows,
             "answer": answer,
         }
-        print(s, flush=True)
-        print(sub_item, flush=True)
+        logger.info(sub_item)
         self.submission.append(sub_item)
 
 

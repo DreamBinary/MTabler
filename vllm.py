@@ -1,21 +1,16 @@
-
 # config env
 pkgs_path = "/bohr/pkgs-7x29/v5/pkgs"
 llava_lib_path = "/bohr/libb-bg5b/v3/llava"
 tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
 
 help_model_path = "OpenGVLab/InternVL2-2B"
-main_model_path = "lmms-lab/llava-onevision-qwen2-7b-si"
+main_model_path = "Qwen/Qwen2-VL-7B-Instruct"
 cache_path = "/bohr/cach-rxl3/v7/cache"
 
 # pkgs_path = "/personal/pkgs"
 # llava_lib_path = "/personal/llava"
 # model_path = "lmms-lab/llava-onevision-qwen2-0.5b-ov"
 # cache_path = "/personal/cache"
-
-
-!pip install {pkgs_path}/*
-!cp {llava_lib_path} . -r
 
 import os
 
@@ -38,7 +33,7 @@ from transformers import AutoModel, AutoTokenizer
 
 import threading
 import queue
-
+from qwen_vl_utils import process_vision_info
 from llava.conversation import Conversation, SeparatorStyle
 from llava.utils import disable_torch_init
 import json
@@ -77,6 +72,7 @@ if os.environ.get('DATA_PATH_B'):  # 提交时会选择隐藏的测试数据集�
 else:
     base_dir = '/bohr/form-recognition-train-b6y2/v4'  # 示例，把A榜测试数据集路径作为测试集路径，仅开发时挂载A榜数据用于debug   # 示例，把A榜测试数据集路径作为测试集路径，仅开发时挂载A榜数据用于debug
 
+
 def clean_out(image_path, out_list):
     matches = re.findall(r"\d+", out_list[0])
     if len(matches) >= 2:
@@ -94,6 +90,7 @@ def clean_out(image_path, out_list):
         "answer": l2i[out_list[2][0]],
     }
     return sub_item
+
 
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
@@ -173,6 +170,7 @@ def load_image(image_file, input_size=448, max_num=12):
     pixel_values = torch.stack(pixel_values)
     return pixel_values
 
+
 class Worker:
     def __init__(self):
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
@@ -181,14 +179,14 @@ class Worker:
         self.help_result = []
         self.main_input = queue.Queue()
 
-        self.help_model = AutoModel.from_pretrained(
-            help_model_path,
-            torch_dtype=torch.bfloat16,
-            load_in_8bit=True,
-            low_cpu_mem_usage=True,
-            trust_remote_code=True).eval()
-
-        self.help_tokenizer = AutoTokenizer.from_pretrained(help_model_path, trust_remote_code=True, use_fast=False)
+        # self.help_model = AutoModel.from_pretrained(
+        #     help_model_path,
+        #     torch_dtype=torch.bfloat16,
+        #     load_in_8bit=True,
+        #     low_cpu_mem_usage=True,
+        #     trust_remote_code=True).eval()
+        #
+        # self.help_tokenizer = AutoTokenizer.from_pretrained(help_model_path, trust_remote_code=True, use_fast=False)
 
         # self.tokenizer, self.model, self.image_processor, _ = load_pretrained_model(
         #     main_model_path, None, "llava_qwen", device_map="auto",
@@ -210,10 +208,7 @@ class Worker:
         self.label_row = label2id['table row']
         self.label_col = label2id['table column']
 
-        kwargs = {
-            "guided-decoding-backend": "outlines"
-        }
-        self.llm = LLM(model=main_model_path, kwargs=kwargs)
+        self.llm = LLM(model=main_model_path)
 
     def run(self):
         tasks = [
@@ -300,22 +295,6 @@ class Worker:
                 for (image_path, caption, qs_list, out_list), (image, row, col) in items
             ])
             size += 1
-            convs = [
-                Conversation(
-                    system="""<|im_start|>system
-                        You are a helpful assistant. Provide only an option's letter or an integer for each question, without any additional explanation.""",
-                    roles=["<|im_start|>user", "<|im_start|>assistant"],
-                    version="qwen",
-                    messages=[
-                        ["<|im_start|>user",
-                         f'{DEFAULT_IMAGE_TOKEN}\n This is a table image with red borders. The table shape might be ({r}, {c}) but could vary. The caption of the table is "{caption}". Besides that, for the following three questions, the answer from the other model is {out_list}, which you can use as a reference.'],
-                        ["<|im_start|>assistant", "I have a general understanding of the information in this table."]
-                    ],
-                    offset=0,
-                    sep_style=SeparatorStyle.CHATML,
-                    sep="<|im_end|>",
-                ) for r, c, caption, out_list in zip(rows, cols, captions, out_lists)
-            ]
 
             out_lists = self.vllm_images(images, convs, qs_lists)
             sub_items = [clean_out(img_path, out_list) for img_path, out_list in zip(img_paths, out_lists)]
@@ -354,6 +333,7 @@ class Worker:
                 conv_list[i].messages[-1][-1] = text
 
         return list(zip(*ans_list))
+
 
 worker = Worker()
 worker.run()

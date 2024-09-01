@@ -45,21 +45,38 @@
 
 # !export HF_ENDPOINT=https://hf-mirror.com;huggingface-cli download --resume-download OpenGVLab/InternVL2-1B --local-dir InternVL2-1B --exclude *.zip
 # !export HF_ENDPOINT=https://hf-mirror.com;huggingface-cli download --resume-download SpursgoZmy/table-llava-v1.5-7b --local-dir table_llava
-# HF_ENDPOINT=https://hf-mirror.com HUGGINGFACE_HUB_CACHE="./cache" HF_HOME="./cache" python download.py
-
-import torch
-from transformers import CLIPVisionModel
+# HF_ENDPOINT=https://hf-mirror.com HUGGINGFACE_HUB_CACHE="./cache" HF_HOME="./cache" PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python download.py
 
 # path = "OpenGVLab/InternVL2-8B"
-path = "google/siglip-so400m-patch14-384"
-# model = AutoModel.from_pretrained(
-#     path,
+# path = "google/siglip-so400m-patch14-384"
+# # model = AutoModel.from_pretrained(
+# #     path,
+# #
+# #     cache_dir="./cache",
+# #     trust_remote_code=True)
+# CLIPVisionModel.from_pretrained(
+#     path, torch_dtype=torch.float16, cache_dir="./cache", trust_remote_code=True
+# )
+
+
+from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
+
+# default: Load the model on the available device(s)
+# model = Qwen2VLForConditionalGeneration.from_pretrained(
+#     "Qwen/Qwen2-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
+# )
 #
-#     cache_dir="./cache",
-#     trust_remote_code=True)
-CLIPVisionModel.from_pretrained(
-    path, torch_dtype=torch.float16, cache_dir="./cache", trust_remote_code=True
-)
+# processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-7B-Instruct")
+
+# We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
+# model = Qwen2VLForConditionalGeneration.from_pretrained(
+#     "Qwen/Qwen2-VL-7B-Instruct",
+#     torch_dtype=torch.bfloat16,
+#     attn_implementation="flash_attention_2",
+#     device_map="auto",
+# )
+
+# default processer
 
 #
 # from llava.model.builder import load_pretrained_model
