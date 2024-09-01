@@ -3,6 +3,7 @@ data
 #data/**/*.jpg
 #data/**/*.zip
 #data/**/*.tgz
+**/*.pt
 model/**/*.bin
 model/**/*.pdiparams
 model/**/*.safetensors

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/DAVAR-Lab-OCR" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/LLaVA-NeXT" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PaddleOCR" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PaddleOCR/ppstructure/AutoLog" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/sglang" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/unitable" vcs="Git" />
   </component>
 </project>

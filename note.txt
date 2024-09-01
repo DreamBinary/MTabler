@@ -1,8 +1,0 @@
-
-
-FinTabNet
-
-https://dax-cdn.cdn.appdomain.cloud/dax-fintabnet/1.0.0/fintabnet.tar.gz
-
-
-PubTables-1M

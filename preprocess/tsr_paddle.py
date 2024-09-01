@@ -53,8 +53,8 @@ class TSR(TableStructurer):
 
 
 def tsr(image_file_list):
-    table_model_dir = "/bohr/ocrr-zlwd/v1/ch_ppstructure_openatom_SLANetv2_infer"
-    table_char_dict_path = "/bohr/ocrr-zlwd/v1/table_structure_dict.txt"
+    table_model_dir = "/root/MTabler/model/ch_ppstructure_openatom_SLANetv2_infer"
+    table_char_dict_path = "./table_structure_dict.txt"
     args = type("Args", (), {
         "table_model_dir": table_model_dir,
         "table_char_dict_path": table_char_dict_path,
@@ -142,7 +142,7 @@ def count_rows_and_columns(html_tags):
 
 if __name__ == '__main__':
     image_file_list = ["./tmp.png"]
-
+    print(count_rows_and_columns(['<table>', '<thead>', '<tr>', '<td></td>', '<td></td>', '</tr>', '</thead>', '<tbody>', '<tr>', '<td></td>', '<td></td>', '</tr>', '<tr>', '<td></td>', '<td></td>', '</tr>', '<tr>', '<td></td>', '<td></td>', '</tr>', '<tr>', '<td></td>', '<td></td>', '</tr>', '<tr>', '<td></td>', '<td></td>', '</tr>', '<tr>', '<td></td>', '<td></td>', '</tr>', '</tbody>', '</table>']))
     result = tsr(image_file_list)
     for s, i in result:
         print(s)

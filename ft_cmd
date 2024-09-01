@@ -1,4 +1,4 @@
-[2024-08-18 19:57:54,005] [WARNING] [real_accelerator.py:162:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+:[2024-08-18 19:57:54,005] [WARNING] [real_accelerator.py:162:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
 [2024-08-18 19:57:54,006] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cpu (auto detect)
 /opt/mamba/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cpu.so: undefined symbol: cadam32bit_grad_fp32
 usage: train_mem.py [-h] [--model_name_or_path MODEL_NAME_OR_PATH]
