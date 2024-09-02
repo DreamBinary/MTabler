@@ -1,5 +1,4 @@
-from tqdm import tqdm
-
+#%%
 pkgs_path = "/bohr/pkgs-7x29/v18/pkgs"
 # llava_lib_path = "/bohr/libb-bg5b/v3/llava"
 # tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
@@ -16,7 +15,7 @@ unitable_src = "/bohr/unii-7sxm/v1/unitable/src"
 
 import os
 
-# os.system(f"pip install {pkgs_path}/* --ignore-installed")
+os.system(f"pip install {pkgs_path}/* --ignore-installed")
 os.system(f"cp -r {unitable_src} .")
 # os.system(f"cp -r {llava_lib_path} .")
 # # 提交时可能不能联网，设置成离线模式防止联网失败报错
@@ -28,7 +27,7 @@ os.environ["HUGGINGFACE_HUB_CACHE"] = cache_path
 os.environ["HF_HOME"] = cache_path
 os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 device = "cuda"
-
+#%%
 import json
 
 import torch.multiprocessing as multiprocessing
@@ -64,27 +63,25 @@ from src.vocab import (
 )
 
 warnings.filterwarnings('ignore')
-import logging
+# import logging
 
-multiprocessing.log_to_stderr(logging.INFO)
-logger = multiprocessing.get_logger()
-
+# multiprocessing.log_to_stderr(logging.INFO)
+# logger = multiprocessing.get_logger()
+#%%
 l2i = defaultdict(lambda: -1)
 for i, letter in enumerate('ABCDEFGH'):
     l2i[letter] = i
 sub_list = ('Physics', 'Mathematics', 'ComputerScience', 'QuantitativeBiology', 'QuantitativeFinance',
             'Statistics', 'ElectricalEngineeringandSystemsScience', 'Economics', '')
 torch.cuda.empty_cache()
-
+#%%
 if os.environ.get('DATA_PATH_B'):
     base_dir = os.environ.get('DATA_PATH_B')
 else:
     base_dir = '/bohr/form-recognition-train-b6y2/v4'
 with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
     data = list(json.load(f))
-    data = data[:10]
-
-
+#%%
 class Runtime(sgl.srt.server.Runtime):
     def __init__(
             self,
@@ -144,8 +141,7 @@ class Runtime(sgl.srt.server.Runtime):
                 "Initialization failed. Please see the error messages above."
             )
         self.endpoint = RuntimeEndpoint(self.url)
-
-
+#%%
 MODEL_DIR = Path(unitable_model)
 MODEL_FILE_NAME = ["unitable_large_structure.pt", "unitable_large_bbox.pt", "unitable_large_content.pt"]
 VOCAB_DIR = Path(unitable_vocab)
@@ -163,8 +159,7 @@ d_model = 768
 patch_size = 16
 nhead = 12
 dropout = 0.2
-
-
+#%%
 def autoregressive_decode(
         model: EncoderDecoder,
         image: Tensor,
@@ -302,22 +297,21 @@ def count_rows_and_columns(html_tags):
         index += 1
     columns = max(columns_cnt, key=columns_cnt.get)
     return rows, columns
-
-
+#%%
 class Unitable:
     def __init__(self):
         manager = multiprocessing.Manager()
-        self.html = manager.list()
-        self.bbox = manager.list()
-        self.cell_input = multiprocessing.Queue()
-        self.shape = manager.list()
+        # self.html = manager.list()
+        # self.bbox = manager.list()
+        # self.cell_input = multiprocessing.Queue()
+        # self.shape = manager.list()
         self.result = multiprocessing.Queue()
 
     def run(self):
         ps = [
             multiprocessing.Process(target=self.img_tsr),
-            multiprocessing.Process(target=self.img_bbox),
-            multiprocessing.Process(target=self.img_tcr),
+            # multiprocessing.Process(target=self.img_bbox),
+            # multiprocessing.Process(target=self.img_tcr),
         ]
         for p in ps:
             p.start()
@@ -360,8 +354,8 @@ class Unitable:
             decoder=decoder
         )
 
-        for item in tqdm(data, desc="HTML"):
         # for item in data:
+        for idx, item in enumerate(data):
             image = Image.open(os.path.join(base_dir, "test_images", item["image_path"])).convert("RGB")
             # Image transformation
             image_tensor = image_to_tensor(image, size=(448, 448))
@@ -383,123 +377,120 @@ class Unitable:
             pred_html = html_str_to_token_list(pred_html)
 
             rows, cols = count_rows_and_columns(pred_html)
-            self.shape.append((rows, cols))
-            if self.bbox:
-                self.cell_input.put((pred_html, self.bbox.pop(0)))
-            else:
-                self.html.append(pred_html)
-        if not self.html and not self.bbox:
-            self.cell_input.put(None)
-        logger.info("HTML processed")
-
-    def img_bbox(self):
-        backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
-        encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
-                          norm_first=True, nlayer=12, ff_ratio=4)
-        decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
-                          norm_first=True, nlayer=4, ff_ratio=4)
-        vocab_bbox, model_bbox = load_vocab_and_model(
-            vocab_path=VOCAB_BBOX,
-            max_seq_len=1024,
-            model_weights=MODEL_DIR / MODEL_FILE_NAME[1],
-            backbone=backbone,
-            encoder=encoder,
-            decoder=decoder
-        )
-        for item in tqdm(data, desc="BBOX"):
-        # for item in data:
-            image = Image.open(os.path.join(base_dir, "test_images", item["image_path"])).convert("RGB")
-
-            # Image transformation
-            image_tensor = image_to_tensor(image, size=(448, 448))
-            image_size = image.size
-            # Inference
-            pred_bbox = autoregressive_decode(
-                model=model_bbox,
-                image=image_tensor,
-                prefix=[vocab_bbox.token_to_id("[bbox]")],
-                max_decode_len=1024,
-                eos_id=vocab_bbox.token_to_id("<eos>"),
-                token_whitelist=[vocab_bbox.token_to_id(i) for i in VALID_BBOX_TOKEN[: 449]],
-                token_blacklist=None
-            )
-
-            # Convert token id to token text
-            pred_bbox = pred_bbox.detach().cpu().numpy()[0]
-            pred_bbox = vocab_bbox.decode(pred_bbox, skip_special_tokens=False)
-            pred_bbox = bbox_str_to_token_list(pred_bbox)
-            pred_bbox = rescale_bbox(pred_bbox, src=(448, 448), tgt=image_size)
-            if self.html:
-                self.cell_input.put((self.html.pop(0), pred_bbox))
-            else:
-                self.bbox.append(pred_bbox)
-        if not self.html and not self.bbox:
-            self.cell_input.put(None)
-        logger.info("BBOX processed")
-
-    def img_tcr(self):
-        backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
-        encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
-                          norm_first=True, nlayer=12, ff_ratio=4)
-        decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
-                          norm_first=True, nlayer=4, ff_ratio=4)
-        vocab_cell, model_cell = load_vocab_and_model(
-            vocab_path=VOCAB_CELL,
-            max_seq_len=200,
-            model_weights=MODEL_DIR / MODEL_FILE_NAME[2],
-            backbone=backbone,
-            encoder=encoder,
-            decoder=decoder
-        )
-        idx = 0
-        while True:
-            item = self.cell_input.get()
-            if item is None:
-                break
-            html, bbox = item
-            image = Image.open(os.path.join(base_dir, "test_images", data[idx]["image_path"])).convert("RGB")
-
-            # Cell image cropping and transformation
-            image_tensor = [image_to_tensor(image.crop(b), size=(112, 448)) for b in bbox]
-            image_tensor = torch.cat(image_tensor, dim=0)
-
-            # Inference
-            pred_cell = autoregressive_decode(
-                model=model_cell,
-                image=image_tensor,
-                prefix=[vocab_cell.token_to_id("[cell]")],
-                max_decode_len=200,
-                eos_id=vocab_cell.token_to_id("<eos>"),
-                token_whitelist=None,
-                token_blacklist=[vocab_cell.token_to_id(i) for i in INVALID_CELL_TOKEN]
-            )
-
-            # Convert token id to token text
-            pred_cell = pred_cell.detach().cpu().numpy()
-            pred_cell = vocab_cell.decode_batch(pred_cell, skip_special_tokens=False)
-            pred_cell = [cell_str_to_token_list(i) for i in pred_cell]
-            pred_cell = [re.sub(r'(\d).\s+(\d)', r'\1.\2', i) for i in pred_cell]
-
-            code = build_table_from_html_and_cell(html, pred_cell)
-            code = "".join(code)
-
-            self.result.put((idx, self.shape.pop(0), code))
-
-            logger.info(f"Image {idx} processed")
-            logger.info(f"HTML: {html}")
-            logger.info(f"BBOX: {bbox}")
-            logger.info(f"CODE: {code}")
-            idx += 1
+            # self.shape.append((rows, cols))
+            self.result.put((idx, (rows, cols), pred_html))
         self.result.put(None)
-        logger.info("TCR processed")
+        #     if self.bbox:
+        #         self.cell_input.put((pred_html, self.bbox.pop(0)))
+        #     else:
+        #         self.html.append(pred_html)
+        # if not self.html and not self.bbox:
+        #     self.cell_input.put(None)
+
+    # def img_bbox(self):
+    #     backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
+    #     encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+    #                       norm_first=True, nlayer=12, ff_ratio=4)
+    #     decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+    #                       norm_first=True, nlayer=4, ff_ratio=4)
+    #     vocab_bbox, model_bbox = load_vocab_and_model(
+    #         vocab_path=VOCAB_BBOX,
+    #         max_seq_len=1024,
+    #         model_weights=MODEL_DIR / MODEL_FILE_NAME[1],
+    #         backbone=backbone,
+    #         encoder=encoder,
+    #         decoder=decoder
+    #     )
+    #     for item in data:
+    #         image = Image.open(os.path.join(base_dir, "test_images", item["image_path"])).convert("RGB")
+    # 
+    #         # Image transformation
+    #         image_tensor = image_to_tensor(image, size=(448, 448))
+    #         image_size = image.size
+    #         # Inference
+    #         pred_bbox = autoregressive_decode(
+    #             model=model_bbox,
+    #             image=image_tensor,
+    #             prefix=[vocab_bbox.token_to_id("[bbox]")],
+    #             max_decode_len=1024,
+    #             eos_id=vocab_bbox.token_to_id("<eos>"),
+    #             token_whitelist=[vocab_bbox.token_to_id(i) for i in VALID_BBOX_TOKEN[: 449]],
+    #             token_blacklist=None
+    #         )
+    # 
+    #         # Convert token id to token text
+    #         pred_bbox = pred_bbox.detach().cpu().numpy()[0]
+    #         pred_bbox = vocab_bbox.decode(pred_bbox, skip_special_tokens=False)
+    #         pred_bbox = bbox_str_to_token_list(pred_bbox)
+    #         pred_bbox = rescale_bbox(pred_bbox, src=(448, 448), tgt=image_size)
+    #         if self.html:
+    #             self.cell_input.put((self.html.pop(0), pred_bbox))
+    #         else:
+    #             self.bbox.append(pred_bbox)
+    #     if not self.html and not self.bbox:
+    #         self.cell_input.put(None)
+
+    # def img_tcr(self):
+    #     backbone = ImgLinearBackbone(d_model=d_model, patch_size=patch_size)
+    #     encoder = Encoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+    #                       norm_first=True, nlayer=12, ff_ratio=4)
+    #     decoder = Decoder(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu",
+    #                       norm_first=True, nlayer=4, ff_ratio=4)
+    #     vocab_cell, model_cell = load_vocab_and_model(
+    #         vocab_path=VOCAB_CELL,
+    #         max_seq_len=200,
+    #         model_weights=MODEL_DIR / MODEL_FILE_NAME[2],
+    #         backbone=backbone,
+    #         encoder=encoder,
+    #         decoder=decoder
+    #     )
+    #     idx = 0
+    #     while True:
+    #         item = self.cell_input.get()
+    #         if item is None:
+    #             break
+    #         html, bbox = item
+    #         image = Image.open(os.path.join(base_dir, "test_images", data[idx]["image_path"])).convert("RGB")
+    # 
+    #         # Cell image cropping and transformation
+    #         image_tensor = [image_to_tensor(image.crop(b), size=(112, 448)) for b in bbox]
+    #         image_tensor = torch.cat(image_tensor, dim=0)
+    # 
+    #         # Inference
+    #         pred_cell = autoregressive_decode(
+    #             model=model_cell,
+    #             image=image_tensor,
+    #             prefix=[vocab_cell.token_to_id("[cell]")],
+    #             max_decode_len=200,
+    #             eos_id=vocab_cell.token_to_id("<eos>"),
+    #             token_whitelist=None,
+    #             token_blacklist=[vocab_cell.token_to_id(i) for i in INVALID_CELL_TOKEN]
+    #         )
+    # 
+    #         # Convert token id to token text
+    #         pred_cell = pred_cell.detach().cpu().numpy()
+    #         pred_cell = vocab_cell.decode_batch(pred_cell, skip_special_tokens=False)
+    #         pred_cell = [cell_str_to_token_list(i) for i in pred_cell]
+    #         pred_cell = [re.sub(r'(\d).\s+(\d)', r'\1.\2', i) for i in pred_cell]
+    # 
+    #         code = build_table_from_html_and_cell(html, pred_cell)
+    #         code = "".join(code)
+    # 
+    #         self.result.put((idx, self.shape.pop(0), code))
+    # 
+    #         # logger.info(f"Image {idx} processed")
+    #         # logger.info(f"HTML: {html}")
+    #         # logger.info(f"BBOX: {bbox}")
+    #         # logger.info(f"CODE: {code}")
+    #         idx += 1
+    #     self.result.put(None)
 
     # def draw_bbox(self, image, bbox):
     #     draw = ImageDraw.Draw(image)
     #     for b in bbox:
     #         draw.rectangle(b, outline="red", width=1)
     #     return image
-
-
+#%%
 @sgl.function
 def one_image(s, img_path, caption, q3, tsr):
     q2 = """Based on the table, caption and html structure, which subject is most relevant to the table and caption?
@@ -514,9 +505,12 @@ H) Economics
 """
     s += sgl.system(
         "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions.")
+    # s += sgl.user(
+    #     sgl.image(img_path) +
+    #     f'This is a table image. The caption of the table is "{caption}". The OCR recognition result of the table in HTML format is {tsr}, which can be used as a reference but no standard answer')
     s += sgl.user(
         sgl.image(img_path) +
-        f'This is a table image. The caption of the table is "{caption}". The OCR recognition result of the table in HTML format is {tsr}, which can be used as a reference but no standard answer')
+        f'This is a table image. The caption of the table is "{caption}". The structure of the table in html format is as follows: {tsr}.')
     s += sgl.assistant("I have a general understanding of the information in this table.")
     s += sgl.user(q2)
     s += sgl.assistant(
@@ -527,6 +521,7 @@ H) Economics
     s += sgl.assistant(sgl.gen("option",
                                # choices=["A", "B", "C", "D"],
                                max_tokens=2, temperature=0.0, top_p=1))
+#%%
 
 
 from sglang.lang.chat_template import get_chat_template
@@ -577,7 +572,7 @@ class Worker:
                 flag = False
             batch_output = []
             batch_data = []
-            for idx, shape, code in batch_result:
+            for idx, shape, tsr in batch_result:
                 item = data[idx]
                 path = os.path.join(base_dir, "test_images", item["image_path"])
                 question = item["question"]
@@ -592,7 +587,7 @@ D) {item["options"][3]}
                 batch_data.append({
                     "img_path": path,
                     "caption": item["caption"],
-                    "tsr": code,
+                    "tsr": tsr,
                     "q3": q3,
                 })
             self.ocr_data.put((batch_output, batch_data))
@@ -638,9 +633,7 @@ D) {item["options"][3]}
             "rows": rows,
             "answer": answer,
         }
-        logger.info(sub_item)
         self.submission.append(sub_item)
-
-
+#%%
 worker = Worker()
 worker.run()

@@ -5,39 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/MTabler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MTabler.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/llava_vllm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/baseline.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/main_llava.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/table_llava.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/main_llava_with_tsr.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/table_llava_tsr.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_local.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0818.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_tsr.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0818_2.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0824.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_latex.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0825.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_latex2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0825_2.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0826.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_0826_2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/sgl.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_0.5b.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_process.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl_process.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_thread.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl_thread.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_vllmhelp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/si_internvl_vllm.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_si_help_vllmov.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/ov_vllm.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download.py" beforeDir="false" afterPath="$PROJECT_DIR$/download.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_latex.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/sgl_latex.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_latex.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_paddle.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_paddle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_paddle.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_paddle.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_unitable.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sgl_unitable.py" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_unitable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vllmhelp.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vllmhelp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vllm.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +71,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "//wsl.localhost/Ubuntu/root/MTabler",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
-    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/commit/si_internvl_vllm.ipynb"
+    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/sgl_unitable3.ipynb"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -107,11 +83,11 @@
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\unitable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\commit" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model\unitable_weights\weights" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\unitable" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\unitable\experiments\unitable_weights" />
     </key>
   </component>
   <component name="RunManager" selected="Python.tmp">
@@ -347,6 +323,11 @@
       <workItem from="1725182933322" duration="601000" />
       <workItem from="1725183833857" duration="283000" />
       <workItem from="1725184208424" duration="8499000" />
+      <workItem from="1725197826216" duration="94000" />
+      <workItem from="1725199121946" duration="2191000" />
+      <workItem from="1725261347818" duration="4218000" />
+      <workItem from="1725266069233" duration="5398000" />
+      <workItem from="1725279729974" duration="4640000" />
     </task>
     <servers />
   </component>
@@ -386,7 +367,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ttt.py</url>
-          <line>36</line>
+          <line>30</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
@@ -396,8 +377,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
           <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/qwen_paddle.ipynb</url>
-          <line>28</line>
+          <line>30</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/qwen_paddle.ipynb</url>
+          <line>53</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

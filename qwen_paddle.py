@@ -1,20 +1,26 @@
-pkgs_path = "/bohr/pkgs-7x29/v18/pkgs"
+from tqdm import tqdm
+
+pkgs_path = "/bohr/pkgs-7x29/v21/pkgs"
 # llava_lib_path = "/bohr/libb-bg5b/v3/llava"
 # tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
 model_path = "Qwen/Qwen2-VL-7B-Instruct"
 cache_path = "/bohr/cach-rxl3/v11/cache"
 table_model_dir = "/bohr/ocrr-zlwd/v1/ch_ppstructure_openatom_SLANetv2_infer"
 table_char_dict_path = "/bohr/ocrr-zlwd/v1/table_structure_dict.txt"
+vllm_path = "/bohr/vllm-iq98/v1/vllm"
+
 # pkgs_path = "/personal/pkgs"
 # llava_lib_path = "/personal/llava"
 # model_path = "lmms-lab/llava-onevision-qwen2-0.5b-ov"
 # cache_path = "/personal/cache"
+# vllm_path = "/personal/vllm"
 
 
 import os
 
-# os.system(f"pip3 install {pkgs_path}/* --ignore-installed")
+os.system(f"pip3 install {pkgs_path}/* --ignore-installed")
 # os.system(f"cp -r {llava_lib_path} .")
+os.system(f"cp -r {vllm_path} .")
 # # 提交时可能不能联网，设置成离线模式防止联网失败报错
 os.environ['TRANSFORMERS_OFFLINE'] = '1'
 os.environ['HF_DATASETS_OFFLINE'] = '1'
@@ -39,11 +45,12 @@ import torch
 import multiprocessing
 import re
 import math
+
+warnings.filterwarnings("ignore")
 import logging
 
 multiprocessing.log_to_stderr(logging.INFO)
 logger = multiprocessing.get_logger()
-warnings.filterwarnings("ignore")
 
 l2i = defaultdict(lambda: -1)
 for i, letter in enumerate('ABCDEFGH'):
@@ -55,7 +62,6 @@ IMAGE_FACTOR = 28
 MIN_PIXELS = 4 * 28 * 28
 MAX_PIXELS = 16384 * 28 * 28
 MAX_RATIO = 200
-
 
 def round_by_factor(number: int, factor: int) -> int:
     """Returns the closest integer to 'number' that is divisible by 'factor'."""
@@ -73,8 +79,8 @@ def floor_by_factor(number: int, factor: int) -> int:
 
 
 def smart_resize(
-        height: int, width: int, factor: int = IMAGE_FACTOR, min_pixels: int = MIN_PIXELS,
-        max_pixels: int = MAX_PIXELS):
+        height: int, width: int, factor: int = IMAGE_FACTOR, min_pixels: int = MIN_PIXELS, max_pixels: int = MAX_PIXELS
+):
     """
     Rescales the image so that the following conditions are met:
 
@@ -143,7 +149,6 @@ class TSR(TableStructurer):
         structure_str_list = ["<table>"] + structure_str_list + ["</table>"]
         return structure_str_list, bbox_list
 
-
 def count_rows_and_columns(html_tags):
     rows = 0
     max_columns = 0
@@ -193,7 +198,6 @@ def count_rows_and_columns(html_tags):
     columns = max(columns_cnt, key=columns_cnt.get)
     return rows, columns
 
-
 class Worker:
     def __init__(self):
         self.llm = None
@@ -235,7 +239,8 @@ class Worker:
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
             data = list(json.load(f))
             data = data[:10]
-        for item in data:
+        # for item in data:
+        for item in tqdm(data):
             path = os.path.join(base_dir, "test_images", item["image_path"])
             img = cv2.imread(path)
             structure_res = tsr(img)
@@ -264,6 +269,7 @@ D) {item["options"][3]}
         self.llm = LLM(
             model=model_path,
             limit_mm_per_prompt={"image": 1},
+            dtype="float16"
         )
         self.processor = AutoProcessor.from_pretrained(model_path)
         while flag:
@@ -405,7 +411,6 @@ H) Economics
         )
         img = img.resize((resized_width, resized_height))
         return img
-
 
 worker = Worker()
 worker.run()
