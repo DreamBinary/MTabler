@@ -2,7 +2,9 @@
 # @FileName : unitable.py
 # @Time : 2024/8/31 15:17
 # @Author : fiv
+import json
 import logging
+import os.path
 import re
 import warnings
 from collections import defaultdict
@@ -200,7 +202,7 @@ def count_rows_and_columns(html_tags):
                     rowspan_columns[current_columns - _] = rowspan
 
         elif tag == '</tr>':
-            print(f"Row {rows} has {current_columns} columns")
+            # print(f"Row {rows} has {current_columns} columns")
             columns_cnt[current_columns] += 1
             max_columns = max(max_columns, current_columns)
 
@@ -331,8 +333,8 @@ class Unitable:
     def run(self):
         ps = [
             multiprocessing.Process(target=self.img_tsr),
-            # multiprocessing.Process(target=self.img_bbox),
-            # multiprocessing.Process(target=self.img_tcr),
+            multiprocessing.Process(target=self.img_bbox),
+            multiprocessing.Process(target=self.img_tcr),
         ]
         for p in ps:
             p.start()
@@ -509,6 +511,12 @@ class Unitable:
     #         draw.rectangle(b, outline="red", width=1)
     #     return image
 
+
+base_dir = "/root/MTabler/data/form-recognition-train_v4"
+
+with open(f"{base_dir}/dataset.json", "r") as f:
+    data = json.load(f)
+    data = [os.path.join(base_dir, "test_images", d["image_path"]) for d in data]
 
 data = ["./tmp.png"]
 if __name__ == '__main__':

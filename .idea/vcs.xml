@@ -2,8 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vllm" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vllmsadf" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vllmsadf/build/temp.linux-x86_64-cpython-310/_deps/cutlass-src" vcs="Git" />
   </component>
 </project>
