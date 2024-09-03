@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/MTabler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MTabler.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/unitable.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/unitable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_unitable.py" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_unitable1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sgl_unitable2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_unitable2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,7 +324,7 @@
       <workItem from="1725279729974" duration="7676000" />
       <workItem from="1725328027851" duration="2147000" />
       <workItem from="1725345164986" duration="6512000" />
-      <workItem from="1725352830108" duration="616000" />
+      <workItem from="1725352830108" duration="6015000" />
     </task>
     <servers />
   </component>
