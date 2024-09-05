@@ -1,38 +1,379 @@
+# %%
+
+import json
+import multiprocessing
 import os
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+q_prefix = "Based on the table, caption and html structure, "
+manager = multiprocessing.Manager()
+data = manager.list()
 
-from swift.llm import (
-    get_model_tokenizer, get_template, inference, ModelType,
-    get_default_template_type
-)
-from swift.utils import seed_everything
+
+def rewrite():
+    if os.environ.get('DATA_PATH_B'):
+        base_dir = os.environ.get('DATA_PATH_B')
+    else:
+        base_dir = '/bohr/form-recognition-train-b6y2/v4'
+    with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
+        data_t = json.load(f)
+        data_t = list(data_t)[:50]
+        # write path to json
+    # new_data = []
+    for d in data_t:
+        path = os.path.join(base_dir, "test_images", d["image_path"])
+        # image = Image.open(path).convert("RGB")
+        question = d["question"]
+        question = question[0].lower() + question[1:]
+        q3 = f"""{q_prefix}{question}
+A) {d["options"][0]}
+B) {d["options"][1]}
+C) {d["options"][2]}
+D) {d["options"][3]}
+"""
+        data.append({
+            "path": path,
+            "image_path": d["image_path"],
+            "caption": d["caption"],
+            # "image": image,
+            "q3": q3,
+        })
+
+
+p = multiprocessing.Process(target=rewrite)
+p.start()
+# %%
+pkgs_path = "/bohr/pkgs-7x29/v18/pkgs"
+model_path = "lmms-lab/llava-onevision-qwen2-7b-si"
+cache_path = "/bohr/cach-rxl3/v9/cache"
+table_model_dir = "/bohr/ocrr-zlwd/v1/ch_ppstructure_openatom_SLANetv2_infer"
+table_char_dict_path = "/bohr/ocrr-zlwd/v1/table_structure_dict.txt"
+# pkgs_path = "/personal/pkgs"
+# llava_lib_path = "/personal/llava"
+# model_path = "lmms-lab/llava-onevision-qwen2-0.5b-ov"
+# cache_path = "/personal/cache"
+OCR_BASE_DIR = "./OCRCache"
+
+os.system(f"pip3 install {pkgs_path}/* --ignore-installed")
+# os.system(f"cp -r {llava_lib_path} .")
+# # 提交时可能不能联网，设置成离线模式防止联网失败报错
+os.environ['TRANSFORMERS_OFFLINE'] = '1'
+os.environ['HF_DATASETS_OFFLINE'] = '1'
+os.environ['HF_HUB_OFFLINE'] = '1'
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+os.environ["HUGGINGFACE_HUB_CACHE"] = cache_path
+os.environ["HF_HOME"] = cache_path
+device = "cuda"
+os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
+# %%
+from collections import defaultdict
+from typing import Optional
+
+from paddleocr.paddleocr import parse_args
+from paddleocr.ppstructure.predict_system import StructureSystem
+
+from sglang.lang.chat_template import get_chat_template
+from sglang.srt.server import launch_server
+from sglang.srt.server_args import ServerArgs
+from sglang.srt.utils import allocate_init_ports
+from sglang import RuntimeEndpoint
+import cv2
+
+import warnings
+import sglang as sgl
 import torch
+import multiprocessing
+import re
 
-MODEL_PATH = '/data/llm-models/qwen2-vl-7b-instruct'
+warnings.filterwarnings("ignore")
 
-model_type = ModelType.qwen2_vl_7b_instruct
-template_type = get_default_template_type(model_type)
-model, tokenizer = get_model_tokenizer(
-    model_type, torch.bfloat16, model_id_or_path=MODEL_PATH, model_kwargs={'device_map': 'auto'})
-model.generation_config.max_new_tokens = 2
-template = get_template(template_type, tokenizer)
-seed_everything(42)
+# %%
 
-query = """<img>http://modelscope-open.oss-cn-hangzhou.aliyuncs.com/images/road.png</img>距离各城市多远？"""
-response, history = inference(model, template, query)
-print(f'query: {query}')
-print(f'response: {response}')
+l2i = defaultdict(lambda: -1)
+for i, letter in enumerate('ABCDEFGH'):
+    l2i[letter] = i
+sub_list = ('Physics', 'Mathematics', 'ComputerScience', 'QuantitativeBiology', 'QuantitativeFinance',
+            'Statistics', 'ElectricalEngineeringandSystemsScience', 'Economics', '')
+torch.cuda.empty_cache()
 
+
+# %%
+class Runtime(sgl.srt.server.Runtime):
+    def __init__(
+            self,
+            log_level: str = "error",
+            model_overide_args: Optional[dict] = None,
+            *args,
+            **kwargs,
+    ):
+        """See the arguments in server_args.py::ServerArgs"""
+        self.server_args = ServerArgs(*args, log_level=log_level, **kwargs)
+
+        # Pre-allocate ports
+        self.server_args.port, self.server_args.additional_ports = allocate_init_ports(
+            self.server_args.port,
+            self.server_args.additional_ports,
+            self.server_args.dp_size,
+        )
+
+        self.url = self.server_args.url()
+        self.generate_url = (
+            f"http://{self.server_args.host}:{self.server_args.port}/generate"
+        )
+
+        self.pid = None
+        # logger.info("Launching server...")
+        pipe_reader, pipe_writer = multiprocessing.Pipe(duplex=False)
+        proc = multiprocessing.Process(
+            target=launch_server,
+            args=(self.server_args, model_overide_args, pipe_writer),
+        )
+        # logger.info("Waiting for server to launch...")
+        proc.start()
+        self.pid = proc.pid
+        # logger.info("Waiting for server to launch...")
+        # pipe_writer.close()
+        # timeout = 60
+        # import time
+        # start_time = time.time()
+        #
+        # while True:
+        #     logger.info("Waiting for initialization state...", flush=True)
+        #     if pipe_reader.poll(timeout=1):
+        #         logger.info("Waiting for initialization state...", flush=True)
+        #         init_state = pipe_reader.recv()
+        #         break
+        #     if time.time() - start_time > timeout:
+        #         raise TimeoutError("Timeout while waiting for initialization state")
+        # try:
+        #     init_state = pipe_reader.recv()
+        # except EOFError:
+        #     init_state = ""
+        init_state = pipe_reader.recv()
+
+        if init_state != "init ok":
+            self.shutdown()
+            raise RuntimeError(
+                "Initialization failed. Please see the error messages above."
+            )
+        self.endpoint = RuntimeEndpoint(self.url)
+
+
+# %%
+# def count_rows_and_columns(html_tags):
+#     rows = 0
+#     max_columns = 0
+#     current_columns = 0
+#     rowspan_columns = {}
+#     index = 0
+#     columns_cnt = defaultdict(int)
+#     while index < len(html_tags):
+#         tag = html_tags[index]
+#
+#         if tag == '<tr>':
+#             rows += 1
+#             current_columns = 0
+#
+#             # Account for any ongoing rowspans from previous rows
+#             for col, span in rowspan_columns.items():
+#                 if span > 1:
+#                     current_columns += 1
+#                     rowspan_columns[col] -= 1
+#
+#         elif tag.startswith('<td'):
+#             colspan = 1
+#             rowspan = 1
+#
+#             # Check if 'colspan' and 'rowspan' are in the subsequent strings
+#             if index + 1 < len(html_tags) and 'colspan="' in html_tags[index + 1]:
+#                 colspan = int(html_tags[index + 1].strip().split('colspan="')[1].split('"')[0])
+#                 index += 1  # Skip the colspan string
+#             if index + 1 < len(html_tags) and 'rowspan="' in html_tags[index + 1]:
+#                 rowspan = int(html_tags[index + 1].strip().split('rowspan="')[1].split('"')[0])
+#                 index += 1  # Skip the rowspan string
+#
+#             # Increment columns count
+#             current_columns += colspan
+#
+#             # Track rowspans for subsequent rows
+#             if rowspan > 1:
+#                 for _ in range(colspan):
+#                     rowspan_columns[current_columns - _] = rowspan
+#
+#         elif tag == '</tr>':
+#             print(f"Row {rows} has {current_columns} columns")
+#             columns_cnt[current_columns] += 1
+#             max_columns = max(max_columns, current_columns)
+#
+#         index += 1
+#     columns = max(columns_cnt, key=columns_cnt.get)
+#     return rows, columns
+
+
+@sgl.function
+def one_image(s, path, q1, q3):
+    q2 = """Based on the table, caption and html structure, which subject is most relevant to the table and caption?
+A) Physics
+B) Mathematics
+C) Computer Science
+D) Quantitative Biology
+E) Quantitative Finance
+F) Statistics
+G) Electrical Engineering and Systems Science
+H) Economics
 """
-template_type: qwen2-vl
-query: <img>http://modelscope-open.oss-cn-hangzhou.aliyuncs.com/images/road.png</img>距离各城市多远？
-response: 根据图片中的路标，距离各城市的距离如下：
+    s += sgl.system(
+        "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions.")
+    # s += sgl.user(
+    #     sgl.image(img_path) +
+    #     f'This is a table image. The caption of the table is "{caption}". The OCR recognition result of the table in HTML format is {tsr}, which can be used as a reference but no standard answer')
+    s += sgl.user(sgl.image(path) + q1)
+    s += sgl.assistant("I have a general understanding of the information in this table.")
+    s += sgl.user(q2)
+    s += sgl.assistant(
+        sgl.gen_string("subject",
+                       # choices=["A", "B", "C", "D", "E", "F", "G", "H"],
+                       max_tokens=2, temperature=0.0, top_p=1
+                       ))
+    s += sgl.user(q3)
+    s += sgl.assistant(
+        sgl.gen_string("option",
+                       # choices=["A", "B", "C", "D"],
+                       max_tokens=2, temperature=0.0, top_p=1
+                       ))
 
-- 马踏：14公里
-- 阳江：62公里
-- 广州：293公里
-query: 距离最远的城市是哪？
-response: 距离最远的城市是广州，距离为293公里。
-history: [['<img>http://modelscope-open.oss-cn-hangzhou.aliyuncs.com/images/road.png</img>距离各城市多远？', '根据图片中的路标，距离各城市的距离如下：\n\n- 马踏：14公里\n- 阳江：62公里\n- 广州：293公里'], ['距离最远的城市是哪？', '距离最远的城市是广州，距离为293公里。']]
-"""
+
+# %%
+class OCR(StructureSystem):
+    def __init__(self, **kwargs):
+        params = parse_args(mMain=False)
+        params.__dict__.update(**kwargs)
+
+        params.structure_version = "PP-StructureV2"
+        params.use_gpu = False
+        params.mode = "structure"
+
+        params.det_model_dir = os.path.join(OCR_BASE_DIR, "whl", "det", "en", "en_PP-OCRv3_det_infer")
+        params.rec_model_dir = os.path.join(OCR_BASE_DIR, "whl", "rec", "en", "en_PP-OCRv4_rec_infer")
+        params.table_model_dir = os.path.join(OCR_BASE_DIR, "whl", "table", "en_ppstructure_mobile_v2.0_SLANet_infer")
+        # params.layout_model_dir = os.path.join(BASE_DIR, "whl", "layout")
+
+        params.rec_char_dict_path = os.path.join(OCR_BASE_DIR, "dict", "en_dict.txt")
+        params.table_char_dict_path = os.path.join(OCR_BASE_DIR, "dict", "table_structure_dict.txt")
+        # params.layout_dict_path = os.path.join(BASE_DIR, "dict", "layout_publaynet_dict.txt")
+
+        super().__init__(params)
+
+    def __call__(self, img, return_ocr_result_in_table=False, img_idx=0):
+        res, table_time_dict = self.table_system(
+            img, return_ocr_result_in_table
+        )
+        return res
+
+
+# %%
+class Worker:
+    def __init__(self):
+        self.batch_size = 8
+        self.ocr_data = multiprocessing.Queue()
+        self.result = multiprocessing.Queue()
+
+    def run(self):
+        ocr_process = multiprocessing.Process(target=self.ocr)
+        ocr_process.start()
+
+        model_overide_args = {
+            "attn_implementation": "eager",
+            "multimodal": True,
+            "overwrite_config": {
+                "image_aspect_ratio": "anyres_max_9"
+            }
+        }
+        runtime = Runtime(
+            model_path=model_path,
+            model_overide_args=model_overide_args,
+        )
+        runtime.endpoint.chat_template = get_chat_template("qwen")
+        sgl.set_default_backend(runtime)
+
+        post = multiprocessing.Process(target=self.post_process)
+        post.start()
+
+        self.process()
+        runtime.shutdown()
+        post.join()
+
+    def ocr(self):
+        engine = OCR(layout=False, show_log=False, lang="en")
+        outputs = []
+        inputs = []
+        for item in data:
+            path = item["path"]
+            img = cv2.imread(path)
+            res = engine(img)
+            rows, cols = -1, -1
+            q1 = f'This is a table image. The caption of the table is "{item["caption"]}". The result of OCR in html format is as follows: {res["html"]}.'
+            outputs.append((item["image_path"], rows, cols))
+            inputs.append({"path": item["path"], "q1": q1, "q3": item["q3"]})
+            if len(outputs) == self.batch_size:
+                self.ocr_data.put((outputs, inputs))
+                outputs, inputs = [], []
+        self.ocr_data.put(None)
+
+    def process(self):
+        flag = True
+        while flag:
+            item = self.ocr_data.get()
+            if item is None:
+                break
+            outputs, inputs = item
+            states = one_image.run_batch(inputs)
+            self.result.put((outputs, states))
+        self.result.put(None)
+
+    def post_process(self):
+        submission = []
+        while True:
+            item = self.result.get()
+            if item is None:
+                break
+            outputs, states = item
+            for o, s in zip(outputs, states):
+                sub_item = self.clean_out(o, s)
+                submission.append(sub_item)
+        with open('submission.json', 'w') as f:
+            json.dump(submission, f)
+
+    def clean_out(self, o, s):
+        img_path, rows, cols = o
+        category = ""
+        answer = -1
+        try:
+            subject = s["subject"]
+            match = re.search(r'[A-Za-z]', subject)
+            if match:
+                category = match.group(0).upper()
+                category = sub_list[l2i[category]]
+        except:
+            category = ""
+        try:
+            option = s["option"]
+            match = re.search(r'[A-Za-z]', option)
+            if match:
+                answer = match.group(0).upper()
+                answer = l2i[answer]
+        except:
+            answer = -1
+        sub_item = {
+            "image_path": img_path,
+            "category": category,
+            "cols": cols,
+            "rows": rows,
+            "answer": answer,
+        }
+        return sub_item
+
+
+# %%
+p.join()
+worker = Worker()
+worker.run()

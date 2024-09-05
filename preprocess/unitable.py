@@ -333,8 +333,8 @@ class Unitable:
     def run(self):
         ps = [
             multiprocessing.Process(target=self.img_tsr),
-            multiprocessing.Process(target=self.img_bbox),
-            multiprocessing.Process(target=self.img_tcr),
+            # multiprocessing.Process(target=self.img_bbox),
+            # multiprocessing.Process(target=self.img_tcr),
         ]
         for p in ps:
             p.start()
@@ -378,6 +378,9 @@ class Unitable:
             encoder=encoder,
             decoder=decoder
         )
+        print(model_html)
+        print(vocab_html)
+        return
 
         for item in data:
             image = Image.open(item).convert("RGB")
