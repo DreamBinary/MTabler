@@ -1,11 +1,11 @@
 import json
-import logging
+
 import multiprocessing
 import os
 
 from PIL import Image
 from tqdm import tqdm
-
+import logging
 multiprocessing.log_to_stderr(logging.INFO)
 logger = multiprocessing.get_logger()
 logging.basicConfig(filename='sgl_unitable4.log', level=logging.INFO)
