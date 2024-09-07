@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tsr_paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tsr_paddle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/ch_ppstructure_openatom_SLANetv2_infer/inference.pdiparams.info" beforeDir="false" afterPath="$PROJECT_DIR$/OCRCache/whl/table/ch_ppstructure_openatom_SLANetv2_infer/inference.pdiparams.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/ch_ppstructure_openatom_SLANetv2_infer/inference.pdmodel" beforeDir="false" afterPath="$PROJECT_DIR$/OCRCache/whl/table/ch_ppstructure_openatom_SLANetv2_infer/inference.pdmodel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/table/[0, 0, 1405, 495]_0.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/table/res_0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/table1/[0, 0, 689, 270]_0.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/table1/res_0.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sgl_paddle_new2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_paddle_new2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_paddle_new_border.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_paddle_new2_border.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +71,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "//wsl.localhost/Ubuntu/root/MTabler",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
-    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/sgl_unitable3.ipynb"
+    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/commit/sgl_paddle.ipynb"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -79,11 +83,11 @@
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model\unitable\vocab" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\OCRCache\whl\table" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\commit" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model\unitable_weights\weights" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\unitable" />
     </key>
   </component>
   <component name="RunManager" selected="Python.ttt">
@@ -336,7 +340,7 @@
       <workItem from="1725603991297" duration="4702000" />
       <workItem from="1725611213475" duration="7109000" />
       <workItem from="1725625564802" duration="2207000" />
-      <workItem from="1725687222652" duration="2625000" />
+      <workItem from="1725687222652" duration="8847000" />
     </task>
     <servers />
   </component>
