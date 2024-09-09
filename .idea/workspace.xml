@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/MTabler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MTabler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/ch_ppstructure_openatom_SLANetv2_infer/inference.pdiparams.info" beforeDir="false" afterPath="$PROJECT_DIR$/OCRCache/whl/table/ch_ppstructure_openatom_SLANetv2_infer/inference.pdiparams.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/ch_ppstructure_openatom_SLANetv2_infer/inference.pdmodel" beforeDir="false" afterPath="$PROJECT_DIR$/OCRCache/whl/table/ch_ppstructure_openatom_SLANetv2_infer/inference.pdmodel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/table/[0, 0, 1405, 495]_0.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/table/res_0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/table1/[0, 0, 689, 270]_0.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/table1/res_0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_paddle_sw.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_paddle_sw.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sgl_paddle_new2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_paddle_new2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_paddle_new_border.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_paddle_new2_border.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,35 +42,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.ComTQA.executor": "Run",
-    "Python.MMTab.executor": "Run",
-    "Python.TableVQA-Bench.executor": "Run",
-    "Python.conversation.executor": "Run",
-    "Python.convert.executor": "Run",
-    "Python.download.executor": "Run",
-    "Python.gather.executor": "Run",
-    "Python.main_llava.executor": "Run",
-    "Python.sgl_ocr.executor": "Run",
-    "Python.table_shape.executor": "Run",
-    "Python.thresholding.executor": "Run",
-    "Python.tmp.executor": "Run",
-    "Python.train_mem.executor": "Run",
-    "Python.tsr (1).executor": "Run",
-    "Python.tsr.executor": "Run",
-    "Python.tsr_paddle.executor": "Run",
-    "Python.ttt.executor": "Run",
-    "Python.unitable.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/root/MTabler",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
-    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/commit/sgl_paddle.ipynb"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.ComTQA.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MMTab.executor&quot;: &quot;Run&quot;,
+    &quot;Python.TableVQA-Bench.executor&quot;: &quot;Run&quot;,
+    &quot;Python.conversation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.convert.executor&quot;: &quot;Run&quot;,
+    &quot;Python.download.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gather.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_llava.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sgl_ocr.executor&quot;: &quot;Run&quot;,
+    &quot;Python.table_shape.executor&quot;: &quot;Run&quot;,
+    &quot;Python.thresholding.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tmp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_mem.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tsr (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.tsr.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tsr_paddle.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ttt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.unitable.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/sgl_paddle_66_0_61.ipynb&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/sgl_paddle_66_0_61.ipynb&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
@@ -340,7 +337,17 @@
       <workItem from="1725603991297" duration="4702000" />
       <workItem from="1725611213475" duration="7109000" />
       <workItem from="1725625564802" duration="2207000" />
-      <workItem from="1725687222652" duration="8847000" />
+      <workItem from="1725687222652" duration="9017000" />
+      <workItem from="1725716098174" duration="686000" />
+      <workItem from="1725769747537" duration="4079000" />
+      <workItem from="1725779086192" duration="1873000" />
+      <workItem from="1725786006706" duration="812000" />
+      <workItem from="1725793215908" duration="96000" />
+      <workItem from="1725793335512" duration="26000" />
+      <workItem from="1725796850926" duration="33000" />
+      <workItem from="1725804014978" duration="370000" />
+      <workItem from="1725865138668" duration="2564000" />
+      <workItem from="1725868635645" duration="5802000" />
     </task>
     <servers />
   </component>
@@ -391,18 +398,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ttt.py</url>
-          <line>15</line>
+          <line>99</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
           <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/ov_si_0818_2.ipynb</url>
           <line>34</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
-          <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/qwen_paddle.ipynb</url>
-          <line>30</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
           <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/qwen_paddle.ipynb</url>
