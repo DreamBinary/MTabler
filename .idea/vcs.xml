@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PaddleOCR" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/table-transformer" vcs="Git" />
   </component>
 </project>
