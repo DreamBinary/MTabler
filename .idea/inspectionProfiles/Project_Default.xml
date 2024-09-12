@@ -5,7 +5,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="45">
+          <list size="91">
             <item index="0" class="java.lang.String" itemvalue="chromadb" />
             <item index="1" class="java.lang.String" itemvalue="modelscope" />
             <item index="2" class="java.lang.String" itemvalue="transformers" />
@@ -51,6 +51,52 @@
             <item index="42" class="java.lang.String" itemvalue="websockets" />
             <item index="43" class="java.lang.String" itemvalue="xxhash" />
             <item index="44" class="java.lang.String" itemvalue="outlines" />
+            <item index="45" class="java.lang.String" itemvalue="httpx" />
+            <item index="46" class="java.lang.String" itemvalue="tiktoken" />
+            <item index="47" class="java.lang.String" itemvalue="vllm" />
+            <item index="48" class="java.lang.String" itemvalue="distro" />
+            <item index="49" class="java.lang.String" itemvalue="protobuf" />
+            <item index="50" class="java.lang.String" itemvalue="networkx" />
+            <item index="51" class="java.lang.String" itemvalue="async-timeout" />
+            <item index="52" class="java.lang.String" itemvalue="nvidia-nvjitlink-cu12" />
+            <item index="53" class="java.lang.String" itemvalue="jiter" />
+            <item index="54" class="java.lang.String" itemvalue="xformers" />
+            <item index="55" class="java.lang.String" itemvalue="nvidia-ml-py" />
+            <item index="56" class="java.lang.String" itemvalue="python-dotenv" />
+            <item index="57" class="java.lang.String" itemvalue="cloudpickle" />
+            <item index="58" class="java.lang.String" itemvalue="py-cpuinfo" />
+            <item index="59" class="java.lang.String" itemvalue="datasets" />
+            <item index="60" class="java.lang.String" itemvalue="llvmlite" />
+            <item index="61" class="java.lang.String" itemvalue="MarkupSafe" />
+            <item index="62" class="java.lang.String" itemvalue="torchvision" />
+            <item index="63" class="java.lang.String" itemvalue="httptools" />
+            <item index="64" class="java.lang.String" itemvalue="ftfy" />
+            <item index="65" class="java.lang.String" itemvalue="vllm-flash-attn" />
+            <item index="66" class="java.lang.String" itemvalue="filelock" />
+            <item index="67" class="java.lang.String" itemvalue="safetensors" />
+            <item index="68" class="java.lang.String" itemvalue="multiprocess" />
+            <item index="69" class="java.lang.String" itemvalue="prometheus_client" />
+            <item index="70" class="java.lang.String" itemvalue="pycountry" />
+            <item index="71" class="java.lang.String" itemvalue="lark" />
+            <item index="72" class="java.lang.String" itemvalue="pyarrow" />
+            <item index="73" class="java.lang.String" itemvalue="tokenizers" />
+            <item index="74" class="java.lang.String" itemvalue="annotated-types" />
+            <item index="75" class="java.lang.String" itemvalue="watchfiles" />
+            <item index="76" class="java.lang.String" itemvalue="triton" />
+            <item index="77" class="java.lang.String" itemvalue="dill" />
+            <item index="78" class="java.lang.String" itemvalue="lm-format-enforcer" />
+            <item index="79" class="java.lang.String" itemvalue="prometheus-fastapi-instrumentator" />
+            <item index="80" class="java.lang.String" itemvalue="ray" />
+            <item index="81" class="java.lang.String" itemvalue="bitsandbytes" />
+            <item index="82" class="java.lang.String" itemvalue="pyairports" />
+            <item index="83" class="java.lang.String" itemvalue="interegular" />
+            <item index="84" class="java.lang.String" itemvalue="pydantic_core" />
+            <item index="85" class="java.lang.String" itemvalue="ninja" />
+            <item index="86" class="java.lang.String" itemvalue="cmake" />
+            <item index="87" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="88" class="java.lang.String" itemvalue="open_clip_torch" />
+            <item index="89" class="java.lang.String" itemvalue="msgpack" />
+            <item index="90" class="java.lang.String" itemvalue="diskcache" />
           </list>
         </value>
       </option>

@@ -557,16 +557,19 @@ class TableEngine(object):
             visualize_cells(img, elem, out_path)
         return tables_htmls[0], rows, cols
 
-# if __name__ == "__main__":
-#     engine = TableEngine(
-#         str_device='cuda',
-#         str_model_path='../../model/TATR/TATR-v1.1-All-msft.pth',
-#         str_config_path='../../model/TATR/structure_config.json',
-#         out_dir='./outputs'
-#     )
-#     from PIL import Image
-#
-#     img = Image.open('../../img/table.jpg')
-#     html, rows, cols = engine(img, './outputs/table.jpg', tokens=[])
-#     print(html)
-#     print(rows, cols)
+if __name__ == "__main__":
+    import os
+
+    os.environ["TORCH_HOME"] = "/root/MTabler/cache"
+    engine = TableEngine(
+        str_device='cuda',
+        str_model_path='../../model/TATR/TATR-v1.1-All-msft.pth',
+        str_config_path='../../model/TATR/structure_config.json',
+        out_dir='./outputs'
+    )
+    from PIL import Image
+
+    img = Image.open('../../img/table.jpg')
+    html, rows, cols = engine(img, '../outputs/table.jpg', tokens=[])
+    print(html)
+    print(rows, cols)

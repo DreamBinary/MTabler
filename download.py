@@ -59,8 +59,6 @@
 # )
 
 
-from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
-
 # default: Load the model on the available device(s)
 # model = Qwen2VLForConditionalGeneration.from_pretrained(
 #     "Qwen/Qwen2-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
@@ -87,3 +85,20 @@ from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 # tokenizer, model, image_processor, context_len = load_pretrained_model(
 #     model_path, None, model_name, device_map="auto",
 # )
+
+# HF_ENDPOINT=https://hf-mirror.com HUGGINGFACE_HUB_CACHE="./cache" HF_HOME="./cache" HUGGING_FACE_HUB_TOKEN=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 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python download.py
+
+model_path = "meta-llama/Meta-Llama-3.1-8B"
+import sglang as sgl
+
+runtime = sgl.Runtime(model_path, device_map="auto")
+sgl.set_default_backend(runtime)
+import transformers
+
+model_id = "meta-llama/Meta-Llama-3.1-8B"
+
+pipeline = transformers.pipeline(
+    "text-generation", model=model_id
+)
+
+pipeline("Hey how are you doing today?")

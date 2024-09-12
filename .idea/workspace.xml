@@ -4,23 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/preprocess/inference.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocess/tatr/postprocess.py" afterDir="false" />
+    <list default="true" id="1d535fff-c8d1-4517-92cc-7ed406abb704" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jupyter-settings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commit/sgl_paddle.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/commit/sgl_paddle.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/table.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/table.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/table1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/result.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/result.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download.py" beforeDir="false" afterPath="$PROJECT_DIR$/download.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ft_cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/log1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/log2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocess/tatr/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tatr/engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_paddle.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_paddle.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_paddle.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qwen_paddle_sw.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_paddle_sw.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgl_paddle_new2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/sgl_paddle_new2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgl_tatr.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/table-transformer" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/src/eval.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/inference.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/postprocess.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp2.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tttttttt.ipynb" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +41,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jupyter Notebook" />
         <option value="Python Script" />
       </list>
     </option>
@@ -42,9 +52,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2kPOPGcsow95vFTQIZO7YNFLnQd" />
+  <component name="ProjectId" id="2ltzyPgF88xtkRIoVW7Gvuh7TPC" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -54,77 +65,21 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Python.ComTQA.executor&quot;: &quot;Run&quot;,
-    &quot;Python.MMTab.executor&quot;: &quot;Run&quot;,
-    &quot;Python.TableVQA-Bench.executor&quot;: &quot;Run&quot;,
-    &quot;Python.conversation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.convert.executor&quot;: &quot;Run&quot;,
-    &quot;Python.download.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gather.executor&quot;: &quot;Run&quot;,
-    &quot;Python.inference.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_llava.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sgl_ocr.executor&quot;: &quot;Run&quot;,
-    &quot;Python.table_shape.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tatr (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.tatr.executor&quot;: &quot;Run&quot;,
-    &quot;Python.thresholding.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tmp (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.tmp.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_mem.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tsr (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.tsr.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tsr_paddle.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ttt.executor&quot;: &quot;Run&quot;,
-    &quot;Python.unitable.executor&quot;: &quot;Run&quot;,
+    &quot;Python.engine.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/sgl_paddle_66_0_61.ipynb&quot;
+    &quot;two.files.diff.last.used.file&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/sgl_tatr_select.ipynb&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\img" />
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\commit" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\img\rec" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\model\TATR" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\preprocess\tatr" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\img\rec" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\preprocess" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\data\xf" />
-      <recent name="\\wsl.localhost\Ubuntu\root\MTabler\OCRCache\whl\table" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tmp (1)">
-    <configuration name="engine" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MTabler" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocess" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="\\wsl.localhost\Ubuntu\root\MTabler\preprocess\tatr\engine.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="engine" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MTabler" />
       <option name="ENV_FILES" value="" />
@@ -139,76 +94,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="\\wsl.localhost\Ubuntu\root\MTabler\preprocess\tatr\engine.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="inference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MTabler" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocess" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocess/inference.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tmp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MTabler" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/preprocess" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocess/tmp.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ttt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MTabler" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ttt.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocess/tatr/engine.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -219,11 +105,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tmp (1)" />
         <item itemvalue="Python.engine" />
-        <item itemvalue="Python.engine" />
-        <item itemvalue="Python.inference" />
-        <item itemvalue="Python.ttt" />
       </list>
     </recent_temporary>
   </component>
@@ -237,223 +119,23 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="0266983e-b128-4509-81e4-f185d2be8df3" name="更改" comment="" />
-      <created>1723181719430</created>
+      <changelist id="1d535fff-c8d1-4517-92cc-7ed406abb704" name="更改" comment="" />
+      <created>1726014419053</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1723181719430</updated>
-      <workItem from="1723181720531" duration="6468000" />
-      <workItem from="1723199628873" duration="13154000" />
-      <workItem from="1723253757619" duration="7017000" />
-      <workItem from="1723266963794" duration="4307000" />
-      <workItem from="1723372106002" duration="12191000" />
-      <workItem from="1723435444124" duration="24096000" />
-      <workItem from="1723469037526" duration="2448000" />
-      <workItem from="1723522075823" duration="11435000" />
-      <workItem from="1723543767057" duration="4839000" />
-      <workItem from="1723549436899" duration="2106000" />
-      <workItem from="1723551958302" duration="1810000" />
-      <workItem from="1723620087337" duration="782000" />
-      <workItem from="1723628927676" duration="6799000" />
-      <workItem from="1723636052286" duration="7238000" />
-      <workItem from="1723643966884" duration="673000" />
-      <workItem from="1723690618261" duration="1711000" />
-      <workItem from="1723692783170" duration="895000" />
-      <workItem from="1723704493754" duration="896000" />
-      <workItem from="1723705791228" duration="11406000" />
-      <workItem from="1723723972809" duration="7144000" />
-      <workItem from="1723771395834" duration="1014000" />
-      <workItem from="1723780184942" duration="2406000" />
-      <workItem from="1723784156881" duration="5830000" />
-      <workItem from="1723794167474" duration="518000" />
-      <workItem from="1723802219322" duration="10507000" />
-      <workItem from="1723857492657" duration="8787000" />
-      <workItem from="1723866947398" duration="62000" />
-      <workItem from="1723874323498" duration="5028000" />
-      <workItem from="1723879417696" duration="398000" />
-      <workItem from="1723886264896" duration="512000" />
-      <workItem from="1723886982248" duration="46000" />
-      <workItem from="1723887093640" duration="193000" />
-      <workItem from="1723887299474" duration="11163000" />
-      <workItem from="1723898851389" duration="1318000" />
-      <workItem from="1723900284070" duration="114000" />
-      <workItem from="1723900731139" duration="1470000" />
-      <workItem from="1723902271726" duration="90000" />
-      <workItem from="1723902465447" duration="2027000" />
-      <workItem from="1723904550014" duration="1491000" />
-      <workItem from="1723906380639" duration="1584000" />
-      <workItem from="1723964848775" duration="182000" />
-      <workItem from="1723965184507" duration="3880000" />
-      <workItem from="1723976152086" duration="6391000" />
-      <workItem from="1723984773020" duration="3857000" />
-      <workItem from="1723989732682" duration="2400000" />
-      <workItem from="1724028575470" duration="3976000" />
-      <workItem from="1724042860814" duration="6839000" />
-      <workItem from="1724063708083" duration="2930000" />
-      <workItem from="1724067801369" duration="4129000" />
-      <workItem from="1724072109767" duration="1784000" />
-      <workItem from="1724118374537" duration="5351000" />
-      <workItem from="1724131807519" duration="1429000" />
-      <workItem from="1724143448530" duration="11917000" />
-      <workItem from="1724160073279" duration="6044000" />
-      <workItem from="1724211474383" duration="3901000" />
-      <workItem from="1724222616846" duration="4337000" />
-      <workItem from="1724235972400" duration="9353000" />
-      <workItem from="1724248974148" duration="449000" />
-      <workItem from="1724298878659" duration="11644000" />
-      <workItem from="1724323093303" duration="611000" />
-      <workItem from="1724330034627" duration="3173000" />
-      <workItem from="1724333685829" duration="3477000" />
-      <workItem from="1724337777517" duration="1893000" />
-      <workItem from="1724395597516" duration="7461000" />
-      <workItem from="1724461087553" duration="14160000" />
-      <workItem from="1724570090650" duration="6015000" />
-      <workItem from="1724582094988" duration="2005000" />
-      <workItem from="1724585129624" duration="11919000" />
-      <workItem from="1724668563780" duration="12926000" />
-      <workItem from="1724723348087" duration="4169000" />
-      <workItem from="1724746174104" duration="3197000" />
-      <workItem from="1724752772115" duration="60000" />
-      <workItem from="1724757397371" duration="2816000" />
-      <workItem from="1724825013635" duration="8501000" />
-      <workItem from="1724834065842" duration="11879000" />
-      <workItem from="1724849406597" duration="7258000" />
-      <workItem from="1724931494128" duration="4498000" />
-      <workItem from="1724936070921" duration="1548000" />
-      <workItem from="1724993734636" duration="6237000" />
-      <workItem from="1725011095972" duration="5689000" />
-      <workItem from="1725023141253" duration="2974000" />
-      <workItem from="1725065914876" duration="5284000" />
-      <workItem from="1725071884299" duration="1498000" />
-      <workItem from="1725073446868" duration="1197000" />
-      <workItem from="1725087750926" duration="5337000" />
-      <workItem from="1725093168689" duration="3064000" />
-      <workItem from="1725097786837" duration="17013000" />
-      <workItem from="1725173662843" duration="836000" />
-      <workItem from="1725178708808" duration="149000" />
-      <workItem from="1725182933322" duration="601000" />
-      <workItem from="1725183833857" duration="283000" />
-      <workItem from="1725184208424" duration="8499000" />
-      <workItem from="1725197826216" duration="94000" />
-      <workItem from="1725199121946" duration="2191000" />
-      <workItem from="1725261347818" duration="4218000" />
-      <workItem from="1725266069233" duration="5398000" />
-      <workItem from="1725279729974" duration="7676000" />
-      <workItem from="1725328027851" duration="2147000" />
-      <workItem from="1725345164986" duration="6512000" />
-      <workItem from="1725352830108" duration="6779000" />
-      <workItem from="1725370223102" duration="3671000" />
-      <workItem from="1725431677555" duration="290000" />
-      <workItem from="1725514813841" duration="20005000" />
-      <workItem from="1725548816740" duration="66000" />
-      <workItem from="1725581827096" duration="962000" />
-      <workItem from="1725583670554" duration="1557000" />
-      <workItem from="1725603991297" duration="4702000" />
-      <workItem from="1725611213475" duration="7109000" />
-      <workItem from="1725625564802" duration="2207000" />
-      <workItem from="1725687222652" duration="9017000" />
-      <workItem from="1725716098174" duration="686000" />
-      <workItem from="1725769747537" duration="4079000" />
-      <workItem from="1725779086192" duration="1873000" />
-      <workItem from="1725786006706" duration="812000" />
-      <workItem from="1725793215908" duration="96000" />
-      <workItem from="1725793335512" duration="26000" />
-      <workItem from="1725796850926" duration="33000" />
-      <workItem from="1725804014978" duration="370000" />
-      <workItem from="1725865138668" duration="2564000" />
-      <workItem from="1725868635645" duration="6733000" />
-      <workItem from="1725881644984" duration="1566000" />
-      <workItem from="1725884820601" duration="3322000" />
-      <workItem from="1725935295578" duration="10065000" />
-      <workItem from="1725963021572" duration="1804000" />
+      <updated>1726014419053</updated>
+      <workItem from="1726014427516" duration="1003000" />
+      <workItem from="1726030088158" duration="1111000" />
+      <workItem from="1726035459738" duration="436000" />
+      <workItem from="1726039008700" duration="24000" />
+      <workItem from="1726040425709" duration="10351000" />
+      <workItem from="1726051565249" duration="9484000" />
+      <workItem from="1726113791203" duration="5749000" />
+      <workItem from="1726138280373" duration="3388000" />
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/llava/model/builder.py</url>
-          <line>114</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/AppData/Local/JetBrains/PyCharm2023.3/remote_sources/847003818/1767177227/sglang/lang/ir.py</url>
-          <line>161</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/AppData/Local/JetBrains/PyCharm2023.3/remote_sources/847003818/1767177227/sglang/lang/interpreter.py</url>
-          <line>699</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/preprocess/src/model/encoderdecoder.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ttt.py</url>
-          <line>99</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
-          <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/ov_si_0818_2.ipynb</url>
-          <line>34</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
-          <url>notebook:////wsl.localhost/Ubuntu/root/MTabler/qwen_paddle.ipynb</url>
-          <line>53</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MTabler$download.coverage" NAME="download 覆盖结果" MODIFIED="1725192431508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$tsr.coverage" NAME="tsr 覆盖结果" MODIFIED="1724997703085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$main_llava.coverage" NAME="main_llava 覆盖结果" MODIFIED="1723183709619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$TableVQA_Bench.coverage" NAME="TableVQA-Bench 覆盖结果" MODIFIED="1723861323792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
-    <SUITE FILE_PATH="coverage/MTabler$inference.coverage" NAME="inference 覆盖结果" MODIFIED="1725937661703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$thresholding.coverage" NAME="thresholding 覆盖结果" MODIFIED="1723462510269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$MMTab.coverage" NAME="MMTab 覆盖结果" MODIFIED="1723983934699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
-    <SUITE FILE_PATH="coverage/MTabler$conversation.coverage" NAME="conversation 覆盖结果" MODIFIED="1723211466701" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/llava" />
-    <SUITE FILE_PATH="coverage/MTabler$tsr__1_.coverage" NAME="tsr (1) 覆盖结果" MODIFIED="1724932856778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/PaddleOCR/ppstructure" />
-    <SUITE FILE_PATH="coverage/MTabler$tatr.coverage" NAME="tatr 覆盖结果" MODIFIED="1725937964304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$table_shape.coverage" NAME="table_shape 覆盖结果" MODIFIED="1723379673923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1725612579509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$sgl_ocr.coverage" NAME="sgl_ocr 覆盖结果" MODIFIED="1725066143420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$ComTQA.coverage" NAME="ComTQA 覆盖结果" MODIFIED="1723862271942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
-    <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1725687972049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$convert.coverage" NAME="convert 覆盖结果" MODIFIED="1723803289561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/TableVQA-Bench" />
-    <SUITE FILE_PATH="coverage/MTabler$tatr__1_.coverage" NAME="tatr (1) 覆盖结果" MODIFIED="1725946572322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess/tatr" />
-    <SUITE FILE_PATH="coverage/MTabler$tsr_paddle.coverage" NAME="tsr_paddle 覆盖结果" MODIFIED="1725066192535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$unitable.coverage" NAME="unitable 覆盖结果" MODIFIED="1725536737255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$tmp__1_.coverage" NAME="tmp (1) 覆盖结果" MODIFIED="1725947136848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
-    <SUITE FILE_PATH="coverage/MTabler$gather.coverage" NAME="gather 覆盖结果" MODIFIED="1723984164107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
-    <SUITE FILE_PATH="coverage/MTabler$train_mem.coverage" NAME="train_mem 覆盖结果" MODIFIED="1723879354218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$engine.coverage" NAME="engine 覆盖结果" MODIFIED="1726050814190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess/tatr" />
   </component>
 </project>

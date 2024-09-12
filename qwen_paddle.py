@@ -1,26 +1,64 @@
-from tqdm import tqdm
+q_prefix = "Based on the table, caption and html structure, "
+
+
+def rewrite():
+    import os
+    import json
+    NEW_IMG_DIR = "new_images"
+    os.makedirs(NEW_IMG_DIR, exist_ok=True)
+    if os.environ.get('DATA_PATH_B'):
+        base_dir = os.environ.get('DATA_PATH_B')
+    else:
+        base_dir = '/bohr/form-recognition-train-b6y2/v4'
+    with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
+        data_t = json.load(f)
+        data_t = list(data_t)[:10]
+    data = []
+    for d in data_t:
+        r_path = os.path.join(base_dir, "test_images", d["image_path"])
+        w_path = os.path.join(NEW_IMG_DIR, d["image_path"])
+        question = d["question"]
+        question = question[0].lower() + question[1:]
+        q3 = f"""{q_prefix}{question}
+A) {d["options"][0]}
+B) {d["options"][1]}
+C) {d["options"][2]}
+D) {d["options"][3]}
+"""
+        data.append({
+            "r_path": r_path,
+            "w_path": w_path,
+            "image_path": d["image_path"],
+            "caption": d["caption"],
+            "q3": q3,
+        })
+
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
+
+
+import multiprocessing
+
+# import logging
+#
+# multiprocessing.log_to_stderr(logging.INFO)
+# logger = multiprocessing.get_logger()
+# logging.basicConfig(filename='sgl_unitable4.log', level=logging.INFO)
+
+p = multiprocessing.Process(target=rewrite)
+p.start()
 
 pkgs_path = "/bohr/pkgs-7x29/v21/pkgs"
-# llava_lib_path = "/bohr/libb-bg5b/v3/llava"
-# tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
 model_path = "Qwen/Qwen2-VL-7B-Instruct"
 cache_path = "/bohr/cach-rxl3/v11/cache"
 table_model_dir = "/bohr/ocrr-zlwd/v1/ch_ppstructure_openatom_SLANetv2_infer"
 table_char_dict_path = "/bohr/ocrr-zlwd/v1/table_structure_dict.txt"
-vllm_path = "/bohr/vllm-iq98/v1/vllm"
-
-# pkgs_path = "/personal/pkgs"
-# llava_lib_path = "/personal/llava"
-# model_path = "lmms-lab/llava-onevision-qwen2-0.5b-ov"
-# cache_path = "/personal/cache"
-# vllm_path = "/personal/vllm"
-
 
 import os
 
+os.system("pip uninstall psutil -y")
 os.system(f"pip3 install {pkgs_path}/* --ignore-installed")
 # os.system(f"cp -r {llava_lib_path} .")
-os.system(f"cp -r {vllm_path} .")
 # # 提交时可能不能联网，设置成离线模式防止联网失败报错
 os.environ['TRANSFORMERS_OFFLINE'] = '1'
 os.environ['HF_DATASETS_OFFLINE'] = '1'
@@ -36,7 +74,6 @@ from collections import defaultdict
 from PIL import Image
 import cv2
 from transformers import AutoProcessor
-from vllm import LLM, SamplingParams
 import numpy as np
 from paddleocr.ppocr.data.imaug import transform
 from paddleocr.ppstructure.table.predict_structure import TableStructurer
@@ -45,12 +82,9 @@ import torch
 import multiprocessing
 import re
 import math
+from transformers import Qwen2VLForConditionalGeneration
 
 warnings.filterwarnings("ignore")
-import logging
-
-multiprocessing.log_to_stderr(logging.INFO)
-logger = multiprocessing.get_logger()
 
 l2i = defaultdict(lambda: -1)
 for i, letter in enumerate('ABCDEFGH'):
@@ -62,6 +96,7 @@ IMAGE_FACTOR = 28
 MIN_PIXELS = 4 * 28 * 28
 MAX_PIXELS = 16384 * 28 * 28
 MAX_RATIO = 200
+
 
 def round_by_factor(number: int, factor: int) -> int:
     """Returns the closest integer to 'number' that is divisible by 'factor'."""
@@ -149,6 +184,7 @@ class TSR(TableStructurer):
         structure_str_list = ["<table>"] + structure_str_list + ["</table>"]
         return structure_str_list, bbox_list
 
+
 def count_rows_and_columns(html_tags):
     rows = 0
     max_columns = 0
@@ -190,7 +226,6 @@ def count_rows_and_columns(html_tags):
                     rowspan_columns[current_columns - _] = rowspan
 
         elif tag == '</tr>':
-            # print(f"Row {rows} has {current_columns} columns")
             columns_cnt[current_columns] += 1
             max_columns = max(max_columns, current_columns)
 
@@ -198,12 +233,25 @@ def count_rows_and_columns(html_tags):
     columns = max(columns_cnt, key=columns_cnt.get)
     return rows, columns
 
+
+q2 = f"""{q_prefix}which subject is most relevant to the table or caption?
+A) Physics
+B) Mathematics
+C) Computer Science
+D) Quantitative Biology
+E) Quantitative Finance
+F) Statistics
+G) Electrical Engineering and Systems Science
+H) Economics
+"""
+
+
 class Worker:
     def __init__(self):
-        self.llm = None
         self.processor = None
         self.batch_size = 8
         self.submission = []
+        self.model = None
         self.ocr_data = multiprocessing.Queue()
 
     def run(self):
@@ -232,143 +280,127 @@ class Worker:
             "cpu_threads": 16,
         })()
         tsr = TSR(args)
-        if os.environ.get('DATA_PATH_B'):  # 提交时会选择隐藏的测试数据集路径（A+B榜），数据集的格式与A榜数据相同，但数目不同（5360张）
-            base_dir = os.environ.get('DATA_PATH_B')
-        else:
-            base_dir = '/bohr/form-recognition-train-b6y2/v4'  # 示例，把A榜测试数据集路径作为测试集路径，仅开发时挂载A榜数据用于debug   # 示例，把A榜测试数据集路径作为测试集路径，仅开发时挂载A榜数据用于debug
-        with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
-            data = list(json.load(f))
-            data = data[:10]
-        # for item in data:
-        for item in tqdm(data):
-            path = os.path.join(base_dir, "test_images", item["image_path"])
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+        outputs = []
+        inputs = []
+        for item in data:
+            path = item["r_path"]
             img = cv2.imread(path)
             structure_res = tsr(img)
-            structure_str_list, bbox_list = structure_res
+            html, bbox_list = structure_res
             # boxes = np.array(bbox_list)
             # for box in boxes.astype(int):
             #     x1, y1, x2, y2 = box
             #     cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
             # output_path = os.path.join(img_output_dir, item["image_path"])
             # cv2.imwrite(output_path, img)
-            rows, cols = count_rows_and_columns(structure_str_list)
-            question = item["question"]
-            question = question[0].lower() + question[1:]
-            q3 = f"""Based on the table, caption and html structure, {question}
-A) {item["options"][0]}
-B) {item["options"][1]}
-C) {item["options"][2]}
-D) {item["options"][3]}
-"""
-            self.ocr_data.put(((item["image_path"], rows, cols), (path, item["caption"], structure_str_list, q3)))
-            # print(f"Put {item['image_path']} into queue", flush=True)
+            rows, cols = count_rows_and_columns(html)
+            q1 = f'This is a table image. The caption of the table is "{item["caption"]}". The structure of the table in html format is as follows: {html}.'
+
+            outputs.append((item["image_path"], rows, cols))
+            inputs.append((path, q1, item["q3"]))
+
+            if len(outputs) == self.batch_size:
+                self.ocr_data.put((outputs, inputs))
+                outputs, inputs = [], []
+        if outputs:
+            self.ocr_data.put((outputs, inputs))
         self.ocr_data.put(None)
 
     def process(self):
         flag = True
-        self.llm = LLM(
-            model=model_path,
-            limit_mm_per_prompt={"image": 1},
-            dtype="float16"
+        self.model = Qwen2VLForConditionalGeneration.from_pretrained(
+            model_path, torch_dtype="auto", device_map="auto"
         )
         self.processor = AutoProcessor.from_pretrained(model_path)
         while flag:
             item = self.ocr_data.get()
             if item is None:
                 break
-            size = min(self.ocr_data.qsize(), self.batch_size)
-            batch_items = [item]
-            for _ in range(size):
-                item = self.ocr_data.get()
-                batch_items.append(item)
-            if batch_items[-1] is None:
-                batch_items.pop()
-                flag = False
-            batch_inputs = []
-            outputs = []
-            q3s = []
-            for output, input in batch_items:
-                outputs.append(output)
-                # batch_images.append({
-                #     "img_path": input[0],
-                #     "caption": input[1],
-                #     "tsr": input[2],
-                #     "q3": input[3],
-                # })
-                msg = [
-                    {"role": "system",
-                     "content": "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions."},
-                    {"role": "user", "content": [
-                        {"type": "image", "image": input[0]},
-                        {"type": "text",
-                         "text": f'This is a table image. The caption of the table is "{input[1]}". The structure of the table in html format is as follows: {input[2]}.'}
-                    ]},
-                    {"role": "assistant",
-                     "content": "I have a general understanding of the information in this table."},
-                    {"role": "user", "content": """Based on the table, caption and html structure, which subject is most relevant to the table and caption?
-A) Physics
-B) Mathematics
-C) Computer Science
-D) Quantitative Biology
-E) Quantitative Finance
-F) Statistics
-G) Electrical Engineering and Systems Science
-H) Economics
-"""
-                     }]
-                prompt = self.processor.apply_chat_template(
-                    msg,
-                    tokenize=False,
-                    add_generation_prompt=True,
-                )
-                img = self.fetch_image(input[0])
-                batch_inputs.append({
-                    "prompt": prompt,
-                    "multi_modal_data": {"image": img},
-                })
-                q3s.append(input[3])
-            self.batch(outputs, batch_inputs)
-
+            outputs, inputs = item
+            paths, q1s, q3s = zip(*inputs)
+            self.batch(outputs, paths, q1s, q3s)
+        if len(self.submission) != 5360:
+            raise Exception(f"Submission length is {len(self.submission)}")
         with open('submission.json', 'w') as f:
             json.dump(self.submission, f)
 
-    def batch(self, msgs, q3s, outputs, batch_inputs):
+    def batch(self, outputs, paths, q1s, q3s):
+        imgs = [self.fetch_image(path) for path in paths]
+        msgs = [
+            [
+                {"role": "system",
+                 "content": "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions."},
+                {"role": "user", "content": [
+                    {"type": "image", "image": path},
+                    {"type": "text", "text": q1}
+                ]},
+                {"role": "assistant",
+                 "content": "I have a general understanding of the information in this table."},
+                {"role": "user", "content": q2}
+            ] for path, q1 in zip(paths, q1s)
+        ]
+        texts = [
+            self.processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True)
+            for msg in msgs
+        ]
+        batch_inputs = self.processor(
+            text=texts,
+            images=imgs,
+            padding=True,
+            return_tensors="pt",
+        )
+
         results = self.vllm(batch_inputs)
         ans = []
-        for i, r in enumerate(results):
-            text = r.outputs[0].text
+        for i, text in enumerate(results):
+            category = "C) Computer Science"
+            try:
+                match = re.search(r'[A-Za-z]', text)
+                if match:
+                    category = match.group(0).upper()
+                    category = f"{category}) {sub_list[l2i[category]]}"
+            except:
+                category = "C) Computer Science"
+            ans.append({"subject": category})
             msgs[i].append({
                 "role": "assistant",
-                "content": text,
+                "content": category,
             })
             msgs[i].append({
                 "role": "user",
                 "content": q3s[i],
             })
-            prompt = self.processor.apply_chat_template(
-                msgs[i],
-                tokenize=False,
-                add_generation_prompt=True,
-            )
-            ans.append({"subject": text})
-            batch_inputs[i]["prompt"] = prompt
+
+        texts = [
+            self.processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True)
+            for msg in msgs
+        ]
+        batch_inputs = self.processor(
+            text=texts,
+            images=imgs,
+            padding=True,
+            return_tensors="pt",
+        )
+
         results = self.vllm(batch_inputs)
-        for i, r in enumerate(results):
-            text = r.outputs[0].text
+        for i, text in enumerate(results):
             ans[i]["option"] = text
             self.clean_out(outputs[i], ans[i])
 
-    def vllm(self, inputs):
-        return self.llm.generate(inputs, sampling_params=SamplingParams(
-            temperature=0.0,
-            top_p=1,
-            repetition_penalty=1.05,
-            max_tokens=2,
-            stop_token_ids=[],
-        ))
+    def vllm(self, batch_inputs):
+        batch_inputs = batch_inputs.to("cuda")
+        generated_ids = self.model.generate(**batch_inputs, max_new_tokens=2)
+        generated_ids_trimmed = [
+            out_ids[len(in_ids):] for in_ids, out_ids in zip(batch_inputs.input_ids, generated_ids)
+        ]
+        results = self.processor.batch_decode(
+            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )
+        return results
 
     def clean_out(self, o, s):
-        # print(s, flush=True)
         img_path, rows, cols = o
         category = ""
         answer = -1
@@ -395,8 +427,6 @@ H) Economics
             "rows": rows,
             "answer": answer,
         }
-        logger.info(sub_item)
-        # print(sub_item, flush=True)
         self.submission.append(sub_item)
 
     def fetch_image(self, img_path, size_factor: int = IMAGE_FACTOR) -> Image.Image:
@@ -412,5 +442,7 @@ H) Economics
         img = img.resize((resized_width, resized_height))
         return img
 
+
+p.join()
 worker = Worker()
 worker.run()
