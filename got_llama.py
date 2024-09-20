@@ -1,15 +1,17 @@
+import json
+import os
+
 q_prefix = "Based on the latex table and caption, "
 
 
 def rewrite():
-    import os
-    import json
     # NEW_IMG_DIR = "new_images"
     # os.makedirs(NEW_IMG_DIR, exist_ok=True)
     if os.environ.get('DATA_PATH_B'):
         base_dir = os.environ.get('DATA_PATH_B')
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
-            data_t = json.load(f)
+            # data_t = json.load(f)
+            data_t = list(json.load(f))[:10]
     else:
         base_dir = '/bohr/form-recognition-train-b6y2/v4'
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
@@ -38,25 +40,14 @@ D) {d["options"][3]}
         json.dump(data, f)
 
 
-import logging
-import multiprocessing
-import os
-
-multiprocessing.log_to_stderr(logging.INFO)
-logger = multiprocessing.get_logger()
-logging.basicConfig(filename='log.log', level=logging.INFO)
-
-p = multiprocessing.Process(target=rewrite)
-p.start()
-
-pkgs_path = "/bohr/pkgs-7x29/v18/pkgs"
 model_path = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-got_path = "/bohr/gott-117w/v1/GOT_weights"
+gotp_path = "/bohr/gotp-adm2/v1/GOT"
+gotw_path = "/bohr/gott-117w/v1/GOT_weights"
 raw_cache_path = "/bohr/cach-rxl3/v14/cache"
 cache_path = "./cache"
-os.system(f"pip3 install {pkgs_path}/* --ignore-installed")
+
+os.system(f"cp -r {gotp_path} .")
 os.system(f"cp -r {raw_cache_path} .")
-# # 提交时可能不能联网，设置成离线模式防止联网失败报错
 os.environ['TRANSFORMERS_OFFLINE'] = '1'
 os.environ['HF_DATASETS_OFFLINE'] = '1'
 os.environ['HF_HUB_OFFLINE'] = '1'
@@ -66,16 +57,14 @@ os.environ["HF_HOME"] = cache_path
 os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 device = "cuda"
 
-from collections import defaultdict
-import json
-from sglang import Runtime
-import warnings
-import sglang as sgl
-import multiprocessing
-import os
 import re
+import warnings
+from collections import defaultdict
+import sglang as sgl
 import torch
+from torch import multiprocessing
 from PIL import Image
+from sglang import Runtime
 from transformers import AutoTokenizer
 from GOT.model import *
 from GOT.model.plug.blip_process import BlipImageEvalProcessor
@@ -83,6 +72,12 @@ from GOT.utils.conversation import SeparatorStyle, Conversation
 from GOT.utils.utils import KeywordsStoppingCriteria
 
 warnings.filterwarnings("ignore")
+
+import logging
+
+multiprocessing.log_to_stderr(logging.INFO)
+logger = multiprocessing.get_logger()
+logging.basicConfig(filename='log.log', level=logging.INFO)
 
 l2i = defaultdict(lambda: -1)
 for i, letter in enumerate('ABCDEFGH'):
@@ -247,24 +242,24 @@ class Worker:
         self.batch_size = 8
         self.ocr_data = multiprocessing.Queue()
 
-    def run(self):
-        ocr_process = multiprocessing.Process(target=self.ocr)
-        ocr_process.start()
-
-        runtime = Runtime(
+        self.runtime = Runtime(
             model_path=model_path,
             # model_overide_args=model_overide_args,
             # disable_regex_jump_forward=True,
             # # enable_mixed_chunk=True,
             # triton_attention_reduce_in_fp32=True,
         )
-        sgl.set_default_backend(runtime)
+        sgl.set_default_backend(self.runtime)
+
+    def run(self):
+        ocr_process = multiprocessing.Process(target=self.ocr)
+        ocr_process.start()
         self.process()
-        runtime.shutdown()
+        self.runtime.shutdown()
         # post.join()
 
     def ocr(self):
-        engine = GOT(got_path)
+        engine = GOT(gotw_path)
         outputs = []
         inputs = []
         with open('data.json', 'r') as f:
@@ -314,6 +309,11 @@ H) Economics
             json.dump(submission, f)
 
 
-p.join()
-worker = Worker()
-worker.run()
+if __name__ == '__main__':
+    # This guard is necessary to avoid the RuntimeError
+    multiprocessing.freeze_support()
+    rewrite()
+    logger.info("Finished rewriting")
+    worker = Worker()
+    logger.info("Starting worker")
+    worker.run()
