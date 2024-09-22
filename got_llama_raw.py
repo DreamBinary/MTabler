@@ -1,11 +1,53 @@
+import json
 import os
+
+q_prefix = "Based on the latex table and caption, "
+
+
+def rewrite():
+    # NEW_IMG_DIR = "new_images"
+    # os.makedirs(NEW_IMG_DIR, exist_ok=True)
+    if os.environ.get('DATA_PATH_B'):
+        base_dir = os.environ.get('DATA_PATH_B')
+        with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
+            # data_t = json.load(f)
+            data_t = list(json.load(f))[:10]
+    else:
+        base_dir = '/bohr/form-recognition-train-b6y2/v4'
+        with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
+            data_t = list(json.load(f))[:10]
+    data = []
+    for d in data_t:
+        r_path = os.path.join(base_dir, "test_images", d["image_path"])
+        # w_path = os.path.join(NEW_IMG_DIR, d["image_path"])
+        question = d["question"]
+        question = question[0].lower() + question[1:]
+        q3 = f"""{q_prefix}{question}
+A) {d["options"][0]}
+B) {d["options"][1]}
+C) {d["options"][2]}
+D) {d["options"][3]}
+"""
+        data.append({
+            "r_path": r_path,
+            # "w_path": w_path,
+            "image_path": d["image_path"],
+            "caption": d["caption"],
+            "q3": q3,
+        })
+
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
+
 
 model_path = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 gotp_path = "/bohr/gotp-adm2/v1/GOT"
 gotw_path = "/bohr/gott-117w/v1/GOT_weights"
-cache_path = "/bohr/cach-rxl3/v15/cache"
+raw_cache_path = "/bohr/cach-rxl3/v14/cache"
+cache_path = "./cache"
 
 os.system(f"cp -r {gotp_path} .")
+os.system(f"cp -r {raw_cache_path} .")
 os.environ['TRANSFORMERS_OFFLINE'] = '1'
 os.environ['HF_DATASETS_OFFLINE'] = '1'
 os.environ['HF_HUB_OFFLINE'] = '1'
@@ -15,14 +57,13 @@ os.environ["HF_HOME"] = cache_path
 os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 device = "cuda"
 
-import json
 import re
 import warnings
 from collections import defaultdict
 import sglang as sgl
 import torch
+from torch import multiprocessing
 from PIL import Image
-import multiprocessing
 from sglang import Runtime
 from transformers import AutoTokenizer
 from GOT.model import *
@@ -32,11 +73,11 @@ from GOT.utils.utils import KeywordsStoppingCriteria
 
 warnings.filterwarnings("ignore")
 
-# import logging
-#
-# multiprocessing.log_to_stderr(logging.INFO)
-# logger = multiprocessing.get_logger()
-# logging.basicConfig(filename='log.log', level=logging.INFO)
+import logging
+
+multiprocessing.log_to_stderr(logging.INFO)
+logger = multiprocessing.get_logger()
+logging.basicConfig(filename='log.log', level=logging.INFO)
 
 l2i = defaultdict(lambda: -1)
 for i, letter in enumerate('ABCDEFGH'):
@@ -132,30 +173,7 @@ class GOT:
             return -1, -1
 
 
-data = multiprocessing.Queue()
-
-
-def rewrite():
-    # NEW_IMG_DIR = "new_images"
-    # os.makedirs(NEW_IMG_DIR, exist_ok=True)
-    if os.environ.get('DATA_PATH_B'):
-        base_dir = os.environ.get('DATA_PATH_B')
-        with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
-            data_t = json.load(f)
-            # data_t = list(json.load(f))[:10]
-    else:
-        base_dir = '/bohr/form-recognition-train-b6y2/v4'
-        with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
-            data_t = list(json.load(f))[:10]
-    q_prefix = "Based on the latex table and caption, "
-    engine = GOT(gotw_path)
-    for d in data_t:
-        r_path = os.path.join(base_dir, "test_images", d["image_path"])
-        # w_path = os.path.join(NEW_IMG_DIR, d["image_path"])
-
-        img = Image.open(r_path).convert('RGB')
-        latex, rows, cols = engine(img)
-        q2 = f""""{latex}" This is the latex code of the table with caption "{d["caption"]}". {q_prefix}which subject is most relevant to the table or caption?
+q2 = f"""{q_prefix}which subject is most relevant to the table or caption?
 A) Physics
 B) Mathematics
 C) Computer Science
@@ -165,28 +183,12 @@ F) Statistics
 G) Electrical Engineering and Systems Science
 H) Economics
 """
-        question = d["question"]
-        question = question[0].lower() + question[1:]
-        q3 = f"""{q_prefix}{question}
-A) {d["options"][0]}
-B) {d["options"][1]}
-C) {d["options"][2]}
-D) {d["options"][3]}
-"""
-        data.put({
-            "image_path": d["image_path"],
-            "q2": q2,
-            "q3": q3,
-            "rows": rows,
-            "cols": cols
-        })
 
 
 @sgl.function
 def one_image(s, q2, q3):
     s += sgl.system(
-        "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions."
-    )
+        "You are a helpful assistant. Provide only an label ([A-H] or [A-D]) of the correct answer for multiple-choice questions.")
     s += sgl.user(q2)
     s += sgl.assistant(
         "subject label: " + sgl.gen_string(
@@ -206,6 +208,7 @@ def one_image(s, q2, q3):
 
 
 def clean_out(o, s):
+    img_path, rows, cols = o
     category = ""
     answer = -1
     try:
@@ -225,49 +228,92 @@ def clean_out(o, s):
     except:
         answer = -1
     sub_item = {
-        "image_path": o["image_path"],
+        "image_path": img_path,
         "category": category,
-        "cols": o["cols"],
-        "rows": o["rows"],
+        "cols": cols,
+        "rows": rows,
         "answer": answer,
     }
     return sub_item
 
 
-def run():
-    runtime = Runtime(
-        model_path=model_path,
-        mem_fraction_static=0.85
-        # model_overide_args=model_overide_args,
-        # disable_regex_jump_forward=True,
-        # # enable_mixed_chunk=True,
-        # triton_attention_reduce_in_fp32=True,
-    )
-    sgl.set_default_backend(runtime)
-    submission = []
-    while True:
-        try:
-            item = data.get(timeout=300)
-            if item is None:
+class Worker:
+    def __init__(self):
+        self.batch_size = 8
+        self.ocr_data = multiprocessing.Queue()
+
+        self.runtime = Runtime(
+            model_path=model_path,
+            # model_overide_args=model_overide_args,
+            # disable_regex_jump_forward=True,
+            # # enable_mixed_chunk=True,
+            # triton_attention_reduce_in_fp32=True,
+        )
+        sgl.set_default_backend(self.runtime)
+
+    def run(self):
+        ocr_process = multiprocessing.Process(target=self.ocr)
+        ocr_process.start()
+        self.process()
+        self.runtime.shutdown()
+        # post.join()
+
+    def ocr(self):
+        engine = GOT(gotw_path)
+        outputs = []
+        inputs = []
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+        for item in data:
+            img = Image.open(item["r_path"])
+            latex, rows, cols = engine(img)
+            q2 = f""""{latex}" This is the latex code of the table with caption "{item["caption"]}". {q_prefix}which subject is most relevant to the table or caption?
+A) Physics
+B) Mathematics
+C) Computer Science
+D) Quantitative Biology
+E) Quantitative Finance
+F) Statistics
+G) Electrical Engineering and Systems Science
+H) Economics
+"""
+            outputs.append((item["image_path"], rows, cols))
+            inputs.append({"q2": q2, "q3": item["q3"]})
+            if len(outputs) == self.batch_size:
+                self.ocr_data.put((outputs, inputs))
+                outputs, inputs = [], []
+        if outputs:
+            self.ocr_data.put((outputs, inputs))
+        self.ocr_data.put(None)
+
+    def process(self):
+        submission = []
+        while True:
+            try:
+                item = self.ocr_data.get(timeout=300)
+                if item is None:
+                    break
+            except:
                 break
-        except:
-            break
-        size = min(data.qsize(), 8)
-        items = [item] + [data.get() for _ in range(size)]
-        inputs = [{"q2": item["q2"], "q3": item["q3"]} for item in items]
-        states = one_image.run_batch(inputs)
-        for o, s in zip(items, states):
-            sub_item = clean_out(o, s)
-            # logger.info(sub_item)
-            submission.append(sub_item)
-    if len(submission) != 5360:
-        import sys
-        sys.exit(f"Submission length is {len(submission)}")
-    with open('submission.json', 'w') as f:
-        json.dump(submission, f)
-    runtime.shutdown()
+
+            outputs, inputs = item
+            states = one_image.run_batch(inputs)
+            for o, s in zip(outputs, states):
+                sub_item = clean_out(o, s)
+                logger.info(sub_item)
+                submission.append(sub_item)
+        if len(submission) != 5360:
+            import sys
+            sys.exit(f"Submission length is {len(submission)}")
+        with open('submission.json', 'w') as f:
+            json.dump(submission, f)
 
 
-p = multiprocessing.Process(target=rewrite)
-p.start()
-run()
+if __name__ == '__main__':
+    # This guard is necessary to avoid the RuntimeError
+    multiprocessing.freeze_support()
+    rewrite()
+    logger.info("Finished rewriting")
+    worker = Worker()
+    logger.info("Starting worker")
+    worker.run()
