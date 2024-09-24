@@ -5,6 +5,7 @@
 
 
 import json
+import os
 import sys
 import xml.etree.ElementTree as ET
 from collections import defaultdict
@@ -17,7 +18,6 @@ from fitz import Rect
 from matplotlib.patches import Patch
 from torchvision import transforms
 
-import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "detr")))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
 import postprocess
@@ -528,7 +528,7 @@ class TableEngine(object):
         self.str_model.to(str_device)
         self.str_model.eval()
 
-    def __call__(self, img, out_path, tokens=None):
+    def __call__(self, img, tokens=[], out_path=None, visualize=False):
         # out_formats = {}
 
         # Transform the image how the model expects it
@@ -551,8 +551,9 @@ class TableEngine(object):
         # out_file = img_file.replace(".jpg", "_fig_tables.jpg")
         # out_path = os.path.join("/root/MTabler/img", out_file)
         # visualize_detected_tables(img, objects, out_path)
-        for elem in tables_cells:
-            visualize_cells(img, elem, out_path)
+        if visualize:
+            for elem in tables_cells:
+                visualize_cells(img, elem, out_path)
         return tables_htmls[0], rows, cols
 
 # if __name__ == "__main__":

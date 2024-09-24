@@ -180,6 +180,7 @@ D) {d["options"][3]}
             "rows": rows,
             "cols": cols
         })
+    data.put(None)
 
 
 @sgl.function
