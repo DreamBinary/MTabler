@@ -6,179 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1d535fff-c8d1-4517-92cc-7ed406abb704" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaddleOCR" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/outputs/table.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/outputs/table.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/.circleci/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/.circleci/config.yml:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/Dockerfile:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/LICENSE:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/README.md:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/README.md:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/configs/detr_256_6_6_torchvision.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/configs/detr_256_6_6_torchvision.yaml:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/configs/detr_segm_256_6_6_torchvision.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/configs/detr_segm_256_6_6_torchvision.yaml:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/converter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/converter.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/config.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/dataset_mapper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/dataset_mapper.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/detr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/detr/detr.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/train_net.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/d2/train_net.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/coco.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/coco.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/coco_eval.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/coco_eval.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/coco_panoptic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/coco_panoptic.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/panoptic_eval.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/panoptic_eval.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/transforms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/datasets/transforms.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/engine.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/engine.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/engine_multi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/engine_multi.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/hubconf.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/hubconf.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/main.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/backbone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/backbone.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/detr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/detr.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/detr_multi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/detr_multi.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/matcher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/matcher.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/position_encoding.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/position_encoding.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/segmentation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/segmentation.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/transformer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/models/transformer.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/requirements.txt:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/run_with_submitit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/run_with_submitit.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/test_all.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/test_all.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/tox.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/tox.ini:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/box_ops.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/box_ops.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/misc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/misc.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/plot_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/detr/util/plot_utils.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/engine.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tatr/postprocess.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tmp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qwen_tatr_img_vllm.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_tatr_img_vllm.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qwen_tatr_vllm.py" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_tatr_vllm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_latex_llama.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_latex_llama.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/src/eval.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/inference.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/postprocess.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/.circleci/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/.circleci/config.yml:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/Dockerfile:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/LICENSE:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/README.md:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/README.md:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/configs/detr_256_6_6_torchvision.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/configs/detr_256_6_6_torchvision.yaml:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/configs/detr_segm_256_6_6_torchvision.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/configs/detr_segm_256_6_6_torchvision.yaml:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/converter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/converter.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/config.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/dataset_mapper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/dataset_mapper.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/detr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/detr/detr.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/train_net.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/d2/train_net.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/coco.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/coco.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/coco_eval.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/coco_eval.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/coco_panoptic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/coco_panoptic.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/panoptic_eval.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/panoptic_eval.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/transforms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/datasets/transforms.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/engine.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/engine.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/engine_multi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/engine_multi.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/hubconf.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/hubconf.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/main.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/backbone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/backbone.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/detr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/detr.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/detr_multi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/detr_multi.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/matcher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/matcher.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/position_encoding.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/position_encoding.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/segmentation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/segmentation.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/transformer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/models/transformer.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/requirements.txt:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/run_with_submitit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/run_with_submitit.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/test_all.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/test_all.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/tox.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/tox.ini:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/__init__.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/box_ops.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/box_ops.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/misc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/misc.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/plot_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/detr/util/plot_utils.py:Zone.Identifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/engine.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tatr/postprocess.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -400,7 +235,7 @@
       <workItem from="1727151422315" duration="5601000" />
       <workItem from="1727190733503" duration="1177000" />
       <workItem from="1727229941546" duration="3218000" />
-      <workItem from="1727250872851" duration="11491000" />
+      <workItem from="1727250872851" duration="12299000" />
     </task>
     <servers />
   </component>
