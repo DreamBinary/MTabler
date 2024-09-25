@@ -99,6 +99,18 @@ def count_rows_cols(latex_code):
         return -1, -1
 
 
+llm = LLM(
+    model=model_path,
+    limit_mm_per_prompt={"image": 1},
+)
+processor = AutoProcessor.from_pretrained(model_path)
+sampling_params = SamplingParams(
+    temperature=0.0,
+    top_p=1,
+    repetition_penalty=1.05,
+    max_tokens=4096,
+    stop_token_ids=[],
+)
 batch_size = 16
 latex_data = []
 if os.environ.get('DATA_PATH_B'):
@@ -112,11 +124,11 @@ else:
         data = list(json.load(f))[:10]
 
 
-def generate_latex(llm, sampling_params, inputs, cnt):
+def generate_latex(inputs, cnt):
     outputs = llm.generate(inputs, sampling_params=sampling_params)
     latex = [output.outputs[0].text for output in outputs]
     for ii, l in enumerate(latex):
-        print(l)
+        # print(l)
         rows, cols = count_rows_cols(l)
         idx = ii + cnt * batch_size
         data[idx]["latex"] = l
@@ -125,18 +137,6 @@ def generate_latex(llm, sampling_params, inputs, cnt):
 
 
 def preprocess():
-    llm = LLM(
-        model=model_path,
-        limit_mm_per_prompt={"image": 1},
-    )
-    processor = AutoProcessor.from_pretrained(model_path)
-    sampling_params = SamplingParams(
-        temperature=0.0,
-        top_p=1,
-        repetition_penalty=1.05,
-        max_tokens=4096,
-        stop_token_ids=[],
-    )
     prompt = processor.apply_chat_template([
         {"role": "system",
          "content": "You are a helpful assistant. Provide only latex code for the table in the image."},
@@ -158,11 +158,11 @@ def preprocess():
         }
         inputs.append(input)
         if len(inputs) == batch_size:
-            generate_latex(llm, sampling_params, inputs, cnt)
+            generate_latex(inputs, cnt)
             cnt += 1
             inputs = []
     if len(inputs) > 0:
-        generate_latex(llm, sampling_params, inputs, cnt)
+        generate_latex(inputs, cnt)
 
 
 def process():
@@ -171,7 +171,6 @@ def process():
             {"role": "system",
              "content": sys},
             {"role": "user", "content": [
-                {"type": "image", "image": ""},
                 {"type": "text", "text": q}
             ]}
         ], tokenize=False, add_generation_prompt=True)
@@ -207,6 +206,7 @@ D) {d["options"][3]}
         inputs.append({
             "prompt": create_msg(sys3, q3),
         })
+        # print(inputs)
         if len(inputs) == 2 * batch_size:
             generate_ans(inputs, cnt)
             cnt += 1
@@ -254,7 +254,7 @@ def postprocess():
             "rows": d["rows"],
             "answer": answer,
         }
-        print(sub_item)
+        # print(sub_item)
         submission.append(sub_item)
     if len(submission) != 5360:
         with open('error.json', 'w') as f:

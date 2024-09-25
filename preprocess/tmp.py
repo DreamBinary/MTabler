@@ -14,6 +14,6 @@ engine = TableEngine(
 from PIL import Image
 
 img = Image.open('../img/table.jpg')
-html, rows, cols = engine(img, './outputs/table.jpg', tokens=[])
+html, rows, cols = engine(img, out_path='./outputs/table.png', tokens=[])
 print(html)
 print(rows, cols)

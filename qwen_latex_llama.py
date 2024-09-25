@@ -7,22 +7,18 @@ from collections import defaultdict
 
 import torch
 from PIL import Image
-from transformers import AutoProcessor
 from vllm import LLM, SamplingParams
 
 warnings.filterwarnings("ignore")
 
 torch.cuda.empty_cache()
-model_path = "/bohr/cach-rxl3/v17/cache/models--Qwen--Qwen2-VL-7B-Instruct/snapshots/51c47430f97dd7c74aa1fa6825e68a813478097f"
-cache_path = "/bohr/cach-rxl3/v17/cache"
-
+qwen_path = "/bohr/cach-rxl3/v17/cache/models--Qwen--Qwen2-VL-7B-Instruct/snapshots/51c47430f97dd7c74aa1fa6825e68a813478097f"
+llama_path = "/bohr/cach-rxl3/v15/cache/models--meta-llama--Meta-Llama-3.1-8B-Instruct/snapshots/5206a32e0bd3067aef1ce90f5528ade7d866253f"
 # os.system(f"cp -r {raw_cache_path} .")
 # os.environ['TRANSFORMERS_OFFLINE'] = '1'
 # os.environ['HF_DATASETS_OFFLINE'] = '1'
 # os.environ['HF_HUB_OFFLINE'] = '1'
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-os.environ["HUGGINGFACE_HUB_CACHE"] = cache_path
-os.environ["HF_HOME"] = cache_path
 device = "cuda"
 os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 
@@ -91,7 +87,7 @@ def count_rows_cols(latex_code):
             num_cols = 0
 
         # 查找行数：根据 \hline 分隔符统计表格的行数
-        rows = latex_code.split(r'\hline')
+        rows = latex_code.split(r'\\')
         num_rows = sum(1 for row in rows if '&' in row or '\\rule' in row)
 
         return num_rows, num_cols
@@ -116,7 +112,7 @@ def generate_latex(llm, sampling_params, inputs, cnt):
     outputs = llm.generate(inputs, sampling_params=sampling_params)
     latex = [output.outputs[0].text for output in outputs]
     for ii, l in enumerate(latex):
-        print(l)
+        # print(l)
         rows, cols = count_rows_cols(l)
         idx = ii + cnt * batch_size
         data[idx]["latex"] = l
@@ -126,10 +122,9 @@ def generate_latex(llm, sampling_params, inputs, cnt):
 
 def preprocess():
     llm = LLM(
-        model=model_path,
+        model=qwen_path,
         limit_mm_per_prompt={"image": 1},
     )
-    processor = AutoProcessor.from_pretrained(model_path)
     sampling_params = SamplingParams(
         temperature=0.0,
         top_p=1,
@@ -137,14 +132,22 @@ def preprocess():
         max_tokens=4096,
         stop_token_ids=[],
     )
-    prompt = processor.apply_chat_template([
-        {"role": "system",
-         "content": "You are a helpful assistant. Provide only latex code for the table in the image."},
-        {"role": "user", "content": [
-            {"type": "image", "image": ""},
-            {"type": "text", "text": "Convert the table in the image to latex code."}
-        ]}
-    ], tokenize=False, add_generation_prompt=True)
+    # processor = AutoProcessor.from_pretrained(qwen_path)
+    # prompt = processor.apply_chat_template([
+    #     {"role": "system",
+    #      "content": "You are a helpful assistant. Provide only latex code for the table in the image."},
+    #     {"role": "user", "content": [
+    #         {"type": "image", "image": ""},
+    #         {"type": "text", "text": "Convert the table in the image to latex code."}
+    #     ]}
+    # ], tokenize=False, add_generation_prompt=True)
+    # # print("---------------------->> prompt")
+    # # print(prompt)
+    prompt = """<|im_start|>system
+You are a helpful assistant. Provide only latex code for the table in the image.<|im_end|>
+<|im_start|>user
+<|vision_start|><|image_pad|><|vision_end|>Convert the table in the image to latex code.<|im_end|>
+<|im_start|>assistant"""
     inputs = []
     cnt = 0
     for d in data:
@@ -166,19 +169,26 @@ def preprocess():
 
 
 def process():
-    def create_msg(sys, q):
-        return processor.apply_chat_template([
-            {"role": "system",
-             "content": sys},
-            {"role": "user", "content": [
-                {"type": "image", "image": ""},
-                {"type": "text", "text": q}
-            ]}
-        ], tokenize=False, add_generation_prompt=True)
+    llm = LLM(model=llama_path)
+    sampling_params = SamplingParams(
+        temperature=0.0,
+        top_p=1,
+        repetition_penalty=1.05,
+        max_tokens=2,
+        stop_token_ids=[],
+    )
+
+    #     processor = AutoProcessor.from_pretrained(llama_path)
+    #
+    #     """
+    #     <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+    # Cutting Knowledge Date: December 2023
+    # Today Date: 26 Jul 2024
+    # sys2<|eot_id|><|start_header_id|>user<|end_header_id|>
+    # q2<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+    #     """
 
     q_prefix = "Based on the latex table, "
-    sys2 = "You are a helpful assistant. Provide only a label [A-H] of the correct answer for multiple-choice questions."
-    sys3 = "You are a helpful assistant. Provide only a label [A-D] of the correct answer for multiple-choice questions."
     inputs = []
     cnt = 0
     for d in data:
@@ -192,6 +202,7 @@ E) Quantitative Finance
 F) Statistics
 G) Electrical Engineering and Systems Science
 H) Economics
+Provide only the label [A-H] of the best answer for multiple-choice question without extra explanation (just a letter).
 """
         question = d["question"]
         question = question[0].lower() + question[1:]
@@ -200,27 +211,27 @@ A) {d["options"][0]}
 B) {d["options"][1]}
 C) {d["options"][2]}
 D) {d["options"][3]}
+Provide only the label [A-D] of the correct best for multiple-choice question without extra explanation (just a letter).
 """
-        inputs.append({
-            "prompt": create_msg(sys2, q2),
-        })
-        inputs.append({
-            "prompt": create_msg(sys3, q3),
-        })
+        inputs.append(q2)
+        inputs.append(q3)
         if len(inputs) == 2 * batch_size:
-            generate_ans(inputs, cnt)
+            generate_ans(llm, sampling_params, inputs, cnt)
             cnt += 1
             inputs = []
     if len(inputs) > 0:
-        generate_ans(inputs, cnt)
+        generate_ans(llm, sampling_params, inputs, cnt)
 
 
-def generate_ans(inputs, cnt):
+def generate_ans(llm, sampling_params, inputs, cnt):
     outputs = llm.generate(inputs, sampling_params=sampling_params)
     outputs = [output.outputs[0].text for output in outputs]
     l = len(outputs) // 2
+    # print("-->> ans")
+    # print(outputs)
     for i in range(l):
         idx = cnt * batch_size + i
+
         data[idx]["subject"] = outputs[2 * i]
         data[idx]["option"] = outputs[2 * i + 1]
 
@@ -254,7 +265,7 @@ def postprocess():
             "rows": d["rows"],
             "answer": answer,
         }
-        print(sub_item)
+        # print(sub_item)
         submission.append(sub_item)
     if len(submission) != 5360:
         with open('error.json', 'w') as f:

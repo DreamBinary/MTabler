@@ -105,18 +105,19 @@ def ocr():
     )
     processor = AutoProcessor.from_pretrained(model_path)
 
-    def create_msg(path, q):
+    def create_msg(sys, path, q):
         return processor.apply_chat_template([
             {"role": "system",
-             "content": "You are a helpful assistant. Provide only a label ([A-H] or [A-D]) of the correct answer for multiple-choice questions."},
+             "content": sys},
             {"role": "user", "content": [
                 {"type": "image", "image": path},
                 {"type": "text", "text": q}
             ]}
         ], tokenize=False, add_generation_prompt=True)
 
-    NEW_IMG_DIR = "new_images"
-    os.makedirs(NEW_IMG_DIR, exist_ok=True)
+
+    # NEW_IMG_DIR = "new_images"
+    # os.makedirs(NEW_IMG_DIR, exist_ok=True)
     if os.environ.get('DATA_PATH_B'):
         base_dir = os.environ.get('DATA_PATH_B')
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
@@ -127,6 +128,9 @@ def ocr():
         with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
             data_t = list(json.load(f))[:100]
     q_prefix = "Based on the latex table, caption and html structure, "
+    sys1 = "You are a helpful assistant."
+    sys2 = "You are a helpful assistant. Provide only a label [A-H] of the correct answer for multiple-choice questions."
+    sys3 = "You are a helpful assistant. Provide only a label [A-D] of the correct answer for multiple-choice questions."
     shapes = []
     batch_inputs = []
     for d in data_t:
@@ -134,8 +138,9 @@ def ocr():
         # w_path = os.path.join(NEW_IMG_DIR, d["image_path"])
         img = Image.open(r_path).convert("RGB")
         html, rows, cols = engine(img)
-        q1 = f'This is a table image. The caption of the table is "{d["caption"]}". The structure of the table in html format is as follows: {html}.'
-        q2 = f"""{q1}{q_prefix}which subject is most relevant to the table or caption?
+        q0 = f'This is a table image. The caption of the table is "{d["caption"]}". The structure of the table in html format is as follows: {html}.'
+        q1 = f"{q0}{q_prefix}how many rows and columns are in the table? Provide only two positive integers for rows and columns, separated by a comma. It might be '{rows},{cols}', you can use it as a reference."
+        q2 = f"""{q0}{q_prefix}which subject is most relevant to the table or caption?
 A) Physics
 B) Mathematics
 C) Computer Science
@@ -147,7 +152,7 @@ H) Economics
 """
         question = d["question"]
         question = question[0].lower() + question[1:]
-        q3 = f"""{q1}{q_prefix}{question}
+        q3 = f"""{q0}{q_prefix}{question}
 A) {d["options"][0]}
 B) {d["options"][1]}
 C) {d["options"][2]}
@@ -156,13 +161,19 @@ D) {d["options"][3]}
         shapes.append((d["image_path"], rows, cols))
         img = fetch_image(img)
         batch_inputs.append({
-            "prompt": create_msg(r_path, q2),
+            "prompt": create_msg(sys1, r_path, q1),
             "multi_modal_data": {
                 "image": img
             }
         })
         batch_inputs.append({
-            "prompt": create_msg(r_path, q3),
+            "prompt": create_msg(sys2, r_path, q2),
+            "multi_modal_data": {
+                "image": img
+            }
+        })
+        batch_inputs.append({
+            "prompt": create_msg(sys3, r_path, q3),
             "multi_modal_data": {
                 "image": img
             }
@@ -214,10 +225,20 @@ def clean_out(shapes, ans):
     l = len(shapes)
     for i in range(l):
         image_path, rows, cols = shapes[i]
-        subject = ans[2 * i]
-        option = ans[2 * i + 1]
         category = ""
         answer = -1
+        shape = ans[3 * i]
+        subject = ans[3 * i + 1]
+        option = ans[3 * i + 2]
+        try:
+            pattern = r'.*?(\d+).*?,.*?(\d+).*?'
+            match = re.match(pattern, shape)
+            if match:
+                rows, cols = match.groups()
+                rows = int(rows)
+                cols = int(cols)
+        except:
+            pass
         try:
             match = re.search(r'[A-Za-z]', subject)
             if match:
@@ -239,7 +260,6 @@ def clean_out(shapes, ans):
             "rows": rows,
             "answer": answer,
         }
-        print(sub_item)
         submission.append(sub_item)
 
 

@@ -5,19 +5,16 @@
 
 
 import json
+import os
 import sys
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 
-import matplotlib.patches as patches
 # matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
 import torch
 from fitz import Rect
-from matplotlib.patches import Patch
 from torchvision import transforms
 
-import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "detr")))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
 import postprocess
@@ -255,60 +252,105 @@ def cells_to_html(cells):
     return str(ET.tostring(table, encoding="unicode", short_empty_elements=False))
 
 
-def visualize_cells(img, cells, out_path):
-    plt.imshow(img, interpolation="lanczos")
-    plt.gcf().set_size_inches(20, 20)
-    ax = plt.gca()
+# def visualize_cells(img, cells, out_path):
+#     plt.imshow(img, interpolation="lanczos")
+#     plt.gcf().set_size_inches(20, 20)
+#     ax = plt.gca()
+#
+#     for cell in cells:
+#         bbox = cell['bbox']
+#
+#         if cell['column header']:
+#             # facecolor = (0, 0, 0)
+#             edgecolor = (0, 0, 1)
+#             alpha = 1
+#             linewidth = 1
+#             # hatch = '//////'
+#         elif cell['projected row header']:
+#             # facecolor = (0.95, 0.6, 0.1)
+#             edgecolor = (0, 1, 0)
+#             alpha = 1
+#             linewidth = 1
+#             # hatch = '//////'
+#         else:
+#             # facecolor = (0, 0, 1)
+#             edgecolor = (1, 0, 0)
+#             alpha = 1
+#             linewidth = 1
+#             # hatch = '\\\\\\\\\\\\'
+#
+#         # rect = patches.Rectangle(bbox[:2], bbox[2] - bbox[0], bbox[3] - bbox[1], linewidth=linewidth,
+#         #                          edgecolor='none', facecolor=facecolor, alpha=0.1)
+#         # ax.add_patch(rect)
+#         rect = patches.Rectangle(bbox[:2], bbox[2] - bbox[0], bbox[3] - bbox[1], linewidth=linewidth,
+#                                  edgecolor=edgecolor, facecolor='none', linestyle='-', alpha=alpha)
+#         ax.add_patch(rect)
+#         # rect = patches.Rectangle(bbox[:2], bbox[2] - bbox[0], bbox[3] - bbox[1], linewidth=0,
+#         #                          edgecolor=edgecolor, facecolor='none', linestyle='-', hatch=hatch, alpha=0.2)
+#         # ax.add_patch(rect)
+#
+#     plt.xticks([], [])
+#     plt.yticks([], [])
+#
+#     legend_elements = [Patch(facecolor=(1, 1, 1), edgecolor=(1, 0, 0),
+#                              label='Data cell', alpha=1),
+#                        Patch(facecolor=(1, 1, 1), edgecolor=(0, 0, 1),
+#                              label='Column header cell', alpha=1),
+#                        Patch(facecolor=(1, 1, 1), edgecolor=(0, 1, 0),
+#                              label='Projected row header cell', alpha=1)]
+#     plt.legend(handles=legend_elements, bbox_to_anchor=(0.5, -0.02), loc='upper center', borderaxespad=0,
+#                fontsize=10, ncol=3)
+#     plt.gcf().set_size_inches(10, 10)
+#     plt.axis('off')
+#     plt.savefig(out_path, bbox_inches='tight', dpi=384)
+#     plt.close()
+#
+#     return
 
+
+from PIL import Image, ImageDraw
+
+
+def visualize_cells(img, cells):
+    draw = ImageDraw.Draw(img)
+
+    # 绘制单元格
     for cell in cells:
         bbox = cell['bbox']
 
         if cell['column header']:
-            # facecolor = (0, 0, 0)
-            edgecolor = (0, 0, 1)
-            alpha = 1
-            linewidth = 1
-            # hatch = '//////'
+            edgecolor = (0, 0, 255)  # 蓝色
         elif cell['projected row header']:
-            # facecolor = (0.95, 0.6, 0.1)
-            edgecolor = (0, 1, 0)
-            alpha = 1
-            linewidth = 1
-            # hatch = '//////'
+            edgecolor = (0, 255, 0)  # 绿色
         else:
-            # facecolor = (0, 0, 1)
-            edgecolor = (1, 0, 0)
-            alpha = 1
-            linewidth = 1
-            # hatch = '\\\\\\\\\\\\'
+            edgecolor = (255, 0, 0)  # 红色
 
-        # rect = patches.Rectangle(bbox[:2], bbox[2] - bbox[0], bbox[3] - bbox[1], linewidth=linewidth,
-        #                          edgecolor='none', facecolor=facecolor, alpha=0.1)
-        # ax.add_patch(rect)
-        rect = patches.Rectangle(bbox[:2], bbox[2] - bbox[0], bbox[3] - bbox[1], linewidth=linewidth,
-                                 edgecolor=edgecolor, facecolor='none', linestyle='-', alpha=alpha)
-        ax.add_patch(rect)
-        # rect = patches.Rectangle(bbox[:2], bbox[2] - bbox[0], bbox[3] - bbox[1], linewidth=0,
-        #                          edgecolor=edgecolor, facecolor='none', linestyle='-', hatch=hatch, alpha=0.2)
-        # ax.add_patch(rect)
+        draw.rectangle(bbox, outline=edgecolor, width=2)
 
-    plt.xticks([], [])
-    plt.yticks([], [])
+    # 创建图例区域
+    legend_width, legend_height = img.width, 100
+    legend_image = Image.new("RGB", (legend_width, legend_height), (255, 255, 255, 255))
+    draw_legend = ImageDraw.Draw(legend_image)
 
-    legend_elements = [Patch(facecolor=(1, 1, 1), edgecolor=(1, 0, 0),
-                             label='Data cell', alpha=1),
-                       Patch(facecolor=(1, 1, 1), edgecolor=(0, 0, 1),
-                             label='Column header cell', alpha=1),
-                       Patch(facecolor=(1, 1, 1), edgecolor=(0, 1, 0),
-                             label='Projected row header cell', alpha=1)]
-    plt.legend(handles=legend_elements, bbox_to_anchor=(0.5, -0.02), loc='upper center', borderaxespad=0,
-               fontsize=10, ncol=3)
-    plt.gcf().set_size_inches(10, 10)
-    plt.axis('off')
-    plt.savefig(out_path, bbox_inches='tight', dpi=384)
-    plt.close()
+    # 添加图例内容
+    legend_items = [
+        ((255, 0, 0), 'Data cell'),
+        ((0, 0, 255), 'Column header cell'),
+        ((0, 255, 0), 'Projected row header cell'),
+    ]
 
-    return
+    legend_y = 10
+    for color, label in legend_items:
+        draw_legend.rectangle([10, legend_y, 30, legend_y + 20], fill=color)
+        draw_legend.text((40, legend_y), label, fill=(0, 0, 0))
+        legend_y += 30
+
+    # 将图例与原图合并
+    combined_image = Image.new("RGB", (img.width, img.height + legend_height))
+    combined_image.paste(img, (0, 0))
+    combined_image.paste(legend_image, (0, img.height))
+
+    return combined_image
 
 
 def box_cxcywh_to_xyxy(x):
@@ -510,9 +552,7 @@ class TableEngine(object):
                  str_device=None,
                  str_model_path=None,
                  str_config_path=None,
-                 out_dir=None,
                  ):
-        self.out_dir = out_dir
         self.str_device = str_device
         self.str_class_name2idx = get_class_map('structure')
         self.str_class_idx2name = {v: k for k, v in self.str_class_name2idx.items()}
@@ -530,7 +570,7 @@ class TableEngine(object):
         self.str_model.to(str_device)
         self.str_model.eval()
 
-    def __call__(self, img, out_path, tokens=None):
+    def __call__(self, img, tokens=[], visualize=True):
         # out_formats = {}
 
         # Transform the image how the model expects it
@@ -553,23 +593,21 @@ class TableEngine(object):
         # out_file = img_file.replace(".jpg", "_fig_tables.jpg")
         # out_path = os.path.join("/root/MTabler/img", out_file)
         # visualize_detected_tables(img, objects, out_path)
-        for elem in tables_cells:
-            visualize_cells(img, elem, out_path)
-        return tables_htmls[0], rows, cols
+        if visualize:
+            for elem in tables_cells:
+                img = visualize_cells(img, elem)
+        return img, tables_htmls[0], rows, cols
 
-if __name__ == "__main__":
-    import os
-
-    os.environ["TORCH_HOME"] = "/root/MTabler/cache"
-    engine = TableEngine(
-        str_device='cuda',
-        str_model_path='../../model/TATR/TATR-v1.1-All-msft.pth',
-        str_config_path='../../model/TATR/structure_config.json',
-        out_dir='./outputs'
-    )
-    from PIL import Image
-
-    img = Image.open('../../img/table.jpg')
-    html, rows, cols = engine(img, '../outputs/table.jpg', tokens=[])
-    print(html)
-    print(rows, cols)
+# if __name__ == "__main__":
+#     engine = TableEngine(
+#         str_device='cuda',
+#         str_model_path='../../model/TATR/TATR-v1.1-All-msft.pth',
+#         str_config_path='../../model/TATR/structure_config.json',
+#         out_dir='./outputs'
+#     )
+#     from PIL import Image
+#
+#     img = Image.open('../../img/table.jpg')
+#     html, rows, cols = engine(img, './outputs/table.jpg', tokens=[])
+#     print(html)
+#     print(rows, cols)
