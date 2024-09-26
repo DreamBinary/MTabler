@@ -1,5 +1,5 @@
-import re
-
-text = " 23 ,  45   "
-
-    print(f"Rows: {rows}, Columns: {columns}")
+s = """
+{a}{opt}
+"""
+print(s.replace("{opt}", "b"))
+print(s)
