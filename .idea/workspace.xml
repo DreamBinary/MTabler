@@ -8,7 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qwen_tatr_vllm.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_tatr_vllm.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocess/tatr/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess/tatr/engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_latex_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_latex_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_tatr_vllm_check.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_tatr_vllm_check.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/src/eval.py" afterDir="false" />
@@ -241,7 +243,9 @@
       <workItem from="1727266256141" duration="69000" />
       <workItem from="1727267071869" duration="1106000" />
       <workItem from="1727321638751" duration="9416000" />
-      <workItem from="1727331685898" duration="9944000" />
+      <workItem from="1727331685898" duration="10567000" />
+      <workItem from="1727347622021" duration="3831000" />
+      <workItem from="1727367772022" duration="3167000" />
     </task>
     <servers />
   </component>
@@ -260,7 +264,7 @@
     <SUITE FILE_PATH="coverage/MTabler$got.coverage" NAME="got 覆盖结果" MODIFIED="1727014617553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1727326037605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$got_raw.coverage" NAME="got_raw 覆盖结果" MODIFIED="1726980840127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1727339084392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1727367998639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$engine.coverage" NAME="engine 覆盖结果" MODIFIED="1726050814190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess/tatr" />
     <SUITE FILE_PATH="coverage/MTabler$tmp__1_.coverage" NAME="tmp (1) 覆盖结果" MODIFIED="1727234325024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
   </component>

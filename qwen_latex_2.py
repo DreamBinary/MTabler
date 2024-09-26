@@ -8,6 +8,7 @@ from collections import defaultdict
 import torch
 from PIL import Image
 from vllm import LLM, SamplingParams
+from vllm.model_executor.guided_decoding import GuidedDecodingRequest
 
 warnings.filterwarnings("ignore")
 
@@ -102,7 +103,7 @@ llm = LLM(
     model=model_path,
     limit_mm_per_prompt={"image": 1},
 )
-batch_size = 8
+batch_size = 32
 shape_list = []
 ans_list = []
 if os.environ.get('DATA_PATH_B'):
@@ -145,6 +146,9 @@ You are a helpful assistant. Provide only latex code for the table in the image.
         repetition_penalty=1.05,
         max_tokens=4,
         stop_token_ids=[],
+    )
+    guided_options_request = GuidedDecodingRequest(
+        guided_regex=r"[A-Ha-h]",
     )
     length = len(data)
     for i in range(0, length, batch_size):
@@ -197,7 +201,7 @@ D) {d["options"][3]}
                     "image": img
                 }
             })
-        outputs = llm.generate(inputs, sampling_params=qa_sp)
+        outputs = llm.generate(inputs, sampling_params=qa_sp, guided_options_request=guided_options_request)
         ans = [output.outputs[0].text for output in outputs]
         ans_list.extend(ans)
 
@@ -213,14 +217,14 @@ def postprocess():
         category = ""
         answer = -1
         try:
-            match = re.search(r'[A-Za-z]', subject)
+            match = re.search(r'[A-Ha-h]', subject)
             if match:
                 category = match.group(0).upper()
                 category = sub_list[l2i[category]]
         except:
             pass
         try:
-            match = re.search(r'[A-Za-z]', option)
+            match = re.search(r'[A-Ha-h]', option)
             if match:
                 answer = match.group(0).upper()
                 answer = l2i[answer]

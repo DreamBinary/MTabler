@@ -1,5 +1,7 @@
-s = """
-{a}{opt}
-"""
-print(s.replace("{opt}", "b"))
-print(s)
+from collections import defaultdict
+
+d = defaultdict(lambda: defaultdict(int))
+
+
+d[1]["a"] += 1
+print(d)

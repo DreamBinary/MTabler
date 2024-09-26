@@ -20,15 +20,16 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__))))
 import postprocess
 from models import build_model
 
-structure_class_thresholds = {
-    "table": 0.5,
-    "table column": 0.5,
-    "table row": 0.5,
-    "table column header": 0.5,
-    "table projected row header": 0.5,
-    "table spanning cell": 0.5,
-    "no object": 10
-}
+
+# structure_class_thresholds = {
+#     "table": 0.5,
+#     "table column": 0.5,
+#     "table row": 0.5,
+#     "table column header": 0.5,
+#     "table projected row header": 0.5,
+#     "table spanning cell": 0.5,
+#     "no object": 10
+# }
 
 
 class MaxResize(object):
@@ -549,14 +550,15 @@ def objects_to_structures(objects, tokens, class_thresholds):
 
 class TableEngine(object):
     def __init__(self,
-                 str_device=None,
-                 str_model_path=None,
-                 str_config_path=None,
+                 str_device,
+                 str_model_path,
+                 str_config_path,
+                 str_class_thresholds,
                  ):
         self.str_device = str_device
         self.str_class_name2idx = get_class_map('structure')
         self.str_class_idx2name = {v: k for k, v in self.str_class_name2idx.items()}
-        self.str_class_thresholds = structure_class_thresholds
+        self.str_class_thresholds = str_class_thresholds
 
         with open(str_config_path, 'r') as f:
             str_config = json.load(f)
@@ -570,7 +572,7 @@ class TableEngine(object):
         self.str_model.to(str_device)
         self.str_model.eval()
 
-    def __call__(self, img, tokens=[], visualize=True):
+    def __call__(self, img, tokens=[]):
         # out_formats = {}
 
         # Transform the image how the model expects it
@@ -578,7 +580,6 @@ class TableEngine(object):
 
         # Run input image through the model
         outputs = self.str_model([img_tensor.to(self.str_device)])
-
         # Post-process detected objects, assign class labels
         objects = outputs_to_objects(outputs, img.size, self.str_class_idx2name)
         # out_formats['objects'] = objects
@@ -593,10 +594,10 @@ class TableEngine(object):
         # out_file = img_file.replace(".jpg", "_fig_tables.jpg")
         # out_path = os.path.join("/root/MTabler/img", out_file)
         # visualize_detected_tables(img, objects, out_path)
-        if visualize:
-            for elem in tables_cells:
-                img = visualize_cells(img, elem)
-        return img, tables_htmls[0], rows, cols
+        # if visualize:
+        #     for elem in tables_cells:
+        #         img = visualize_cells(img, elem)
+        return tables_htmls[0], rows, cols
 
 # if __name__ == "__main__":
 #     engine = TableEngine(

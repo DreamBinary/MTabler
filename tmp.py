@@ -9,7 +9,9 @@ from collections import defaultdict
 
 import torch
 from PIL import Image
+from transformers import AutoImageProcessor, TableTransformerForObjectDetection
 from vllm import LLM, SamplingParams
+from vllm.model_executor.guided_decoding import GuidedDecodingRequest
 
 warnings.filterwarnings("ignore")
 
@@ -21,7 +23,9 @@ str_model_path = '/bohr/TATR-xmup/v1/TATR/TATR-v1.1-All-msft.pth'
 str_config_path = '/bohr/TATR-xmup/v1/TATR/structure_config.json'
 model_path = "/bohr/cach-rxl3/v17/cache/models--Qwen--Qwen2-VL-7B-Instruct/snapshots/51c47430f97dd7c74aa1fa6825e68a813478097f"
 torch_hub_path = "/bohr/thub-w4uy/v1"
-cache_path = "/bohr/cach-rxl3/v17/cache"
+
+tsr_model_path = "microsoft/table-structure-recognition-v1.1-all"
+cache_path = "/bohr/cach-rxl3/v3/cache"
 
 os.system(f"pip3 install {opkgs_path}/*")
 os.system(f"cp -r {tatr_path} .")
@@ -115,19 +119,19 @@ else:
 length = len(raw_data)
 ocr_data = multiprocessing.Manager().list()
 batch_size = 8
-tmp_ans2 = defaultdict(list)
-tmp_ans3 = defaultdict(list)
+tmp_ans2 = defaultdict(lambda: defaultdict(int))
+tmp_ans3 = defaultdict(lambda: defaultdict(int))
 final_ans2 = [-1] * length
 final_ans3 = [-1] * length
 placeholder = "%%pl_ac_eh_+=ol_&der%%"
 
 
-def shuffle(arr):
-    raw = arr.copy()
-    random.shuffle(arr)
-    order = [raw.index(x) for x in arr]
-    arr = [f"{label[i]}) {x}" for i, x in enumerate(arr)]
-    shuffled = "\n".join(arr)
+def shuffle(sou):
+    tag = sou.copy()
+    random.shuffle(tag)
+    order = [sou.index(x) for x in tag]
+    tag = [f"{label[i]}) {x}" for i, x in enumerate(tag)]
+    shuffled = "\n".join(tag)
     return shuffled, order
 
 
@@ -173,8 +177,11 @@ def process():
         temperature=0.0,
         top_p=1,
         repetition_penalty=1.05,
-        max_tokens=16,
+        max_tokens=4,
         stop_token_ids=[],
+    )
+    guided_options_request = GuidedDecodingRequest(
+        guided_regex=r"[A-Ha-h]",
     )
 
     idx2, idx3 = 0, 0
@@ -191,7 +198,12 @@ def process():
         inputs2, orders2 = gen_inputs2(batch_idx2)
         inputs3, orders3 = gen_inputs3(batch_idx3)
 
-        outputs = llm.generate(inputs2 + inputs3, sampling_params=sampling_params)
+        outputs = llm.generate(
+            inputs2 + inputs3,
+            sampling_params=sampling_params,
+            use_tqdm=False,
+            guided_options_request=guided_options_request
+        )
         ans = [output.outputs[0].text for output in outputs]
         ans = [clean_ans(a) for a in ans]
         ans2, ans3 = ans[:len(inputs2)], ans[len(inputs2):]
@@ -199,18 +211,18 @@ def process():
         t2, t3 = [], []
         for i, a, o in zip(batch_idx2, ans2, orders2):
             real_ans = o[a]
-            if real_ans in tmp_ans2[i]:
+            if tmp_ans2[i][real_ans] == 2:
                 final_ans2[i] = real_ans
                 t2.append(i)
             else:
-                tmp_ans2[i].append(real_ans)
+                tmp_ans2[i][real_ans] += 1
         for i, a, o in zip(batch_idx3, ans3, orders3):
             real_ans = o[a]
-            if real_ans in tmp_ans3[i]:
+            if tmp_ans3[i][real_ans] == 2:
                 final_ans3[i] = real_ans
                 t3.append(i)
             else:
-                tmp_ans3[i].append(real_ans)
+                tmp_ans3[i][real_ans] += 1
         for i in t2:
             batch_idx2.remove(i)
         for i in t3:
@@ -219,7 +231,7 @@ def process():
 
 def clean_ans(ans):
     try:
-        match = re.search(r'[A-Za-z]', ans)
+        match = re.search(r'[A-Ha-h]', ans)
         if match:
             return l2i[match.group(0).upper()]
     except:
@@ -241,12 +253,12 @@ def fetch_image(img, size_factor: int = IMAGE_FACTOR) -> Image.Image:
 
 
 def ocr():
-    from tatr import TableEngine
-    engine = TableEngine(
-        str_device=device,
-        str_model_path=str_model_path,
-        str_config_path=str_config_path
-    )
+    processor = AutoImageProcessor.from_pretrained(tsr_model_path)
+    processor.size['longest_edge'] = 800
+    engine = TableTransformerForObjectDetection.from_pretrained(tsr_model_path)
+    label2id = engine.config.label2id
+    label_row = label2id['table row']
+    label_col = label2id['table column']
 
     template = """<|im_start|>system
 {sys}<|im_end|>
@@ -260,8 +272,22 @@ def ocr():
     for d in raw_data:
         r_path = os.path.join(base_dir, "test_images", d["image_path"])
         img = Image.open(r_path).convert("RGB")
+
+        inputs = processor(images=img, return_tensors="pt")
+        outputs = engine(**inputs)
+        target_sizes = torch.tensor([img.size[::-1]])  # (height, width) of each image in the batch
+        results = processor.post_process_object_detection(outputs, threshold=0.6, target_sizes=target_sizes)[0]
+        rows = 0
+        cols = 0
+        for label in results["labels"]:
+            label = label.item()
+            if label == label_row:
+                rows += 1
+            elif label == label_col:
+                cols += 1
+
         html, rows, cols = engine(img)
-        q1 = f'This is a table image with ma. The caption of the table is "{d["caption"]}". The structure of the table in html format is as follows: {html}.'
+        q1 = f'This is a table image. The caption of the table is "{d["caption"]}". The structure of the table in html format is as follows: {html}.'
         q2 = f"""{q1}{q_prefix}which subject is most relevant to the table or caption?\n{placeholder}"""
         question = d["question"]
         question = question[0].lower() + question[1:]
