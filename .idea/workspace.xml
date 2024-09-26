@@ -8,12 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qwen_latex_llama.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_latex_llama.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qwen_tatr_vllm.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_tatr_vllm.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/src/eval.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/inference.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/postprocess.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,21 +47,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.engine.executor": "Run",
-    "Python.got.executor": "Run",
-    "Python.got_raw.executor": "Run",
-    "Python.tmp (1).executor": "Run",
-    "Python.tmp.executor": "Run",
-    "Python.ttt.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/root/MTabler",
-    "two.files.diff.last.used.file": "//wsl.localhost/Ubuntu/root/MTabler/qwen_tatr_img_vllm.ipynb"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.got.executor&quot;: &quot;Run&quot;,
+    &quot;Python.got_raw.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tmp (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.tmp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ttt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;//wsl.localhost/Ubuntu/root/MTabler/qwen_tatr_img_vllm.ipynb&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler" />
@@ -68,7 +69,7 @@
       <recent name="\\wsl.localhost\Ubuntu\root\MTabler\commit" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tmp (1)">
+  <component name="RunManager" selected="Python.tmp">
     <configuration name="got" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MTabler" />
       <option name="ENV_FILES" value="" />
@@ -186,11 +187,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tmp" />
         <item itemvalue="Python.tmp (1)" />
         <item itemvalue="Python.ttt" />
         <item itemvalue="Python.got" />
         <item itemvalue="Python.got_raw" />
-        <item itemvalue="Python.tmp" />
       </list>
     </recent_temporary>
   </component>
@@ -236,6 +237,9 @@
       <workItem from="1727190733503" duration="1177000" />
       <workItem from="1727229941546" duration="3218000" />
       <workItem from="1727250872851" duration="12299000" />
+      <workItem from="1727266256141" duration="69000" />
+      <workItem from="1727267071869" duration="1106000" />
+      <workItem from="1727321638751" duration="6963000" />
     </task>
     <servers />
   </component>
@@ -252,7 +256,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MTabler$got.coverage" NAME="got 覆盖结果" MODIFIED="1727014617553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1726976217337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MTabler$tmp.coverage" NAME="tmp 覆盖结果" MODIFIED="1727326037605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$got_raw.coverage" NAME="got_raw 覆盖结果" MODIFIED="1726980840127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$ttt.coverage" NAME="ttt 覆盖结果" MODIFIED="1727154808841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MTabler$engine.coverage" NAME="engine 覆盖结果" MODIFIED="1726050814190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess/tatr" />
