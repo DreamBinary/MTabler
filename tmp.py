@@ -1,4 +1,3 @@
-import itertools
 import json
 import math
 import multiprocessing
@@ -10,6 +9,7 @@ from collections import defaultdict
 
 import torch
 from PIL import Image
+from transformers import AutoImageProcessor, TableTransformerForObjectDetection
 from vllm import LLM, SamplingParams
 from vllm.model_executor.guided_decoding import GuidedDecodingRequest
 
@@ -19,8 +19,9 @@ torch.cuda.empty_cache()
 
 opkgs_path = "/bohr/opkgs-k2wz/v2/opkgs"
 tatr_path = "/bohr/tatr-xdh6/v2/tatr"
-str_model_path = '/bohr/TATR-xmup/v1/TATR/TATR-v1.1-All-msft.pth'
-str_config_path = '/bohr/TATR-xmup/v1/TATR/structure_config.json'
+tatr_model_path = '/bohr/TATR-xmup/v1/TATR/TATR-v1.1-All-msft.pth'
+tatr_config_path = '/bohr/TATR-xmup/v1/TATR/structure_config.json'
+tsr_model_path = "/bohr/cach-rxl3/v3/cache/models--microsoft--table-structure-recognition-v1.1-all/snapshots/7587a7ef111d9dcbf8ac695f1376ab7014340a0c"
 model_path = "/bohr/cach-rxl3/v17/cache/models--Qwen--Qwen2-VL-7B-Instruct/snapshots/51c47430f97dd7c74aa1fa6825e68a813478097f"
 torch_hub_path = "/bohr/thub-w4uy/v1"
 cache_path = "/bohr/cach-rxl3/v17/cache"
@@ -43,7 +44,7 @@ label = "ABCDEFGH"
 for i, letter in enumerate(label):
     l2i[letter] = i
 sub_list = ('Physics', 'Mathematics', 'ComputerScience', 'QuantitativeBiology', 'QuantitativeFinance',
-            'Statistics', 'ElectricalEngineeringandSystemsScience', 'Economics', '')
+            'Statistics', 'ElectricalEngineeringandSystemsScience', 'Economics')
 IMAGE_FACTOR = 28
 MIN_PIXELS = 4 * 28 * 28
 MAX_PIXELS = 16384 * 28 * 28
@@ -115,40 +116,22 @@ else:
     with open(os.path.join(base_dir, 'dataset.json'), 'r') as f:
         raw_data = list(json.load(f))[:10]
 length = len(raw_data)
+shapes = multiprocessing.Manager().list()
 ocr_data = multiprocessing.Manager().list()
-batch_size = 16
-orders4 = list(itertools.permutations([0, 1, 2, 3]))
-orders8 = list(itertools.permutations([0, 1, 2, 3, 4, 5, 6, 7]))
+batch_size = 8
 tmp_ans2 = defaultdict(lambda: defaultdict(int))
 tmp_ans3 = defaultdict(lambda: defaultdict(int))
-ordered2 = defaultdict(list)
-ordered3 = defaultdict(list)
 final_ans2 = [-1] * length
 final_ans3 = [-1] * length
 placeholder = "%%pl_ac_eh_+=ol_&der%%"
 
 
-def shuffle3(idx, arr):
-    while True:
-        ri = random.randint(0, 23)
-        if ri not in ordered3[idx]:
-            ordered3[idx].append(ri)
-            order = orders4[ri]
-            shuffled = [f"{label[i]}) {arr[j]}" for i, j in enumerate(order)]
-            shuffled = "\n".join(shuffled)
-            break
-    return shuffled, order
-
-
-def shuffle2(idx):
-    while True:
-        ri = random.randint(0, 40319)
-        if ri not in ordered2[idx]:
-            ordered2[idx].append(ri)
-            order = orders8[ri]
-            shuffled = [f"{label[i]}) {option2[j]}" for i, j in enumerate(order)]
-            shuffled = "\n".join(shuffled)
-            break
+def shuffle(sou):
+    tag = sou.copy()
+    random.shuffle(tag)
+    order = [sou.index(x) for x in tag]
+    tag = [f"{label[i]}) {x}" for i, x in enumerate(tag)]
+    shuffled = "\n".join(tag)
     return shuffled, order
 
 
@@ -156,7 +139,7 @@ def gen_inputs2(idxs):
     inputs = []
     orders = []
     for i in idxs:
-        option, order = shuffle2(i)
+        option, order = shuffle(option2)
         q2 = ocr_data[i]["q2"].replace(placeholder, option)
         inputs.append({
             "prompt": q2,
@@ -173,7 +156,7 @@ def gen_inputs3(idxs):
     inputs = []
     orders = []
     for i in idxs:
-        option, order = shuffle3(i, raw_data[i]["options"])
+        option, order = shuffle(raw_data[i]["options"])
         q3 = ocr_data[i]["q3"].replace(placeholder, option)
         inputs.append({
             "prompt": q3,
@@ -182,7 +165,6 @@ def gen_inputs3(idxs):
             }
         })
         orders.append(order)
-    orders.append(-1)
     return inputs, orders
 
 
@@ -231,13 +213,13 @@ def process():
             use_tqdm=False,
             guided_options_request=guided_options_request3
         )
-        ans2 = [clean_ans(output.outputs[0].text) for output in outputs2]
-        ans3 = [clean_ans(output.outputs[0].text) for output in outputs3]
+        ans2 = [clean_ans2(output.outputs[0].text) for output in outputs2]
+        ans3 = [clean_ans3(output.outputs[0].text) for output in outputs3]
 
         t2, t3 = [], []
         for i, a, o in zip(batch_idx2, ans2, orders2):
             real_ans = o[a]
-            if tmp_ans2[i][real_ans] == 3:
+            if tmp_ans2[i][real_ans] == 2:
                 final_ans2[i] = real_ans
                 t2.append(i)
             else:
@@ -255,14 +237,24 @@ def process():
             batch_idx3.remove(i)
 
 
-def clean_ans(ans):
+def clean_ans2(ans):
     try:
         match = re.search(r'[A-Ha-h]', ans)
         if match:
             return l2i[match.group(0).upper()]
     except:
-        return -1
-    return -1
+        return random.randint(0, 7)
+    return random.randint(0, 7)
+
+
+def clean_ans3(ans):
+    try:
+        match = re.search(r'[A-Da-d]', ans)
+        if match:
+            return l2i[match.group(0).upper()]
+    except:
+        return random.randint(0, 3)
+    return random.randint(0, 3)
 
 
 def fetch_image(img, size_factor: int = IMAGE_FACTOR) -> Image.Image:
@@ -280,20 +272,10 @@ def fetch_image(img, size_factor: int = IMAGE_FACTOR) -> Image.Image:
 
 def ocr():
     from tatr import TableEngine
-    structure_class_thresholds = {
-        "table": 0.5,
-        "table column": 0.5,
-        "table row": 0.5,
-        "table column header": 0.5,
-        "table projected row header": 0.5,
-        "table spanning cell": 0.5,
-        "no object": 10
-    }
     engine = TableEngine(
         str_device=device,
-        str_model_path=str_model_path,
-        str_config_path=str_config_path,
-        str_class_thresholds=structure_class_thresholds
+        str_model_path=tatr_model_path,
+        str_config_path=tatr_config_path
     )
 
     template = """<|im_start|>system
@@ -317,20 +299,43 @@ def ocr():
         q2 = template.format(sys=sys2, q=q2)
         q3 = template.format(sys=sys3, q=q3)
         ocr_data.append({
-            "rows": rows,
-            "cols": cols,
             "img": fetch_image(img),
             "q2": q2,
             "q3": q3,
         })
+        process_shape()
+
+
+def process_shape():
+    processor = AutoImageProcessor.from_pretrained(tsr_model_path)
+    processor.size['shortest_edge'] = 800
+    engine = TableTransformerForObjectDetection.from_pretrained(tsr_model_path)
+    label2id = engine.config.label2id
+    label_row = label2id['table row']
+    label_col = label2id['table column']
+    for d in raw_data:
+        r_path = os.path.join(base_dir, "test_images", d["image_path"])
+        img = Image.open(r_path).convert("RGB")
+        inputs = processor(images=img, return_tensors="pt")
+        outputs = engine(**inputs)
+        target_sizes = torch.tensor([img.size[::-1]])  # (height, width) of each image in the batch
+        results = processor.post_process_object_detection(outputs, threshold=0.6, target_sizes=target_sizes)[0]
+        rows = 0
+        cols = 0
+        for ll in results["labels"]:
+            ll = ll.item()
+            if ll == label_row:
+                rows += 1
+            elif ll == label_col:
+                cols += 1
+        shapes.append((rows, cols))
 
 
 def postprocess():
     submission = []
     for i in range(length):
         image_path = raw_data[i]["image_path"]
-        rows = ocr_data[i]["rows"]
-        cols = ocr_data[i]["cols"]
+        rows, cols = shapes[i]
         category = sub_list[final_ans2[i]]
         answer = final_ans3[i]
         submission.append({

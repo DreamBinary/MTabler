@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/PaddleOCR/deploy/slim/auto_compression/test_ocr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qwen_latex.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_latex.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qwen_tatr_vllm_check.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/qwen_tatr_vllm_check.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/table-transformer/README.md" afterDir="false" />
@@ -16,7 +15,6 @@
       <change beforePath="$PROJECT_DIR$/table-transformer/src/inference.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/table-transformer/src/postprocess.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ttt.py" beforeDir="false" afterPath="$PROJECT_DIR$/ttt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +244,10 @@
       <workItem from="1727347622021" duration="3831000" />
       <workItem from="1727367772022" duration="3167000" />
       <workItem from="1727370998660" duration="29000" />
-      <workItem from="1727408648422" duration="5009000" />
+      <workItem from="1727408648422" duration="5028000" />
+      <workItem from="1727486931804" duration="2719000" />
+      <workItem from="1727535794596" duration="2196000" />
+      <workItem from="1727538590768" duration="97000" />
     </task>
     <servers />
   </component>
@@ -257,6 +258,11 @@
           <url>file://$PROJECT_DIR$/got.py</url>
           <line>72</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tmp.py</url>
+          <line>272</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
