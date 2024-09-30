@@ -118,7 +118,7 @@ else:
 length = len(raw_data)
 shapes = multiprocessing.Manager().list()
 ocr_data = multiprocessing.Manager().list()
-batch_size = 8
+batch_size = 32
 tmp_ans2 = defaultdict(lambda: defaultdict(int))
 tmp_ans3 = defaultdict(lambda: defaultdict(int))
 final_ans2 = [-1] * length
@@ -148,7 +148,6 @@ def gen_inputs2(idxs):
             }
         })
         orders.append(order)
-    orders.append(-1)
     return inputs, orders
 
 
@@ -303,7 +302,7 @@ def ocr():
             "q2": q2,
             "q3": q3,
         })
-        process_shape()
+    process_shape()
 
 
 def process_shape():
